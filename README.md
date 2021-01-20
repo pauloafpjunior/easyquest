@@ -13,7 +13,7 @@ EasyQuest is in its early development stage, however there are many features tha
 
 
 ## How to run
-The main tool for the development of this project is the [React JavaScript libray](https://reactjs.org/docs/getting-started.html). Hence, there are two ways of running it:
+The main tool for the development of this project is the [React JavaScript library](https://reactjs.org/docs/getting-started.html). Hence, there are two ways of running it:
 
 ### Docker and VSCode (recommended)
 Running the project with Docker Visual Studio Code (VSCode) Container is the recommended way, because using it you do not need to worry about installing any dependencies or having conflict with different versions for different projects. In summary, your code will run in a controlled and ideal environment. [Click here](https://code.visualstudio.com/docs/remote/containers) to learn more about VSCode Containers.
