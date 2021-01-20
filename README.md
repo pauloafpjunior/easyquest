@@ -15,7 +15,7 @@ EasyQuest is in its early development stage, however there are many features tha
 ## How to run
 The main tool for the development of this project is the [React JavaScript library](https://reactjs.org/docs/getting-started.html). Hence, there are two ways of running it:
 
-### Docker and VSCode (recommended)
+### Docker and VSCode (recommended for Linux and macOS)
 Running the project with Docker Visual Studio Code (VSCode) Container is the recommended way, because using it you do not need to worry about installing any dependencies or having conflict with different versions for different projects. In summary, your code will run in a controlled and ideal environment. [Click here](https://code.visualstudio.com/docs/remote/containers) to learn more about VSCode Containers.
 
 Follow this steps to run the project in a Docker container:
@@ -28,7 +28,7 @@ Follow this steps to run the project in a Docker container:
 When you open the repository folder with VSCode, you will be suggested to open the repository inside a Docker container, so you just need to click 'Reopen in Container'. You can do the same by pressing 'Ctrl + Shift + P', typing 'reopen in container' and then choosing the 'Remote-Containers: Reopen in Container' action. At the first time, it can take several minutes to build the container.
 After building the container, you can just install the project dependencies by running `yarn` in the VSCode terminal. After this, run the project with the command `yarn start`.
 
-### Running in your OS
+### Running in your OS  (recommended for Windows)
 You can also install the dependencies in your own machine. In this case you just neeed to:
 * Install [Yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable).
 * Clone this repository.
