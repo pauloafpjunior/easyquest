@@ -11,8 +11,8 @@ EasyQuest is in its early development stage, however there are many features tha
 * Supply question feedbacks
 * Export in XML Moodle format
 
-## Usecases (in portuguese)
-The following usecases are addressed by this project.
+## Use cases (in portuguese)
+The following use cases are addressed by this project.
 * [Export questions](requirements/export-questions-usecase.md)
 
 ## How to run
