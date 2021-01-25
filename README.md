@@ -11,6 +11,9 @@ EasyQuest is in its early development stage, however there are many features tha
 * Supply question feedbacks
 * Export in XML Moodle format
 
+## Usecases (in portuguese)
+The following usecases are addressed by this project.
+* [Export questions](requirements/export-questions-usecase.md)
 
 ## How to run
 The main tool for the development of this project is the [React JavaScript library](https://reactjs.org/docs/getting-started.html). Hence, there are two ways of running it:
