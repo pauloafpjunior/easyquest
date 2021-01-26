@@ -1,32 +1,21 @@
 :arrow_left: [Voltar](/README.md)
 
-#  Criar questões
+#  Cadastrar questão
 
-> ## Questão de Multipla Escolha
-1. O usuário executa o comando "Criar Questão" 
-1. O sistema direciona o usuário para a tela de  criação de questão
-2. O usuário tem a opção de modificar o tipo de questão, que por padrão é do tipo "Multipla Escolha"
-2. O usuário informa o texto do enunciado da questão
-3. O usuário informa as alternativas da questão
-    * Após cada alternativa o usuário deve informar a nota da alternativa adicionada
-    * Devem ser adicionadas no mínimo duas e no máximo cinco alternativas
-    * Ao menos uma alternativa deve ter nota maior que zero
-3. O usuário adiciona o texto de feedback da questão
-    * Passo opcional
-4. O usuário executa o comando "Salvar Questão"
+> ## Fluxo básico
+1. O sistema solicita o tipo de questão a ser cadastrada
+2. O usuário seleciona questão do tipo "Múltipla Escolha"
+3. O sistema solicita o seguinte: texto do enunciado, texto de pelo menos 2 (duas) alternativas, número da alternativa correta e _feedback_, sendo esse último opcional e os demais obrigatórios
+4. O usuário informa os dados necessários
+5. O sistema salva a questão e retorna uma mensagem de sucesso
 
->### Exceção - O enunciado não foi preenchido
-* O sistema desabilita o comando "Salvar Questão"
+> ## Exceção - Há campos obrigatórios não informados
+* O sistema retorna um erro
 
->### Exceção - Não foram adicionadas alternativas suficientes
-* O sistema desabilita o comando "Salvar Questão"
+> ## Exceção - Erro ao cadastrar questão
+* O sistema retorna um erro
 
->### Exceção - Não foi adicionada nenhuma alternativa correta
-* O sistema desabilita o comando "Salvar Questão"
-
-<br>
-    
-> ## Questão de Verdadeiro/Falso
+> ## Fluxo alternativo - O usuário seleciona questão do tipo "Múltipla Escolha"
 1. O usuário executa o comando "Criar Questão" 
 1. O usuário é direcionado para a tela de  criação de questão
 2. O usuário modifica o tipo de questão para "Verdadeiro/Falso"
