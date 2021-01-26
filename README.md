@@ -13,6 +13,7 @@ EasyQuest is in its early development stage, however there are many features tha
 
 ## Use cases (in portuguese)
 The following use cases are addressed by this project.
+* [Create questions](requirements/create-questions-usecase.md)
 * [Export questions](requirements/export-questions-usecase.md)
 
 ## How to run
