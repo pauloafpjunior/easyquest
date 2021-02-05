@@ -23,6 +23,7 @@
     "prettier"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
     "prettier/prettier": "warn",
     "react/jsx-filename-extension": [
       1,
@@ -33,6 +34,8 @@
         ]
       }
     ],
-    "react/state-in-constructor": "off"
+    "react/state-in-constructor": "off",
+    "no-unused-vars": "warn",
+    "react/prop-types": "off"
   }
 }
