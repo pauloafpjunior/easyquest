@@ -9,7 +9,7 @@ export default {
   typography: {
     h1: {
       color: WHITE,
-      fontSize: '40px',
+      fontSize: '30px',
       fontWeight: 'bold',
     },
   },
@@ -22,19 +22,19 @@ export default {
       justifyContent: 'center',
     },
     '.button-icon': {
-      height: '40px',
-      width: '40px',
+      height: '30px',
+      width: '30px',
     },
   },
   overrides: {
     MuiButton: {
       outlined: {
         boxSizing: 'border-box',
-        height: '60px',
+        height: '40px',
         border: `3px solid ${WHITE}`,
         color: WHITE,
         fontWeight: 'bold',
-        fontSize: '30px',
+        fontSize: '20px',
         borderRadius: '9px',
         '&:hover': {
           backgroundColor: CORNFLOWER_BLUE,

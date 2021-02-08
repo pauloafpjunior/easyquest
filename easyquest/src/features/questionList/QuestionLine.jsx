@@ -5,20 +5,22 @@ import { Book, Edit, FileCopy, Delete } from '@material-ui/icons';
 const useStyles = makeStyles({
   container: {
     display: 'flex',
+    alignItems: 'center',
     width: '100%',
+    padding: '10px 0px 10px 0px',
   },
   description: {
     marginRight: 'auto',
-    fontSize: '25px',
+    fontSize: '22px',
   },
-  typeIcon: {
-    height: '35px',
-    width: '35px',
+  typeIcon: { 
+    height: '22px',
+    width: '22px',
     margin: '0px 8px',
   },
   actionIcon: {
-    height: '25px',
-    width: '25px',
+    height: '22px',
+    width: '22px',
     margin: '0px 4px',
     cursor: 'pointer',
   },

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Button, Input, Grid, InputAdornment, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
 import { Add, Search } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
@@ -9,17 +9,18 @@ const useStyles = makeStyles({
     width: '100%',
   },
   input: {
-    fontSize: '30px',
+    fontSize: '22px',
+    padding: '5px 5px 5px 5px',
   },
   icon: {
-    height: '50px',
-    width: '50px',
+    height: '30px',
+    width: '30px',
   },
 });
 
 export default () => {
   const classes = useStyles();
-  const [questions, setQuestions] = useState([
+  const [questions] = useState([
     {
       type: 'multiple',
       description:
