@@ -5,9 +5,9 @@ import { BONDI_BLUE, COD_GRAY } from '../../theme';
 const useStyles = makeStyles({
   header: {
     width: '100%',
-    height: '80px',
+    height: '70px',
     backgroundColor: BONDI_BLUE,
-    border: `5px solid ${COD_GRAY}`,
+    borderBottom: `3px solid ${COD_GRAY}`,
     boxSizing: 'border-box',
     display: 'flex',
     alignItems: 'center',
