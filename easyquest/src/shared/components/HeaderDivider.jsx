@@ -5,7 +5,7 @@ import { WHITE } from '../../theme';
 const useStyles = makeStyles({
   divider: {
     width: '4px',
-    height: '100%',
+    height: '90%',
     backgroundColor: WHITE,
     margin: '0 8px',
   },
