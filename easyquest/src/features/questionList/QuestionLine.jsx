@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-import { Book, Edit, FileCopy, Delete } from '@material-ui/icons';
+import { Book, Edit, FileCopy, Delete, Message, Autorenew } from '@material-ui/icons';
+import { questionType } from '../../shared/Contants';
 
 const useStyles = makeStyles({
   container: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
     marginRight: 'auto',
     fontSize: '22px',
   },
-  typeIcon: { 
+  typeIcon: {
     height: '22px',
     width: '22px',
     margin: '0px 8px',
@@ -28,9 +29,20 @@ const useStyles = makeStyles({
 
 export default ({ question }) => {
   const style = useStyles();
+  const getIcon = () => {
+    switch (question.type) {
+      case questionType.multiple:
+        return <Message className={style.typeIcon} />;
+      case questionType.trueFalse:
+        return <Autorenew className={style.typeIcon} />;
+      case questionType.descritive:
+      default:
+        return <Book className={style.typeIcon} />;
+    }
+  };
   return (
     <Grid className={style.container}>
-      <Book className={style.typeIcon} />
+      {getIcon()}
       <Typography noWrap className={style.description}>
         {question.description}
       </Typography>

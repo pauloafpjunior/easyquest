@@ -1,8 +1,9 @@
 import { Button, Input, Grid, InputAdornment, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Add, Search } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
+import { questionType } from '../../shared/Contants';
 
 const useStyles = makeStyles({
   container: {
@@ -20,18 +21,37 @@ const useStyles = makeStyles({
 
 export default () => {
   const classes = useStyles();
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
+  const [filter, setFilter] = useState('');
   const [questions] = useState([
     {
-      type: 'multiple',
+      type: questionType.descritive,
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at eros nec dui volutpat interdum eget non lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id rutrum justo.',
     },
     {
-      type: 'true/false',
+      type: questionType.trueFalse,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at eros nec dui volutpat interdum eget non lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id rutrum justo.',
+        'Vestibulum risus ante, ullamcorper convallis bibendum vel, pretium eu libero. Maecenas nisi nisl, hendrerit vel auctor quis, mattis pellentesque elit. Fusce nec mi ac nulla lobortis dapibus in non erat. Etiam sodales justo nec congue blandit.',
+    },
+    {
+      type: questionType.multiple,
+      description:
+        'Sed imperdiet nisi arcu, quis vulputate magna vulputate id. Pellentesque consequat tortor sit amet lorem tempus, vel dignissim risus varius.',
     },
   ]);
+
+  useEffect(() => {
+    if (filter) {
+      setFilteredQuestions(
+        questions.filter((question) =>
+          question.description.toLowerCase().includes(filter.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredQuestions(questions);
+    }
+  }, [questions, filter]);
 
   return (
     <Grid className={classes.container}>
@@ -43,6 +63,7 @@ export default () => {
       </Header>
       <Input
         fullWidth
+        onChange={(e) => setFilter(e.target.value)}
         startAdornment={
           <InputAdornment position="start">
             <Search className={classes.icon} />
@@ -51,7 +72,7 @@ export default () => {
         className={classes.input}
         placeholder="Pesquisar..."
       />
-      {questions.map((question) => (
+      {filteredQuestions.map((question) => (
         <QuestionLine question={question} />
       ))}
     </Grid>
