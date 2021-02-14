@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Add, Search } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
-import { questionType } from '../../shared/Contants';
+import { questionType, components } from '../../shared/Contants';
 
 const useStyles = makeStyles({
   container: {
@@ -19,8 +19,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default () => {
-  const classes = useStyles();
+export default ({ setActive }) => {
+  const style = useStyles();
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [filter, setFilter] = useState('');
   const [questions] = useState([
@@ -53,10 +53,14 @@ export default () => {
     }
   }, [questions, filter]);
 
+  const addQuestion = () => {
+    setActive(components.newQuestion);
+  };
+
   return (
-    <Grid className={classes.container}>
+    <Grid className={style.container}>
       <Header>
-        <Button variant="outlined">
+        <Button variant="outlined" onClick={addQuestion}>
           <Add className="button-icon" />
           NOVA
         </Button>
@@ -66,10 +70,10 @@ export default () => {
         onChange={(e) => setFilter(e.target.value)}
         startAdornment={
           <InputAdornment position="start">
-            <Search className={classes.icon} />
+            <Search className={style.icon} />
           </InputAdornment>
         }
-        className={classes.input}
+        className={style.input}
         placeholder="Pesquisar..."
       />
       {filteredQuestions.map((question) => (

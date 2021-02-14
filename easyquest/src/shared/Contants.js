@@ -1,5 +1,6 @@
 export const components = {
   questionList: 'QUESTION_LIST',
+  newQuestion: 'NEW_QUESTION',
 };
 
 export const questionType = {

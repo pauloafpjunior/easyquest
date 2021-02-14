@@ -19,10 +19,10 @@ const useStyles = makeStyles({
 });
 
 export default ({ children }) => {
-  const classes = useStyles();
+  const style = useStyles();
   return (
-    <Grid className={classes.header}>
-      <Typography variant="h1" className={classes.title}>
+    <Grid className={style.header}>
+      <Typography variant="h1" className={style.title}>
         EasyQuest
       </Typography>
       {children}
