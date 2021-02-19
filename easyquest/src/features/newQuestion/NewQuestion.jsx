@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
 import { Button, Grid, makeStyles } from '@material-ui/core';
-import React from 'react';
 import { Save, Close } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import { components } from '../../shared/Contants';
 import HeaderDivider from '../../shared/components/HeaderDivider';
+import DescritiveQuestion from './DescritiveQuestion';
+import { validateQuestion } from '../../shared/utils/QuestionValidators';
 
 const useStyles = makeStyles({
   container: {
@@ -19,14 +21,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive }) => {
+export default ({ setActive, addQuestion }) => {
   const style = useStyles();
+  const [newQuestion, setNewQuestion] = useState({});
   const close = () => setActive(components.questionList);
+  const save = () => {
+    if (!validateQuestion(newQuestion)) {
+      alert('Questão inválida!');
+      return;
+    }
+    addQuestion(newQuestion);
+    close();
+  };
 
   return (
     <Grid className={style.container}>
       <Header>
-        <Button variant="outlined">
+        <Button variant="outlined" onClick={save}>
           <Save className="button-icon" />
           SALVAR
         </Button>
@@ -36,6 +47,7 @@ export default ({ setActive }) => {
           FECHAR
         </Button>
       </Header>
+      <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
     </Grid>
   );
 };

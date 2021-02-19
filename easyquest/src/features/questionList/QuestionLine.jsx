@@ -44,7 +44,7 @@ export default ({ question }) => {
     <Grid className={style.container}>
       {getIcon()}
       <Typography noWrap className={style.description}>
-        {question.description}
+        {question.description.replace(/(<([^>]+)>)/gi, '')}
       </Typography>
       <Edit className={style.actionIcon} />
       <FileCopy className={style.actionIcon} />

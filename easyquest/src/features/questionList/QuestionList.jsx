@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Add, Search } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
-import { questionType, components } from '../../shared/Contants';
+import { components } from '../../shared/Contants';
 
 const useStyles = makeStyles({
   container: {
@@ -19,27 +19,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive }) => {
+export default ({ setActive, questions }) => {
   const style = useStyles();
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [filter, setFilter] = useState('');
-  const [questions] = useState([
-    {
-      type: questionType.descritive,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at eros nec dui volutpat interdum eget non lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id rutrum justo.',
-    },
-    {
-      type: questionType.trueFalse,
-      description:
-        'Vestibulum risus ante, ullamcorper convallis bibendum vel, pretium eu libero. Maecenas nisi nisl, hendrerit vel auctor quis, mattis pellentesque elit. Fusce nec mi ac nulla lobortis dapibus in non erat. Etiam sodales justo nec congue blandit.',
-    },
-    {
-      type: questionType.multiple,
-      description:
-        'Sed imperdiet nisi arcu, quis vulputate magna vulputate id. Pellentesque consequat tortor sit amet lorem tempus, vel dignissim risus varius.',
-    },
-  ]);
 
   useEffect(() => {
     if (filter) {
@@ -77,7 +60,7 @@ export default ({ setActive }) => {
         placeholder="Pesquisar..."
       />
       {filteredQuestions.map((question) => (
-        <QuestionLine question={question} />
+        <QuestionLine key={question.id} question={question} />
       ))}
     </Grid>
   );

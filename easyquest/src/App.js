@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeProvider, Grid, createMuiTheme, makeStyles } from '@material-ui/core';
 import theme from './theme';
 import QuestionList from './features/questionList/QuestionList';
-import { components } from './shared/Contants';
+import { components, questionType } from './shared/Contants';
 import NewQuestion from './features/newQuestion/NewQuestion';
 
 const muiTheme = createMuiTheme(theme);
@@ -13,11 +13,40 @@ const useStyles = makeStyles(() => ({
 function App() {
   useStyles();
   const [active, setActive] = useState(components.questionList);
+  const [questions, setQuestions] = useState([
+    {
+      id: '01',
+      type: questionType.descritive,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at eros nec dui volutpat interdum eget non lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id rutrum justo.',
+    },
+    {
+      id: '02',
+      type: questionType.trueFalse,
+      description:
+        'Vestibulum risus ante, ullamcorper convallis bibendum vel, pretium eu libero. Maecenas nisi nisl, hendrerit vel auctor quis, mattis pellentesque elit. Fusce nec mi ac nulla lobortis dapibus in non erat. Etiam sodales justo nec congue blandit.',
+    },
+    {
+      id: '03',
+      type: questionType.multiple,
+      description:
+        'Sed imperdiet nisi arcu, quis vulputate magna vulputate id. Pellentesque consequat tortor sit amet lorem tempus, vel dignissim risus varius.',
+    },
+  ]);
+
+  const addQuestion = (question) => {
+    setQuestions([...questions, question]);
+  };
+
   return (
     <ThemeProvider theme={muiTheme}>
       <Grid className="screen-container">
-        {active === components.questionList && <QuestionList setActive={setActive} />}
-        {active === components.newQuestion && <NewQuestion setActive={setActive} />}
+        {active === components.questionList && (
+          <QuestionList setActive={setActive} questions={questions} />
+        )}
+        {active === components.newQuestion && (
+          <NewQuestion setActive={setActive} addQuestion={addQuestion} />
+        )}
       </Grid>
     </ThemeProvider>
   );
