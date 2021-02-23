@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive, addQuestion }) => {
+export default ({ setActive, addQuestion, removeQuestion }) => {
   const style = useStyles();
   const [newQuestion, setNewQuestion] = useState(null);
   const [newQuestionType, setNewQuestionType] = useState(questionType.multiple);
@@ -70,7 +70,11 @@ export default ({ setActive, addQuestion }) => {
           <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
         )}
         {newQuestionType === questionType.multiple && (
-          <MultipleChoiceQuestion question={newQuestion} setQuestion={setNewQuestion} />
+          <MultipleChoiceQuestion
+            question={newQuestion}
+            removeQuestion={removeQuestion}
+            setQuestion={setNewQuestion}
+          />
         )}
         {newQuestionType === questionType.trueFalse && (
           <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />

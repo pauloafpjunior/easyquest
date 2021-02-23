@@ -84,9 +84,7 @@ export default ({ question, setQuestion }) => {
       {question?.items &&
         question.items.map((item, index) => (
           <Grid className={style.row} key={item.id}>
-            <Typography style={{ fontWeight: 'bold' }}>
-              {`Item ${NumberToLetter(index)}:`}
-            </Typography>
+            <Typography style={{ fontWeight: 'bold' }}>{`Item ${index + 1}:`}</Typography>
             <RichTextField
               value={item.value}
               setValue={(value) => handleItem(value, index)}

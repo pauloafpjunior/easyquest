@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive, questions }) => {
+export default ({ setActive, questions, removeQuestion }) => {
   const style = useStyles();
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [filter, setFilter] = useState('');
@@ -60,7 +60,7 @@ export default ({ setActive, questions }) => {
         placeholder="Pesquisar..."
       />
       {filteredQuestions.map((question) => (
-        <QuestionLine key={question.id} question={question} />
+        <QuestionLine key={question.id} removeQuestion={removeQuestion} question={question} />
       ))}
     </Grid>
   );

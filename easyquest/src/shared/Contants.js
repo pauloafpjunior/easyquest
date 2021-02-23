@@ -10,3 +10,5 @@ export const questionType = {
 };
 
 export const MAX_ALTERNATIVES = 5;
+
+export const appLocalStorageKey = 'EASY_QUEST_QUESTIONS';

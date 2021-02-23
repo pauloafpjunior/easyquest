@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ question }) => {
+export default ({ question, removeQuestion }) => {
   const style = useStyles();
   const getIcon = () => {
     switch (question.type) {
@@ -55,7 +55,7 @@ export default ({ question }) => {
       </Typography>
       <Edit className={style.actionIcon} />
       <FileCopy className={style.actionIcon} />
-      <Delete className={style.actionIcon} />
+      <Delete className={style.actionIcon} onClick={() => removeQuestion(question.id)} />
     </Grid>
   );
 };
