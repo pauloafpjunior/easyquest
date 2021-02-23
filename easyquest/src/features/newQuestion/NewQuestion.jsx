@@ -7,6 +7,7 @@ import HeaderDivider from '../../shared/components/HeaderDivider';
 import DescritiveQuestion from './DescritiveQuestion';
 import { validateQuestion } from '../../shared/utils/QuestionValidators';
 import MultipleChoiceQuestion from './MultipleChoiceQuestion';
+import TrueFalseQuestion from './TrueFalseQuestion';
 
 const useStyles = makeStyles({
   container: {
@@ -14,6 +15,8 @@ const useStyles = makeStyles({
   },
   content: {
     padding: '0 calc(50% - 250px)',
+    height: 'calc(100vh - 70px)',
+    overflowY: 'auto',
   },
   input: {
     fontSize: '22px',
@@ -70,7 +73,7 @@ export default ({ setActive, addQuestion }) => {
           <MultipleChoiceQuestion question={newQuestion} setQuestion={setNewQuestion} />
         )}
         {newQuestionType === questionType.trueFalse && (
-          <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+          <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />
         )}
       </Grid>
     </Grid>

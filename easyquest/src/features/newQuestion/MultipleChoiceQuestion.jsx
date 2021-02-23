@@ -110,7 +110,7 @@ export default ({ question, setQuestion }) => {
             />
             <Grid className={style.row} style={{ display: 'flex' }}>
               <Remove className={`button-icon ${style.removeIcon}`} onClick={() => remove(index)} />
-              <Typography style={{ lineHeight: '30px' }}>Alternatica correta: </Typography>
+              <Typography style={{ lineHeight: '30px' }}>Alternativa correta: </Typography>
               <Check
                 className={`button-icon ${isCorrect(index)}`}
                 onClick={() => markAsCorrect(index)}

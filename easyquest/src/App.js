@@ -21,12 +21,6 @@ function App() {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at eros nec dui volutpat interdum eget non lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id rutrum justo.',
     },
     {
-      id: '02',
-      type: questionType.trueFalse,
-      description:
-        'Vestibulum risus ante, ullamcorper convallis bibendum vel, pretium eu libero. Maecenas nisi nisl, hendrerit vel auctor quis, mattis pellentesque elit. Fusce nec mi ac nulla lobortis dapibus in non erat. Etiam sodales justo nec congue blandit.',
-    },
-    {
       id: '03',
       type: questionType.multiple,
       description:

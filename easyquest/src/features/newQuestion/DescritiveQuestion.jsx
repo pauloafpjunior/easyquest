@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 import RichTextField from '../../shared/components/RichTextField';
 import { questionType } from '../../shared/Contants';
 
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
 export default ({ question, setQuestion }) => {
   const [description, setDescription] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [showFeedback, setShowFeedback] = useState(false);
   const style = useStyles();
   useEffect(() => {
     if (!question?.id) {
@@ -50,9 +52,20 @@ export default ({ question, setQuestion }) => {
       </Grid>
       <br />
       <Grid className={style.row}>
-        <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-        <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
+        {!showFeedback && (
+          <Button variant="contained" onClick={() => setShowFeedback(true)}>
+            <Add className="button-icon" />
+            Adicionar feedback
+          </Button>
+        )}
+        <br />
       </Grid>
+      {showFeedback && (
+        <Grid className={style.row}>
+          <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
+          <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
+        </Grid>
+      )}
     </Grid>
   );
 };

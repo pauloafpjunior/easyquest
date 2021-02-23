@@ -40,11 +40,18 @@ export default ({ question }) => {
         return <Book className={style.typeIcon} />;
     }
   };
+  const getText = () => {
+    if (question.type === questionType.trueFalse) {
+      return question.items[0].text.replace(/(<([^>]+)>)/gi, '');
+    }
+    return question.description.replace(/(<([^>]+)>)/gi, '');
+  };
+
   return (
     <Grid className={style.container}>
       {getIcon()}
       <Typography noWrap className={style.description}>
-        {question.description.replace(/(<([^>]+)>)/gi, '')}
+        {getText()}
       </Typography>
       <Edit className={style.actionIcon} />
       <FileCopy className={style.actionIcon} />

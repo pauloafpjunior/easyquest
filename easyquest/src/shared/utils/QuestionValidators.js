@@ -10,13 +10,17 @@ const validateMultipleChoiceQuestion = (question) =>
   question.alternatives.every((a) => a.text) &&
   question.alternatives.filter((a) => a.isCorrect).length === 1;
 
+const validateTrueFalseQuestion = (question) =>
+  question?.id && question.items.length >= 1 && question.items.every((a) => a.text);
+
 export const validateQuestion = (question) => {
-  console.log(question);
   switch (question.type) {
     case questionType.descritive:
       return validateDescritiveQuestion(question);
     case questionType.multiple:
       return validateMultipleChoiceQuestion(question);
+    case questionType.trueFalse:
+      return validateTrueFalseQuestion(question);
     default:
       throw new Error('Tipo de questão não implementada');
   }
