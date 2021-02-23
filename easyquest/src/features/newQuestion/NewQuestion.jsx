@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Button, Grid, makeStyles } from '@material-ui/core';
 import { Save, Close } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
-import { components } from '../../shared/Contants';
+import { components, questionType } from '../../shared/Contants';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import DescritiveQuestion from './DescritiveQuestion';
 import { validateQuestion } from '../../shared/utils/QuestionValidators';
+import MultipleChoiceQuestion from './MultipleChoiceQuestion';
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +24,8 @@ const useStyles = makeStyles({
 
 export default ({ setActive, addQuestion }) => {
   const style = useStyles();
-  const [newQuestion, setNewQuestion] = useState({});
+  const [newQuestion, setNewQuestion] = useState(null);
+  const [newQuestionType, setNewQuestionType] = useState(questionType.multiple);
   const close = () => setActive(components.questionList);
   const save = () => {
     if (!validateQuestion(newQuestion)) {
@@ -47,7 +49,15 @@ export default ({ setActive, addQuestion }) => {
           FECHAR
         </Button>
       </Header>
-      <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+      {newQuestionType === questionType.descritive && (
+        <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+      )}
+      {newQuestionType === questionType.multiple && (
+        <MultipleChoiceQuestion question={newQuestion} setQuestion={setNewQuestion} />
+      )}
+      {newQuestionType === questionType.trueFalse && (
+        <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+      )}
     </Grid>
   );
 };

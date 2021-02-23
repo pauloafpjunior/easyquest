@@ -8,3 +8,5 @@ export const questionType = {
   multiple: 'MULTIPLE',
   trueFalse: 'TRUE/FALSE',
 };
+
+export const MAX_ALTERNATIVES = 5;

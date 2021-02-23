@@ -25,6 +25,9 @@ export default {
       height: '30px',
       width: '30px',
     },
+    '.ck-editor__editable_inline': {
+      minHeight: '200px',
+    },
   },
   overrides: {
     MuiButton: {

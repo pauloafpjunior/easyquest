@@ -8,9 +8,15 @@ const useStyles = makeStyles({
   input: {
     width: '500px',
   },
+  row: {
+    width: 'max-content',
+  },
   container: {
     width: '100%',
-    padding: '32px',
+    paddingTop: '32px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });
 
@@ -38,11 +44,15 @@ export default ({ question, setQuestion }) => {
 
   return (
     <Grid className={style.container}>
-      <Typography>Enunciado: </Typography>
-      <RichTextField value={description} setValue={handleDescription} className={style.input} />
+      <Grid className={style.row}>
+        <Typography style={{ fontWeight: 'bold' }}>Enunciado: </Typography>
+        <RichTextField value={description} setValue={handleDescription} className={style.input} />
+      </Grid>
       <br />
-      <Typography>Feedback: </Typography>
-      <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
+      <Grid className={style.row}>
+        <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
+        <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
+      </Grid>
     </Grid>
   );
 };
