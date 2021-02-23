@@ -4,9 +4,9 @@ export const components = {
 };
 
 export const questionType = {
-  descritive: 'DESCRITIVE',
-  multiple: 'MULTIPLE',
-  trueFalse: 'TRUE/FALSE',
+  descritive: 'Dissertativa',
+  multiple: 'Multipla escolha',
+  trueFalse: 'Verdadeiro/Falso',
 };
 
 export const MAX_ALTERNATIVES = 5;

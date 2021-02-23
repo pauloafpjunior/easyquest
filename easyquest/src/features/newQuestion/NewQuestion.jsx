@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Grid, makeStyles } from '@material-ui/core';
+import { Button, Grid, makeStyles, Select, MenuItem } from '@material-ui/core';
 import { Save, Close } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import { components, questionType } from '../../shared/Contants';
@@ -11,6 +11,9 @@ import MultipleChoiceQuestion from './MultipleChoiceQuestion';
 const useStyles = makeStyles({
   container: {
     width: '100%',
+  },
+  content: {
+    padding: '0 calc(50% - 250px)',
   },
   input: {
     fontSize: '22px',
@@ -35,6 +38,9 @@ export default ({ setActive, addQuestion }) => {
     addQuestion(newQuestion);
     close();
   };
+  const handleChangeType = (event) => {
+    setNewQuestionType(event.target.value);
+  };
 
   return (
     <Grid className={style.container}>
@@ -49,15 +55,24 @@ export default ({ setActive, addQuestion }) => {
           FECHAR
         </Button>
       </Header>
-      {newQuestionType === questionType.descritive && (
-        <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
-      )}
-      {newQuestionType === questionType.multiple && (
-        <MultipleChoiceQuestion question={newQuestion} setQuestion={setNewQuestion} />
-      )}
-      {newQuestionType === questionType.trueFalse && (
-        <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
-      )}
+      <Grid className={style.content}>
+        <Select value={newQuestionType} onChange={handleChangeType}>
+          {Object.values(questionType).map((qType) => (
+            <MenuItem key={qType} value={qType}>
+              {qType}
+            </MenuItem>
+          ))}
+        </Select>
+        {newQuestionType === questionType.descritive && (
+          <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+        )}
+        {newQuestionType === questionType.multiple && (
+          <MultipleChoiceQuestion question={newQuestion} setQuestion={setNewQuestion} />
+        )}
+        {newQuestionType === questionType.trueFalse && (
+          <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+        )}
+      </Grid>
     </Grid>
   );
 };
