@@ -12,10 +12,14 @@ export default ({ value, setValue, className }) => {
       setId(x);
     } else if (ctrl && id) {
       setCtrl(false);
-      InlineEditor.create(document.querySelector(`#${id}`))
+      InlineEditor.create(document.querySelector(`#${id}`), {
+        startupFocus: true,
+        initialData: 'teste',
+      })
         .then((editor) => {
+          editor.editing.view.focus();
+          editor.model.document.on('change:data', () => console.log(editor.getData()));
           window.editor = editor;
-          console.log(editor);
         })
         .catch((err) => {
           console.error(err.stack);
@@ -23,5 +27,5 @@ export default ({ value, setValue, className }) => {
     }
   }, [ctrl, id]);
 
-  return <div id={id} style={{ width: '200px' }} />;
+  return <div id={id} style={{ width: '600px', border: '1px solid black', marginTop: '40px' }} />;
 };
