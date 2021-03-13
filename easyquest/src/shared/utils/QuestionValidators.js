@@ -5,13 +5,13 @@ const validateDescritiveQuestion = (question) => question?.id && question?.descr
 const validateMultipleChoiceQuestion = (question) =>
   question?.id &&
   question?.description &&
+  question?.alternatives &&
   question.alternatives.length >= 2 &&
-  question.alternatives.length <= 5 &&
+  question.alternatives.length <= 4 &&
   question.alternatives.every((a) => a.text) &&
   question.alternatives.filter((a) => a.isCorrect).length === 1;
 
-const validateTrueFalseQuestion = (question) =>
-  question?.id && question.items.length >= 1 && question.items.every((a) => a.text);
+const validateTrueFalseQuestion = (question) => question?.id && question?.description;
 
 export const validateQuestion = (question) => {
   switch (question.type) {

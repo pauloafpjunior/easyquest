@@ -4,6 +4,8 @@ import { BONDI_BLUE, COD_GRAY } from '../../theme';
 
 const useStyles = makeStyles({
   header: {
+    position: 'relative',
+    zIndex: '1002',
     width: '100%',
     height: '70px',
     backgroundColor: BONDI_BLUE,

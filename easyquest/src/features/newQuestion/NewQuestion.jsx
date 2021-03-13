@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     width: '100%',
   },
   content: {
-    padding: '0 calc(50% - 250px)',
+    padding: '0 calc(50% - 315px)',
     height: 'calc(100vh - 70px)',
     overflowY: 'auto',
   },
@@ -28,10 +28,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive, addQuestion, removeQuestion }) => {
+export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   const style = useStyles();
-  const [newQuestion, setNewQuestion] = useState(null);
-  const [newQuestionType, setNewQuestionType] = useState(questionType.multiple);
+  const [newQuestion, setNewQuestion] = useState(questionToEdit ?? null);
+  const [newQuestionType, setNewQuestionType] = useState(
+    questionToEdit?.type ?? questionType.multiple
+  );
   const close = () => setActive(components.questionList);
   const save = () => {
     if (!validateQuestion(newQuestion)) {

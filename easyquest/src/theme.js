@@ -24,6 +24,7 @@ export default {
     '.button-icon': {
       height: '30px',
       width: '30px',
+      marginRight: '4px',
     },
     '.ck-editor__editable_inline': {
       minHeight: '200px',

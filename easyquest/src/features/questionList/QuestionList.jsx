@@ -1,9 +1,10 @@
 import { Button, Input, Grid, InputAdornment, makeStyles } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import { Add, Search } from '@material-ui/icons';
+import { Add, Search, Delete } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
 import { components } from '../../shared/Contants';
+import HeaderDivider from '../../shared/components/HeaderDivider';
 
 const useStyles = makeStyles({
   container: {
@@ -19,7 +20,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive, questions, removeQuestion }) => {
+export default ({
+  setActive,
+  questions,
+  editQuestion,
+  duplicateQuestion,
+  removeQuestion,
+  removeAll,
+}) => {
   const style = useStyles();
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [filter, setFilter] = useState('');
@@ -47,6 +55,11 @@ export default ({ setActive, questions, removeQuestion }) => {
           <Add className="button-icon" />
           NOVA
         </Button>
+        <HeaderDivider />
+        <Button variant="outlined" onClick={removeAll}>
+          <Delete className="button-icon" />
+          LIMPAR
+        </Button>
       </Header>
       <Input
         fullWidth
@@ -60,7 +73,13 @@ export default ({ setActive, questions, removeQuestion }) => {
         placeholder="Pesquisar..."
       />
       {filteredQuestions.map((question) => (
-        <QuestionLine key={question.id} removeQuestion={removeQuestion} question={question} />
+        <QuestionLine
+          key={question.id}
+          removeQuestion={removeQuestion}
+          question={question}
+          editQuestion={editQuestion}
+          duplicateQuestion={duplicateQuestion}
+        />
       ))}
     </Grid>
   );
