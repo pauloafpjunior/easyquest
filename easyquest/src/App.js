@@ -33,6 +33,11 @@ function App() {
     setQuestions([...questions]);
   };
 
+  const removeAll = () => {
+    localStorage.setItem(appLocalStorageKey, JSON.stringify([]));
+    setQuestions([]);
+  };
+
   return (
     <ThemeProvider theme={muiTheme}>
       <Grid className="screen-container">
@@ -41,6 +46,7 @@ function App() {
             setActive={setActive}
             questions={questions}
             removeQuestion={removeQuestion}
+            removeAll={removeAll}
           />
         )}
         {active === components.newQuestion && (

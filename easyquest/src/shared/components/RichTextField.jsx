@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Grid } from '@material-ui/core';
 import InlineEditor from 'ckeditor5-build-inline-with-base64-upload';
+import './text.css';
 
 export default ({ value, setValue, className }) => {
-  const [ctrl, setCtrl] = useState(true);
   const [id, setId] = useState('');
+  const [editor, setEditor] = useState(null);
   useEffect(() => {
     if (!id) {
       const x = uuid().replace(/[0-9]/g, 'x');
       setId(x);
-    } else if (ctrl && id) {
-      setCtrl(false);
+    } else if (id && !editor) {
+      console.log('asdasd');
       InlineEditor.create(document.querySelector(`#${id}`), {
-        startupFocus: true,
-        initialData: 'teste',
+        initialData: value ?? '',
       })
-        .then((editor) => {
-          editor.editing.view.focus();
-          editor.model.document.on('change:data', () => console.log(editor.getData()));
-          window.editor = editor;
+        .then((newEditor) => {
+          newEditor.model.document.on('change:data', () => setValue(newEditor.getData()));
+          setEditor(newEditor);
         })
         .catch((err) => {
           console.error(err.stack);
         });
     }
-  }, [ctrl, id]);
+  }, [id, editor]);
 
   return <div id={id} style={{ width: '600px', border: '1px solid black', marginTop: '40px' }} />;
 };

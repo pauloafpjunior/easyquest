@@ -14,8 +14,9 @@ const useStyles = makeStyles({
     width: 'max-content',
   },
   removeIcon: {
+    marginTop: '4px',
+    marginRight: '8px',
     color: 'red',
-    marginRight: '16px',
     cursor: 'pointer',
   },
   correct: {
@@ -36,69 +37,66 @@ const useStyles = makeStyles({
 });
 
 export default ({ question, setQuestion }) => {
-  const [description, setDescription] = useState('');
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [feedback, setFeedback] = useState('');
+  const [id] = useState(question?.id ?? uuid());
+  const [description, setDescription] = useState(question?.description ?? '');
+  const [alternatives, setAlternatives] = useState(
+    question?.alternatives ?? [
+      { isCorrect: false, text: '', id: '01' },
+      { isCorrect: false, text: '', id: '02' },
+      { isCorrect: false, text: '', id: '03' },
+      { isCorrect: false, text: '', id: '04' },
+    ]
+  );
+  const [feedback, setFeedback] = useState(question?.feedback ?? '');
+  const [showFeedback, setShowFeedback] = useState(!!question?.feedback);
   const style = useStyles();
   useEffect(() => {
-    const alternatives = question?.alternatives ?? [{ isCorrect: false, text: '', id: '01' }];
-    if (!question) {
-      setQuestion(question ? { ...question, id: uuid(), alternatives } : { id: uuid() });
-    } else if (question?.type !== questionType.multiple) {
-      setQuestion({ ...question, type: questionType.multiple, alternatives });
-    }
-  }, [question, setQuestion]);
-
-  const handleDescription = (newDescription) => {
-    setDescription(newDescription);
-    setQuestion({ ...question, description: newDescription });
-  };
-
-  const handleFeedback = (newFeedback) => {
-    setFeedback(newFeedback);
-    setQuestion({ ...question, feedback: newFeedback });
-  };
+    setQuestion({ id, description, alternatives, feedback, type: questionType.multiple });
+  }, [id, description, alternatives, feedback]);
 
   const handleAlternative = (newValue, index) => {
-    const { alternatives } = question;
-    alternatives[index].text = newValue;
-    setQuestion({ ...question, alternatives });
+    const alternative = alternatives[index];
+    if (alternative) {
+      alternative.text = newValue;
+    }
+    setAlternatives([...alternatives]);
   };
 
   const addAlternative = () => {
-    const { alternatives } = question;
-    alternatives.push({ isCorrect: false, text: '', id: (alternatives.length + 1).toString() });
-    setQuestion({ ...question, alternatives });
+    alternatives.push({
+      isCorrect: false,
+      text: '',
+      id: (alternatives.length + 1).toString(),
+    });
+    setAlternatives([...alternatives]);
   };
 
-  const isCorrect = (index) =>
-    question?.alternatives[index].isCorrect ? style.correct : style.incorrect;
+  const isCorrect = (index) => (alternatives[index].isCorrect ? style.correct : style.incorrect);
 
   const markAsCorrect = (index) => {
-    const newVal = !question.alternatives[index].isCorrect;
-    const alternatives = question?.alternatives.map((alternative) => ({
+    const newVal = !alternatives[index].isCorrect;
+    const newAlternatives = alternatives.map((alternative) => ({
       ...alternative,
       isCorrect: false,
     }));
-    alternatives[index].isCorrect = newVal;
-    setQuestion({ ...question, alternatives });
+    newAlternatives[index].isCorrect = newVal;
+    setAlternatives([...newAlternatives]);
   };
 
   const remove = (index) => {
-    const { alternatives } = question;
     alternatives.splice(index, 1);
-    setQuestion({ ...question, alternatives });
+    setAlternatives([...alternatives]);
   };
 
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
         <Typography style={{ fontWeight: 'bold' }}>Enunciado: </Typography>
-        <RichTextField value={description} setValue={handleDescription} className={style.input} />
+        <RichTextField value={description} setValue={setDescription} className={style.input} />
       </Grid>
       <br />
-      {question?.alternatives &&
-        question.alternatives.map((alternative, index) => (
+      {alternatives &&
+        alternatives.map((alternative, index) => (
           <Grid className={style.row} key={alternative.id}>
             <Typography style={{ fontWeight: 'bold' }}>{`Alternativa ${NumberToLetter(
               index
@@ -109,18 +107,23 @@ export default ({ question, setQuestion }) => {
               className={style.input}
             />
             <Grid className={style.row} style={{ display: 'flex' }}>
-              <Remove className={`button-icon ${style.removeIcon}`} onClick={() => remove(index)} />
-              <Typography style={{ lineHeight: '30px' }}>Alternativa correta: </Typography>
-              <Check
-                className={`button-icon ${isCorrect(index)}`}
-                onClick={() => markAsCorrect(index)}
-              />
+              <Button onClick={() => remove(index)}>
+                <Remove className={`button-icon ${style.removeIcon}`} />
+                REMOVER
+              </Button>
+              <Button onClick={() => markAsCorrect(index)}>
+                <Check
+                  style={{ marginRight: '8px' }}
+                  className={`button-icon ${isCorrect(index)}`}
+                />
+                Marcar como correta
+              </Button>
             </Grid>
             <br />
           </Grid>
         ))}
       <Grid className={style.row}>
-        {question?.alternatives?.length < MAX_ALTERNATIVES && (
+        {alternatives?.length < MAX_ALTERNATIVES && (
           <Button style={{ marginRight: '8px' }} variant="contained" onClick={addAlternative}>
             <Add className="button-icon" />
             Adicionar alternativa
@@ -137,7 +140,19 @@ export default ({ question, setQuestion }) => {
       {showFeedback && (
         <Grid className={style.row}>
           <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-          <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
+          <RichTextField value={feedback} setValue={setFeedback} className={style.input} />
+          <Grid className={style.row} style={{ display: 'flex' }}>
+            <Button
+              onClick={() => {
+                setShowFeedback(false);
+                setFeedback('');
+              }}
+            >
+              <Remove className={`button-icon ${style.removeIcon}`} />
+              Remover
+            </Button>
+          </Grid>
+          <br />
         </Grid>
       )}
     </Grid>

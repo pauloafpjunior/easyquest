@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     width: '100%',
   },
   content: {
-    padding: '0 calc(50% - 250px)',
+    padding: '0 calc(50% - 315px)',
     height: 'calc(100vh - 70px)',
     overflowY: 'auto',
   },
@@ -35,6 +35,7 @@ export default ({ setActive, addQuestion, removeQuestion }) => {
   const close = () => setActive(components.questionList);
   const save = () => {
     if (!validateQuestion(newQuestion)) {
+      console.log(newQuestion);
       alert('Questão inválida!');
       return;
     }

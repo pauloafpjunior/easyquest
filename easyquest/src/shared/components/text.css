@@ -1,0 +1,3 @@
+.ck.ck-balloon-panel:not(.ck-toolbar-container) {
+  z-index: 1001;
+}
