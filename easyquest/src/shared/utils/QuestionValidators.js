@@ -11,7 +11,7 @@ const validateMultipleChoiceQuestion = (question) =>
   question.alternatives.every((a) => a.text) &&
   question.alternatives.filter((a) => a.isCorrect).length === 1;
 
-const validateTrueFalseQuestion = (question) => question?.id && question?.text;
+const validateTrueFalseQuestion = (question) => question?.id && question?.description;
 
 export const validateQuestion = (question) => {
   switch (question.type) {

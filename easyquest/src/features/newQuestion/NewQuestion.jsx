@@ -28,14 +28,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ setActive, addQuestion, removeQuestion }) => {
+export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   const style = useStyles();
-  const [newQuestion, setNewQuestion] = useState(null);
-  const [newQuestionType, setNewQuestionType] = useState(questionType.multiple);
+  const [newQuestion, setNewQuestion] = useState(questionToEdit ?? null);
+  const [newQuestionType, setNewQuestionType] = useState(
+    questionToEdit?.type ?? questionType.multiple
+  );
   const close = () => setActive(components.questionList);
   const save = () => {
     if (!validateQuestion(newQuestion)) {
-      console.log(newQuestion);
       alert('Questão inválida!');
       return;
     }

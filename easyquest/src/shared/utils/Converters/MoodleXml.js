@@ -57,7 +57,7 @@ const essay = (question) => `<?xml version="1.0" encoding="UTF-8"?>
         <text>${question.id}</text>
       </name>
       <questiontext format="html">
-        <text><![CDATA[${question.text}]]></text>
+        <text><![CDATA[${question.description}]]></text>
       </questiontext>
       <generalfeedback format="html">
         <text><![CDATA[${question.feedback}]]></text>
@@ -86,7 +86,7 @@ const trueFalse = (question) => `<?xml version="1.0" encoding="UTF-8"?>
 <!-- question: 785151  -->
   <question type="truefalse">
     <name>
-      <text>true false</text>
+      <text>${question.id}</text>
     </name>
     <questiontext format="html">
       <text><![CDATA[${question.description}]]></text>
@@ -98,13 +98,13 @@ const trueFalse = (question) => `<?xml version="1.0" encoding="UTF-8"?>
     <penalty>1</penalty>
     <hidden>0</hidden>
     <idnumber></idnumber>
-    <answer fraction="0" format="moodle_auto_format">
+    <answer fraction="${question.isCorrect ? 100 : 0}" format="moodle_auto_format">
       <text>true</text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="100" format="moodle_auto_format">
+    <answer fraction="${question.isCorrect ? 0 : 100}" format="moodle_auto_format">
       <text>false</text>
       <feedback format="html">
         <text></text>
