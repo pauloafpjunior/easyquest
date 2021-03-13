@@ -49,11 +49,79 @@ const multiple = (question) => {
   return xml;
 };
 
+const essay = (question) => `<?xml version="1.0" encoding="UTF-8"?>
+  <quiz>
+  <!-- question: 785150  -->
+    <question type="essay">
+      <name>
+        <text>${question.id}</text>
+      </name>
+      <questiontext format="html">
+        <text><![CDATA[${question.text}]]></text>
+      </questiontext>
+      <generalfeedback format="html">
+        <text><![CDATA[${question.feedback}]]></text>
+      </generalfeedback>
+      <defaultgrade>1</defaultgrade>
+      <penalty>0</penalty>
+      <hidden>0</hidden>
+      <idnumber></idnumber>
+      <responseformat>editor</responseformat>
+      <responserequired>1</responserequired>
+      <responsefieldlines>15</responsefieldlines>
+      <attachments>0</attachments>
+      <attachmentsrequired>0</attachmentsrequired>
+      <graderinfo format="html">
+        <text></text>
+      </graderinfo>
+      <responsetemplate format="html">
+        <text></text>
+      </responsetemplate>
+    </question>
+  
+  </quiz>`;
+
+const trueFalse = (question) => `<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 785151  -->
+  <question type="truefalse">
+    <name>
+      <text>true false</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[${question.description}]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[${question.feedback}]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>1</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>true</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>false</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+</quiz>`;
+
 export default (question) => {
-  console.log('asdasdasdasd');
   switch (question.type) {
     case questionType.multiple:
       return multiple(question);
+    case questionType.descritive:
+      return essay(question);
+    case questionType.trueFalse:
+      return trueFalse(question);
 
     default:
       throw new Error('Not implemented');
