@@ -1,5 +1,5 @@
 const CACHE_NAME = 'easy-quest';
-const urlsToCache = ['/'];
+const urlsToCache = ['/', '/styles/styles.css', '/script/webpack-bundle.js'];
 
 // Install a service worker
 self.addEventListener('install', (event) => {
@@ -13,30 +13,18 @@ self.addEventListener('install', (event) => {
 });
 
 // Cache and return requests
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      // Cache hit - return response
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
-    })
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      // Open a cache and cache our files
+      cache.addAll(urlsToCache)
+    )
   );
 });
 
-// Update a service worker
-self.addEventListener('activate', (event) => {
-  const cacheWhitelist = ['easy-quest'];
-  event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      )
-    )
+self.addEventListener('fetch', (event) => {
+  console.log(event.request.url);
+  event.respondWith(
+    caches.match(event.request).then((response) => response || fetch(event.request))
   );
 });
