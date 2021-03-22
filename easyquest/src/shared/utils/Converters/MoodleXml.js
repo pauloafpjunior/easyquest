@@ -11,8 +11,7 @@ const multiple = (question) => {
     </feedback>
   </answer>`;
   });
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <quiz>
+  const xml = `
     <question type="multichoice">
       <name>
         <text>${question.id}</text>
@@ -43,15 +42,12 @@ const multiple = (question) => {
     <shownumcorrect/>
     ${alternativesText}
   </question>
-
-</quiz>`;
+`;
 
   return xml;
 };
 
-const essay = (question) => `<?xml version="1.0" encoding="UTF-8"?>
-  <quiz>
-  <!-- question: 785150  -->
+const essay = (question) => `
     <question type="essay">
       <name>
         <text>${question.id}</text>
@@ -78,12 +74,9 @@ const essay = (question) => `<?xml version="1.0" encoding="UTF-8"?>
         <text></text>
       </responsetemplate>
     </question>
-  
-  </quiz>`;
+  `;
 
-const trueFalse = (question) => `<?xml version="1.0" encoding="UTF-8"?>
-<quiz>
-<!-- question: 785151  -->
+const trueFalse = (question) => `
   <question type="truefalse">
     <name>
       <text>${question.id}</text>
@@ -110,11 +103,9 @@ const trueFalse = (question) => `<?xml version="1.0" encoding="UTF-8"?>
         <text></text>
       </feedback>
     </answer>
-  </question>
+  </question>`;
 
-</quiz>`;
-
-export default (question) => {
+const convertByType = (question) => {
   switch (question.type) {
     case questionType.multiple:
       return multiple(question);
@@ -126,4 +117,12 @@ export default (question) => {
     default:
       throw new Error('Not implemented');
   }
+};
+
+export const SingleMoodleXml = (question) =>
+  `<?xml version="1.0" encoding="UTF-8"?><quiz>${convertByType(question)}</quiz>`;
+
+export const MultipleMoodleXml = (questions) => {
+  const allQuestions = questions.reduce((all, question) => all + convertByType(question), '');
+  return `<?xml version="1.0" encoding="UTF-8"?><quiz>${allQuestions}</quiz>`;
 };

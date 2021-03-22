@@ -4,6 +4,7 @@ import { Book, Edit, FileCopy, Delete, Message, Autorenew, GetApp } from '@mater
 import { questionType, generalMessages } from '../../shared/Constants';
 import Converter from '../../shared/utils/Converters';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
+import { DownloadXmlFile } from '../../shared/utils/Utils';
 
 const useStyles = makeStyles({
   container: {
@@ -46,15 +47,7 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
   const getText = () => question.description.replace(/(<([^>]+)>)/gi, ' ');
 
   const downloadAsXml = () => {
-    const dataStr = `data:text/xml;charset=utf-8,${encodeURIComponent(
-      Converter[0].converter(question)
-    )}`;
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute('href', dataStr);
-    downloadAnchorNode.setAttribute('download', `question.xml`);
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    DownloadXmlFile(Converter[0].converter(question), 'question.xml');
   };
 
   return (

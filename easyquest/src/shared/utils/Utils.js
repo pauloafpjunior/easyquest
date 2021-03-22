@@ -15,3 +15,13 @@ export const NumberToLetter = (number) => {
       return '';
   }
 };
+
+export const DownloadXmlFile = (data, filename) => {
+  const dataStr = `data:text/xml;charset=utf-8,${encodeURIComponent(data)}`;
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute('href', dataStr);
+  downloadAnchorNode.setAttribute('download', filename);
+  document.body.appendChild(downloadAnchorNode);
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+};

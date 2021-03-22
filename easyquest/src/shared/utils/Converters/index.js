@@ -1,3 +1,5 @@
-import MoodleXml from './MoodleXml';
+import { SingleMoodleXml, MultipleMoodleXml } from './MoodleXml';
 
-export default [{ name: 'MoodleXML', converter: MoodleXml }];
+export default [
+  { name: 'MoodleXML', converter: SingleMoodleXml, multipleConverter: MultipleMoodleXml },
+];

@@ -22,6 +22,12 @@ function App() {
     setQuestions(localContent ? JSON.parse(localContent) : []);
   }, [appLocalStorageKey]);
 
+  useEffect(() => {
+    if (active === components.questionList) {
+      setQuestionToEdit(null);
+    }
+  }, [active]);
+
   const addQuestion = (question) => {
     delete question.modified;
     const index = questions.findIndex((q) => q.id === question.id);
@@ -41,7 +47,9 @@ function App() {
     setActive(components.newQuestion);
   };
 
-  const duplicateQuestion = (question) => addQuestion({ ...question, id: uuid() });
+  const duplicateQuestion = (question) => {
+    addQuestion({ ...question, description: `(Cópia) ${question.description}`, id: uuid() });
+  };
 
   const removeQuestion = (id) => {
     const index = questions.findIndex((q) => q.id === id);

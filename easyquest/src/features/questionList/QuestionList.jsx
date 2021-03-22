@@ -1,11 +1,13 @@
 import { Button, Input, Grid, InputAdornment, makeStyles } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import { Add, Search, Delete } from '@material-ui/icons';
+import { Add, Search, Delete, GetApp } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
 import { components, generalMessages } from '../../shared/Constants';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
+import Converters from '../../shared/utils/Converters';
+import { DownloadXmlFile } from '../../shared/utils/Utils';
 
 const useStyles = makeStyles({
   container: {
@@ -56,6 +58,10 @@ export default ({
     }
   };
 
+  const downloadAll = () => {
+    DownloadXmlFile(Converters[0].multipleConverter(questions), 'questions.xml');
+  };
+
   return (
     <>
       <Grid className={style.container}>
@@ -63,6 +69,10 @@ export default ({
           <Button variant="outlined" onClick={addQuestion}>
             <Add className="button-icon" />
             NOVA
+          </Button>
+          <Button variant="outlined" onClick={downloadAll} style={{ marginLeft: '8px' }}>
+            <GetApp className="button-icon" />
+            DOWNLOAD
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={checkRemoveAll}>
