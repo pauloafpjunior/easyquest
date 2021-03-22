@@ -4,12 +4,7 @@ const urlsToCache = ['/', '/styles/styles.css', '/script/webpack-bundle.js'];
 // Install a service worker
 self.addEventListener('install', (event) => {
   // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Opened cache');
-      return cache.addAll(urlsToCache);
-    })
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)));
 });
 
 // Cache and return requests
@@ -23,7 +18,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log(event.request.url);
   event.respondWith(
     caches.match(event.request).then((response) => response || fetch(event.request))
   );

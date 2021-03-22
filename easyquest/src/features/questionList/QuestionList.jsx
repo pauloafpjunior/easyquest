@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Add, Search, Delete } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
-import { components } from '../../shared/Contants';
+import { components } from '../../shared/Constants';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 
 const useStyles = makeStyles({

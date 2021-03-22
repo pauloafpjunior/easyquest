@@ -9,6 +9,10 @@ export const questionType = {
   trueFalse: 'Verdadeiro/Falso',
 };
 
+export const validationMessages = {
+  invalidQuestion: 'Questão Inválida',
+};
+
 export const MAX_ALTERNATIVES = 5;
 
 export const appLocalStorageKey = 'EASY_QUEST_QUESTIONS';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import { Book, Edit, FileCopy, Delete, Message, Autorenew, GetApp } from '@material-ui/icons';
-import { questionType } from '../../shared/Contants';
+import { questionType } from '../../shared/Constants';
 import Converter from '../../shared/utils/Converters';
 
 const useStyles = makeStyles({

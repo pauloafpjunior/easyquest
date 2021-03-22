@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { ThemeProvider, Grid, createMuiTheme, makeStyles } from '@material-ui/core';
 import theme from './theme';
 import QuestionList from './features/questionList/QuestionList';
-import { appLocalStorageKey, components } from './shared/Contants';
+import { appLocalStorageKey, components } from './shared/Constants';
 import NewQuestion from './features/newQuestion/NewQuestion';
 
 const muiTheme = createMuiTheme(theme);

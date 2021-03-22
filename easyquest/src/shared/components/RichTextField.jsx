@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import InlineEditor from 'ckeditor5-build-inline-with-base64-upload';
 import './text.css';
 
-export default ({ value, setValue, className }) => {
+export default ({ value, setValue }) => {
   const [id, setId] = useState('');
   const [editor, setEditor] = useState(null);
   useEffect(() => {
@@ -11,7 +11,6 @@ export default ({ value, setValue, className }) => {
       const x = uuid().replace(/[0-9]/g, 'x');
       setId(x);
     } else if (id && !editor) {
-      console.log('asdasd');
       InlineEditor.create(document.querySelector(`#${id}`), {
         initialData: value ?? '',
       })

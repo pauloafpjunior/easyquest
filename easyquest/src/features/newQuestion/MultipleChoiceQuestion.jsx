@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
 import { Add, Remove, Check } from '@material-ui/icons';
 import RichTextField from '../../shared/components/RichTextField';
-import { MAX_ALTERNATIVES, questionType } from '../../shared/Contants';
+import { MAX_ALTERNATIVES, questionType } from '../../shared/Constants';
 import { NumberToLetter } from '../../shared/utils/Utils';
 
 const useStyles = makeStyles({

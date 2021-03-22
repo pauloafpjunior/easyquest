@@ -1,4 +1,4 @@
-import { questionType } from '../../Contants';
+import { questionType } from '../../Constants';
 
 const multiple = (question) => {
   const { description, alternatives, feedback } = question;

@@ -1,4 +1,4 @@
-import { questionType } from '../Contants';
+import { questionType } from '../Constants';
 
 const validateDescritiveQuestion = (question) => question?.id && question?.description;
 
