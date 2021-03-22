@@ -1,17 +1,36 @@
-import { questionType } from '../Constants';
+import { questionType, validationMessages, questionRules } from '../Constants';
 
-const validateDescritiveQuestion = (question) => question?.id && question?.description;
+const validateDescritiveQuestion = (question) => {
+  if (!question.description) {
+    return validationMessages.missingDescription;
+  }
 
-const validateMultipleChoiceQuestion = (question) =>
-  question?.id &&
-  question?.description &&
-  question?.alternatives &&
-  question.alternatives.length >= 2 &&
-  question.alternatives.length <= 4 &&
-  question.alternatives.every((a) => a.text) &&
-  question.alternatives.filter((a) => a.isCorrect).length === 1;
+  return false;
+};
 
-const validateTrueFalseQuestion = (question) => question?.id && question?.description;
+const validateMultipleChoiceQuestion = (question) => {
+  if (!question?.description) {
+    return validationMessages.missingDescription;
+  }
+  if (question.alternatives.length < questionRules.minimumAlternatives) {
+    return validationMessages.minimumAlternatives;
+  }
+  if (question.alternatives.some((a) => !a.text)) {
+    return validationMessages.alternativeText;
+  }
+  if (question.alternatives.filter((a) => a.isCorrect).length !== 1) {
+    return validationMessages.correctAlternative;
+  }
+  return false;
+};
+
+const validateTrueFalseQuestion = (question) => {
+  if (!question.description) {
+    return validationMessages.missingDescription;
+  }
+
+  return false;
+};
 
 export const validateQuestion = (question) => {
   switch (question.type) {

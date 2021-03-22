@@ -9,8 +9,16 @@ export const questionType = {
   trueFalse: 'Verdadeiro/Falso',
 };
 
+export const questionRules = {
+  minimumAlternatives: 2,
+};
+
 export const validationMessages = {
   invalidQuestion: 'Questão Inválida',
+  missingDescription: 'É necessário adicionar um enunciado para a questão.',
+  minimumAlternatives: `É necessário adicionar ao menos ${questionRules.minimumAlternatives} para salvar a questão.`,
+  correctAlternative: 'É necessário selecionar uma alternativa correta.',
+  alternativeText: 'É necessário preencher o texto das alternativas.',
 };
 
 export const MAX_ALTERNATIVES = 5;

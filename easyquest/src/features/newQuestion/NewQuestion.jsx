@@ -33,12 +33,16 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   const style = useStyles();
   const [newQuestion, setNewQuestion] = useState(questionToEdit ?? null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [newQuestionType, setNewQuestionType] = useState(
     questionToEdit?.type ?? questionType.multiple
   );
   const close = () => setActive(components.questionList);
   const save = () => {
-    if (!validateQuestion(newQuestion)) {
+    const error = validateQuestion(newQuestion);
+    console.log(error, !!error);
+    if (error) {
+      setErrorMessage(error);
       setOpenDialog(true);
       return;
     }
@@ -89,6 +93,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       <ConfirmationDialog
         dialogParams={{
           title: validationMessages.invalidQuestion,
+          text: errorMessage,
           open: openDialog,
           setOpen: setOpenDialog,
           confirmText: 'Ok',
