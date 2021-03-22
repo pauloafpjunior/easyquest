@@ -23,6 +23,7 @@
     "prettier"
   ],
   "rules": {
+    "no-param-reassign": "off",
     "import/prefer-default-export": "off",
     "prettier/prettier": "warn",
     "react/jsx-filename-extension": [

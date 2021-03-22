@@ -38,6 +38,7 @@ const useStyles = makeStyles({
 
 export default ({ question, setQuestion }) => {
   const [id] = useState(question?.id ?? uuid());
+  const [modified, setModified] = useState(false);
   const [description, setDescription] = useState(question?.description ?? '');
   const [alternatives, setAlternatives] = useState(
     question?.alternatives ?? [
@@ -51,8 +52,8 @@ export default ({ question, setQuestion }) => {
   const [showFeedback, setShowFeedback] = useState(!!question?.feedback);
   const style = useStyles();
   useEffect(() => {
-    setQuestion({ id, description, alternatives, feedback, type: questionType.multiple });
-  }, [id, description, alternatives, feedback]);
+    setQuestion({ id, description, alternatives, feedback, type: questionType.multiple, modified });
+  }, [id, description, alternatives, feedback, modified]);
 
   const handleAlternative = (newValue, index) => {
     const alternative = alternatives[index];
@@ -60,6 +61,7 @@ export default ({ question, setQuestion }) => {
       alternative.text = newValue;
     }
     setAlternatives([...alternatives]);
+    setModified(true);
   };
 
   const addAlternative = () => {
@@ -69,6 +71,7 @@ export default ({ question, setQuestion }) => {
       id: (alternatives.length + 1).toString(),
     });
     setAlternatives([...alternatives]);
+    setModified(true);
   };
 
   const isCorrect = (index) => (alternatives[index].isCorrect ? style.correct : style.incorrect);
@@ -80,19 +83,32 @@ export default ({ question, setQuestion }) => {
       isCorrect: false,
     }));
     newAlternatives[index].isCorrect = newVal;
+
     setAlternatives([...newAlternatives]);
+    setModified(true);
   };
 
   const remove = (index) => {
     alternatives.splice(index, 1);
     setAlternatives([...alternatives]);
+    setModified(true);
+  };
+
+  const handleDescription = (value) => {
+    setDescription(value);
+    setModified(true);
+  };
+
+  const handleFeedback = (value) => {
+    setFeedback(value);
+    setModified(true);
   };
 
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
         <Typography style={{ fontWeight: 'bold' }}>Enunciado: </Typography>
-        <RichTextField value={description} setValue={setDescription} className={style.input} />
+        <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
       {alternatives &&
@@ -140,12 +156,12 @@ export default ({ question, setQuestion }) => {
       {showFeedback && (
         <Grid className={style.row}>
           <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-          <RichTextField value={feedback} setValue={setFeedback} className={style.input} />
+          <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
           <Grid className={style.row} style={{ display: 'flex' }}>
             <Button
               onClick={() => {
                 setShowFeedback(false);
-                setFeedback('');
+                handleFeedback('');
               }}
             >
               <Remove className={`button-icon ${style.removeIcon}`} />

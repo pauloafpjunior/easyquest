@@ -23,13 +23,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ dialogParams }) => {
+export default ({ open, setOpen, dialogParams }) => {
   const styles = useStyles();
   const {
     title,
     text,
-    open,
-    setOpen,
     onClose,
     onCancel,
     onConfirm,

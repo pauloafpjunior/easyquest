@@ -23,6 +23,7 @@ function App() {
   }, [appLocalStorageKey]);
 
   const addQuestion = (question) => {
+    delete question.modified;
     const index = questions.findIndex((q) => q.id === question.id);
     if (index >= 0) {
       questions[index] = question;
@@ -35,6 +36,7 @@ function App() {
   };
 
   const editQuestion = (question) => {
+    delete question.modified;
     setQuestionToEdit(question);
     setActive(components.newQuestion);
   };

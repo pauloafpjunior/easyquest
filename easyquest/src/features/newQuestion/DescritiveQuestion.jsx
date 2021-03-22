@@ -29,19 +29,30 @@ const useStyles = makeStyles({
 
 export default ({ question, setQuestion }) => {
   const [description, setDescription] = useState(question?.description ?? '');
+  const [modified, setModified] = useState(false);
   const [id] = useState(question?.id ?? uuid());
   const [feedback, setFeedback] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
   const style = useStyles();
   useEffect(() => {
-    setQuestion({ id, description, feedback, type: questionType.descritive });
-  }, [id, description, feedback]);
+    setQuestion({ id, description, feedback, type: questionType.descritive, modified });
+  }, [id, description, feedback, modified]);
+
+  const handleDescription = (value) => {
+    setDescription(value);
+    setModified(true);
+  };
+
+  const handleFeedback = (value) => {
+    setFeedback(value);
+    setModified(true);
+  };
 
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
         <Typography style={{ fontWeight: 'bold' }}>Enunciado: </Typography>
-        <RichTextField value={description} setValue={setDescription} className={style.input} />
+        <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
       <Grid className={style.row}>
@@ -56,12 +67,12 @@ export default ({ question, setQuestion }) => {
       {showFeedback && (
         <Grid className={style.row}>
           <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-          <RichTextField value={feedback} setValue={setFeedback} className={style.input} />
+          <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
           <Grid className={style.row} style={{ display: 'flex' }}>
             <Button
               onClick={() => {
                 setShowFeedback(false);
-                setFeedback('');
+                handleFeedback('');
               }}
             >
               <Remove className={`button-icon ${style.removeIcon}`} />

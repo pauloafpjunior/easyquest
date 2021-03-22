@@ -24,3 +24,8 @@ export const validationMessages = {
 export const MAX_ALTERNATIVES = 5;
 
 export const appLocalStorageKey = 'EASY_QUEST_QUESTIONS';
+
+export const generalMessages = {
+  confirmCloseTitle: 'Alterações Não Salvas',
+  confirmClose: 'As alterações não foram salvas. Tem certeza que deseja fechar?',
+};

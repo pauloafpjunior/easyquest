@@ -36,6 +36,7 @@ const useStyles = makeStyles({
 
 export default ({ question, setQuestion }) => {
   const [id] = useState(question?.id ?? uuid());
+  const [modified, setModified] = useState(false);
   const [description, setDescription] = useState(question?.description ?? '');
   const [isCorrect, setIsCorrect] = useState(!!question.isCorrect);
   const [feedback, setFeedback] = useState(question?.feecback ?? '');
@@ -45,11 +46,21 @@ export default ({ question, setQuestion }) => {
     setQuestion({ id, description, isCorrect, feedback, type: questionType.trueFalse });
   }, [description, setQuestion]);
 
+  const handleDescription = (value) => {
+    setDescription(value);
+    setModified(true);
+  };
+
+  const handleFeedBack = (value) => {
+    setFeedback(value);
+    setModified(true);
+  };
+
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
         <Typography style={{ fontWeight: 'bold' }}>Enunaciado:</Typography>
-        <RichTextField value={description} setValue={setDescription} className={style.input} />
+        <RichTextField value={description} setValue={handleDescription} className={style.input} />
         <Grid className={style.row} style={{ display: 'flex' }}>
           <Typography style={{ lineHeight: '30px' }}>Verdadeiro: </Typography>
           <Check
@@ -71,12 +82,12 @@ export default ({ question, setQuestion }) => {
       {showFeedback && (
         <Grid className={style.row}>
           <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-          <RichTextField value={feedback} setValue={setFeedback} className={style.input} />
+          <RichTextField value={feedback} setValue={handleFeedBack} className={style.input} />
           <Grid className={style.row} style={{ display: 'flex' }}>
             <Button
               onClick={() => {
                 setShowFeedback(false);
-                setFeedback('');
+                handleFeedBack('');
               }}
             >
               <Remove className={`button-icon ${style.removeIcon}`} />
