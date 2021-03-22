@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     padding: '0 calc(50% - 315px)',
     height: 'calc(100vh - 70px)',
     overflowY: 'auto',
+    textAlign: 'center',
   },
   input: {
     fontSize: '22px',
@@ -102,19 +103,21 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
               </MenuItem>
             ))}
           </Select>
-          {newQuestionType === questionType.descritive && (
-            <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
-          )}
-          {newQuestionType === questionType.multiple && (
-            <MultipleChoiceQuestion
-              question={newQuestion}
-              removeQuestion={removeQuestion}
-              setQuestion={setNewQuestion}
-            />
-          )}
-          {newQuestionType === questionType.trueFalse && (
-            <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />
-          )}
+          <Grid style={{ textAlign: 'left' }}>
+            {newQuestionType === questionType.descritive && (
+              <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
+            )}
+            {newQuestionType === questionType.multiple && (
+              <MultipleChoiceQuestion
+                question={newQuestion}
+                removeQuestion={removeQuestion}
+                setQuestion={setNewQuestion}
+              />
+            )}
+            {newQuestionType === questionType.trueFalse && (
+              <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />
+            )}
+          </Grid>
         </Grid>
       </Grid>
       <ConfirmationDialog open={openDialog} setOpen={setOpenDialog} dialogParams={dialogParams} />
