@@ -28,4 +28,7 @@ export const appLocalStorageKey = 'EASY_QUEST_QUESTIONS';
 export const generalMessages = {
   confirmCloseTitle: 'Alterações Não Salvas',
   confirmClose: 'As alterações não foram salvas. Tem certeza que deseja fechar?',
+
+  clearQuestionsTitle: 'Limpar Questões',
+  clearQuestions: 'Todas as questões serão apagadas. Tem certeza que deseja prosseguir?',
 };
