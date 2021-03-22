@@ -31,4 +31,7 @@ export const generalMessages = {
 
   clearQuestionsTitle: 'Limpar Questões',
   clearQuestions: 'Todas as questões serão apagadas. Tem certeza que deseja prosseguir?',
+
+  deleteQuestionTitle: 'Excluir questão?',
+  deleteQuestion: 'Tem certeza que deseja excluir essa questão?',
 };

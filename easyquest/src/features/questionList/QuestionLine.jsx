@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import { Book, Edit, FileCopy, Delete, Message, Autorenew, GetApp } from '@material-ui/icons';
-import { questionType } from '../../shared/Constants';
+import { questionType, generalMessages } from '../../shared/Constants';
 import Converter from '../../shared/utils/Converters';
+import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 
 const useStyles = makeStyles({
   container: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 
 export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) => {
   const style = useStyles();
+  const [openDialog, setOpenDialog] = useState(false);
   const getIcon = () => {
     switch (question.type) {
       case questionType.multiple:
@@ -56,15 +58,32 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
   };
 
   return (
-    <Grid className={style.container}>
-      {getIcon()}
-      <Typography noWrap className={style.description}>
-        {getText()}
-      </Typography>
-      <GetApp onClick={downloadAsXml} className={style.actionIcon} />
-      <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
-      <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
-      <Delete className={style.actionIcon} onClick={() => removeQuestion(question.id)} />
-    </Grid>
+    <>
+      <Grid className={style.container}>
+        {getIcon()}
+        <Typography noWrap className={style.description}>
+          {getText()}
+        </Typography>
+        <GetApp onClick={downloadAsXml} className={style.actionIcon} />
+        <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
+        <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
+        <Delete className={style.actionIcon} onClick={() => setOpenDialog(true)} />
+      </Grid>
+      <ConfirmationDialog
+        open={openDialog}
+        setOpen={setOpenDialog}
+        dialogParams={{
+          title: generalMessages.deleteQuestionTitle,
+          text: generalMessages.deleteQuestion,
+          cancelText: 'Cancelar',
+          confirmText: 'Confirmar',
+          onConfirm: () => {
+            removeQuestion(question.id);
+            setOpenDialog(false);
+          },
+          canCancel: true,
+        }}
+      />
+    </>
   );
 };
