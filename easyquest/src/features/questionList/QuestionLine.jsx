@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
-import { Book, Edit, FileCopy, Delete, Message, Autorenew, GetApp } from '@material-ui/icons';
+import { Grid, makeStyles, Tooltip, Typography } from '@material-ui/core';
+import {
+  Book,
+  Edit,
+  FileCopy,
+  Delete,
+  Message,
+  Autorenew,
+  GetApp,
+  Warning,
+} from '@material-ui/icons';
 import { questionType, generalMessages } from '../../shared/Constants';
 import Converter from '../../shared/utils/Converters';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
@@ -11,7 +20,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    padding: '10px 0px 10px 0px',
+    padding: '8px 0px 8px 0px',
   },
   description: {
     marginRight: 'auto',
@@ -25,7 +34,7 @@ const useStyles = makeStyles({
   actionIcon: {
     height: '22px',
     width: '22px',
-    margin: '0px 4px',
+    margin: '0px 8px',
     cursor: 'pointer',
   },
 });
@@ -57,10 +66,22 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         <Typography noWrap className={style.description}>
           {getText()}
         </Typography>
-        <GetApp onClick={downloadAsXml} className={style.actionIcon} />
-        <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
-        <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
-        <Delete className={style.actionIcon} onClick={() => setOpenDialog(true)} />
+        <Tooltip title="Download">
+          <GetApp onClick={downloadAsXml} className={style.actionIcon} />
+        </Tooltip>
+        <Tooltip title="Editar">
+          <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
+        </Tooltip>
+        <Tooltip title="Duplicar">
+          <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
+        </Tooltip>
+        <Tooltip title="Excluir">
+          <Delete
+            style={{ marginRight: '24px' }}
+            className={style.actionIcon}
+            onClick={() => setOpenDialog(true)}
+          />
+        </Tooltip>
       </Grid>
       <ConfirmationDialog
         open={openDialog}
@@ -69,12 +90,17 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
           title: generalMessages.deleteQuestionTitle,
           text: generalMessages.deleteQuestion,
           cancelText: 'Cancelar',
-          confirmText: 'Confirmar',
+          confirmText: (
+            <>
+              <Warning /> Confirmar
+            </>
+          ),
           onConfirm: () => {
             removeQuestion(question.id);
             setOpenDialog(false);
           },
           canCancel: true,
+          confirmStyle: { backgroundColor: 'red', color: 'white' },
         }}
       />
     </>

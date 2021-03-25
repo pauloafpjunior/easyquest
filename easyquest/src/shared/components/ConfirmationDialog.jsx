@@ -34,6 +34,8 @@ export default ({ open, setOpen, dialogParams }) => {
     canCancel,
     confirmText,
     cancelText,
+    confirmStyle,
+    cancelStyle,
   } = dialogParams;
 
   const defaultClose = () => {
@@ -46,8 +48,12 @@ export default ({ open, setOpen, dialogParams }) => {
         {text && <Typography className={styles.text}>{text}</Typography>}
         {canCancel && (
           <Grid className={styles.cancelRow}>
-            <Button onClick={onCancel ?? defaultClose}>{cancelText}</Button>
-            <Button onClick={onConfirm ?? defaultClose}>{confirmText}</Button>
+            <Button style={cancelStyle ?? {}} onClick={onCancel ?? defaultClose}>
+              {cancelText}
+            </Button>
+            <Button style={confirmStyle ?? {}} onClick={onConfirm ?? defaultClose}>
+              {confirmText}
+            </Button>
           </Grid>
         )}
         {!canCancel && (

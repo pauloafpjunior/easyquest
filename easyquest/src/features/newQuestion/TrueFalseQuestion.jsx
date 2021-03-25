@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
-import { Add, Check, Remove } from '@material-ui/icons';
+import { Add, Check, Remove, Close } from '@material-ui/icons';
 import RichTextField from '../../shared/components/RichTextField';
 import { questionType } from '../../shared/Constants';
 
@@ -11,6 +11,10 @@ const useStyles = makeStyles({
   },
   row: {
     width: 'max-content',
+  },
+  btnRow: {
+    width: 'max-content',
+    marginTop: '8px',
   },
   removeIcon: {
     color: 'red',
@@ -24,6 +28,14 @@ const useStyles = makeStyles({
   incorrect: {
     color: 'gray',
     cursor: 'pointer',
+  },
+  trueBtn: {
+    color: 'green',
+    border: '1px solid green',
+  },
+  falseBtn: {
+    color: 'red',
+    border: '1px solid red',
   },
   container: {
     width: '100%',
@@ -43,7 +55,7 @@ export default ({ question, setQuestion }) => {
   const [showFeedback, setShowFeedback] = useState(!!question?.feecback);
   const style = useStyles();
   useEffect(() => {
-    setQuestion({ id, description, isCorrect, feedback, type: questionType.trueFalse });
+    setQuestion({ id, description, isCorrect, feedback, type: questionType.trueFalse, modified });
   }, [description, setQuestion]);
 
   const handleDescription = (value) => {
@@ -56,17 +68,22 @@ export default ({ question, setQuestion }) => {
     setModified(true);
   };
 
+  const getButtonClass = () => (isCorrect ? style.trueBtn : style.falseBtn);
+
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography style={{ fontWeight: 'bold' }}>Enunaciado:</Typography>
+        <Typography style={{ fontWeight: 'bold' }}>Enunciado:</Typography>
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
-        <Grid className={style.row} style={{ display: 'flex' }}>
-          <Typography style={{ lineHeight: '30px' }}>Verdadeiro: </Typography>
-          <Check
-            className={`button-icon ${isCorrect ? style.correct : style.incorrect}`}
-            onClick={() => setIsCorrect(!isCorrect)}
-          />
+        <Grid className={style.btnRow} style={{ display: 'flex' }}>
+          <Button className={getButtonClass()} onClick={() => setIsCorrect(!isCorrect)}>
+            {isCorrect ? (
+              <Check style={{ marginRight: '8px' }} className="button-icon" />
+            ) : (
+              <Close style={{ marginRight: '8px' }} className="button-icon" />
+            )}
+            {isCorrect ? 'Verdadeiro' : 'Falso'}
+          </Button>
         </Grid>
         <br />
       </Grid>
@@ -83,7 +100,7 @@ export default ({ question, setQuestion }) => {
         <Grid className={style.row}>
           <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
           <RichTextField value={feedback} setValue={handleFeedBack} className={style.input} />
-          <Grid className={style.row} style={{ display: 'flex' }}>
+          <Grid className={style.btnRow} style={{ display: 'flex' }}>
             <Button
               onClick={() => {
                 setShowFeedback(false);

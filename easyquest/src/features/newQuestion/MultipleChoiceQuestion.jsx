@@ -10,8 +10,14 @@ const useStyles = makeStyles({
   input: {
     width: '500px',
   },
-  row: {
+  row: {},
+  alternativeRow: {
     width: 'max-content',
+    marginTop: '8px',
+  },
+  buttonRow: {
+    width: 'max-content',
+    marginTop: '8px',
   },
   removeIcon: {
     marginTop: '4px',
@@ -34,6 +40,10 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  selectdAlternative: {
+    border: '1px solid green',
+    color: 'green',
+  },
 });
 
 export default ({ question, setQuestion }) => {
@@ -42,10 +52,10 @@ export default ({ question, setQuestion }) => {
   const [description, setDescription] = useState(question?.description ?? '');
   const [alternatives, setAlternatives] = useState(
     question?.alternatives ?? [
-      { isCorrect: false, text: '', id: '01' },
-      { isCorrect: false, text: '', id: '02' },
-      { isCorrect: false, text: '', id: '03' },
-      { isCorrect: false, text: '', id: '04' },
+      { isCorrect: false, text: '', id: uuid() },
+      { isCorrect: false, text: '', id: uuid() },
+      { isCorrect: false, text: '', id: uuid() },
+      { isCorrect: false, text: '', id: uuid() },
     ]
   );
   const [feedback, setFeedback] = useState(question?.feedback ?? '');
@@ -56,10 +66,7 @@ export default ({ question, setQuestion }) => {
   }, [id, description, alternatives, feedback, modified]);
 
   const handleAlternative = (newValue, index) => {
-    const alternative = alternatives[index];
-    if (alternative) {
-      alternative.text = newValue;
-    }
+    alternatives[index].text = newValue;
     setAlternatives([...alternatives]);
     setModified(true);
   };
@@ -68,7 +75,7 @@ export default ({ question, setQuestion }) => {
     alternatives.push({
       isCorrect: false,
       text: '',
-      id: (alternatives.length + 1).toString(),
+      id: uuid(),
     });
     setAlternatives([...alternatives]);
     setModified(true);
@@ -78,13 +85,11 @@ export default ({ question, setQuestion }) => {
 
   const markAsCorrect = (index) => {
     const newVal = !alternatives[index].isCorrect;
-    const newAlternatives = alternatives.map((alternative) => ({
-      ...alternative,
-      isCorrect: false,
-    }));
-    newAlternatives[index].isCorrect = newVal;
+    alternatives.forEach((alternative, i) => {
+      alternative.isCorrect = i === index && newVal;
+    });
 
-    setAlternatives([...newAlternatives]);
+    setAlternatives([...alternatives]);
     setModified(true);
   };
 
@@ -104,6 +109,8 @@ export default ({ question, setQuestion }) => {
     setModified(true);
   };
 
+  const getButtonClass = (index) => (alternatives[index].isCorrect ? style.selectdAlternative : '');
+
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
@@ -113,26 +120,26 @@ export default ({ question, setQuestion }) => {
       <br />
       {alternatives &&
         alternatives.map((alternative, index) => (
-          <Grid className={style.row} key={alternative.id}>
+          <Grid className={style.alternativeRow} key={alternative.id}>
             <Typography style={{ fontWeight: 'bold' }}>{`Alternativa ${NumberToLetter(
               index
             )}:`}</Typography>
             <RichTextField
-              value={alternative.value}
+              value={alternative.text}
               setValue={(value) => handleAlternative(value, index)}
               className={style.input}
             />
-            <Grid className={style.row} style={{ display: 'flex' }}>
+            <Grid className={style.buttonRow} style={{ display: 'flex' }}>
               <Button onClick={() => remove(index)}>
                 <Remove className={`button-icon ${style.removeIcon}`} />
                 REMOVER
               </Button>
-              <Button onClick={() => markAsCorrect(index)}>
+              <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
                 <Check
                   style={{ marginRight: '8px' }}
                   className={`button-icon ${isCorrect(index)}`}
                 />
-                Marcar como correta
+                Esta é a alternativa correta
               </Button>
             </Grid>
             <br />

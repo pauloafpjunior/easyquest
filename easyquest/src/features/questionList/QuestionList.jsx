@@ -1,6 +1,6 @@
-import { Button, Input, Grid, InputAdornment, makeStyles } from '@material-ui/core';
+import { Button, Input, Grid, InputAdornment, makeStyles, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import { Add, Search, Delete, GetApp } from '@material-ui/icons';
+import { Add, Search, Delete, GetApp, Warning } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
 import { components, generalMessages } from '../../shared/Constants';
@@ -20,6 +20,10 @@ const useStyles = makeStyles({
   icon: {
     height: '30px',
     width: '30px',
+  },
+  emptyListText: {
+    textAlign: 'center',
+    marginTop: '16px',
   },
 });
 
@@ -62,6 +66,11 @@ export default ({
     DownloadXmlFile(Converters[0].multipleConverter(questions), 'questions.xml');
   };
 
+  const getEmptyListText = () =>
+    filter && questions.length > 0
+      ? 'Não existem questões que correspondem ao filtro inserido.'
+      : 'Você não possui questões cadastradas.';
+
   return (
     <>
       <Grid className={style.container}>
@@ -91,6 +100,9 @@ export default ({
           className={style.input}
           placeholder="Pesquisar..."
         />
+        {filteredQuestions.length === 0 && (
+          <Typography className={style.emptyListText}>{getEmptyListText()}</Typography>
+        )}
         {filteredQuestions.map((question) => (
           <QuestionLine
             key={question.id}
@@ -108,12 +120,17 @@ export default ({
           title: generalMessages.clearQuestionsTitle,
           text: generalMessages.clearQuestions,
           cancelText: 'Cancelar',
-          confirmText: 'Confirmar',
+          confirmText: (
+            <>
+              <Warning /> Confirmar
+            </>
+          ),
           onConfirm: () => {
             removeAll();
             setOpenDialog(false);
           },
           canCancel: true,
+          confirmStyle: { backgroundColor: 'red', color: 'white' },
         }}
       />
     </>

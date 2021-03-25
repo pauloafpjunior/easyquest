@@ -32,6 +32,9 @@ export default {
   },
   overrides: {
     MuiButton: {
+      root: {
+        textTransform: 'none',
+      },
       outlined: {
         boxSizing: 'border-box',
         height: '40px',
