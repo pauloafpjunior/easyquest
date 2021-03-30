@@ -10,11 +10,7 @@ const useStyles = makeStyles({
   input: {
     width: '500px',
   },
-  row: {},
-  alternativeRow: {
-    width: 'max-content',
-    marginTop: '8px',
-  },
+  row: { display: 'flex', marginBottom: '16px' },
   buttonRow: {
     width: 'max-content',
     marginTop: '8px',
@@ -35,14 +31,18 @@ const useStyles = makeStyles({
   },
   container: {
     width: '100%',
-    padding: '32px 0',
+    paddingBottom: '32px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'left',
   },
   selectdAlternative: {
     border: '1px solid green',
     color: 'green',
+  },
+  label: {
+    width: '120px',
+    fontWeight: 'bold',
   },
 });
 
@@ -111,41 +111,50 @@ export default ({ question, setQuestion }) => {
 
   const getButtonClass = (index) => (alternatives[index].isCorrect ? style.selectdAlternative : '');
 
+  const getButtonsPadding = () => {
+    if (alternatives.length < 5 && !showFeedback) return '230px';
+    if (!showFeedback) return '335px';
+    return '330px';
+  };
+
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography style={{ fontWeight: 'bold' }}>Enunciado: </Typography>
+        <Typography className={style.label}>Enunciado: </Typography>
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
       {alternatives &&
         alternatives.map((alternative, index) => (
-          <Grid className={style.alternativeRow} key={alternative.id}>
-            <Typography style={{ fontWeight: 'bold' }}>{`Alternativa ${NumberToLetter(
+          <Grid className={style.row} key={alternative.id}>
+            <Typography className={style.label}>{`Alternativa ${NumberToLetter(
               index
             )}:`}</Typography>
-            <RichTextField
-              value={alternative.text}
-              setValue={(value) => handleAlternative(value, index)}
-              className={style.input}
-            />
-            <Grid className={style.buttonRow} style={{ display: 'flex' }}>
-              <Button onClick={() => remove(index)}>
-                <Remove className={`button-icon ${style.removeIcon}`} />
-                REMOVER
-              </Button>
-              <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
-                <Check
-                  style={{ marginRight: '8px' }}
-                  className={`button-icon ${isCorrect(index)}`}
-                />
-                Esta é a alternativa correta
-              </Button>
+            <Grid>
+              <RichTextField
+                value={alternative.text}
+                setValue={(value) => handleAlternative(value, index)}
+                className={style.input}
+              />
+              <Grid className={style.buttonRow} style={{ display: 'flex' }}>
+                <Button onClick={() => remove(index)}>
+                  <Remove className={`button-icon ${style.removeIcon}`} />
+                  REMOVER
+                </Button>
+                <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
+                  <Check
+                    style={{ marginRight: '8px' }}
+                    className={`button-icon ${isCorrect(index)}`}
+                  />
+                  {alternative.isCorrect
+                    ? 'Esta é a alternativa correta'
+                    : 'Marcar como alternativa correta'}
+                </Button>
+              </Grid>
             </Grid>
-            <br />
           </Grid>
         ))}
-      <Grid className={style.row}>
+      <Grid className={style.row} style={{ paddingLeft: getButtonsPadding() }}>
         {alternatives?.length < MAX_ALTERNATIVES && (
           <Button style={{ marginRight: '8px' }} variant="contained" onClick={addAlternative}>
             <Add className="button-icon" />
@@ -158,22 +167,23 @@ export default ({ question, setQuestion }) => {
             Adicionar feedback
           </Button>
         )}
-        <br />
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-          <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
-          <Grid className={style.row} style={{ display: 'flex' }}>
-            <Button
-              onClick={() => {
-                setShowFeedback(false);
-                handleFeedback('');
-              }}
-            >
-              <Remove className={`button-icon ${style.removeIcon}`} />
-              Remover
-            </Button>
+          <Typography className={style.label}>Feedback: </Typography>
+          <Grid>
+            <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
+            <Grid className={style.row} style={{ display: 'flex' }}>
+              <Button
+                onClick={() => {
+                  setShowFeedback(false);
+                  handleFeedback('');
+                }}
+              >
+                <Remove className={`button-icon ${style.removeIcon}`} />
+                Remover
+              </Button>
+            </Grid>
           </Grid>
           <br />
         </Grid>

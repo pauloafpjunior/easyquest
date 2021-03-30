@@ -9,9 +9,7 @@ const useStyles = makeStyles({
   input: {
     width: '500px',
   },
-  row: {
-    width: 'max-content',
-  },
+  row: { display: 'flex', marginBottom: '16px' },
   btnRow: {
     width: 'max-content',
     marginTop: '8px',
@@ -39,10 +37,14 @@ const useStyles = makeStyles({
   },
   container: {
     width: '100%',
-    padding: '32px 0',
+    paddingBottom: '32px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'left',
+  },
+  label: {
+    width: '120px',
+    fontWeight: 'bold',
   },
 });
 
@@ -73,43 +75,46 @@ export default ({ question, setQuestion }) => {
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography style={{ fontWeight: 'bold' }}>Enunciado:</Typography>
-        <RichTextField value={description} setValue={handleDescription} className={style.input} />
-        <Grid className={style.btnRow} style={{ display: 'flex' }}>
-          <Button className={getButtonClass()} onClick={() => setIsCorrect(!isCorrect)}>
-            {isCorrect ? (
-              <Check style={{ marginRight: '8px' }} className="button-icon" />
-            ) : (
-              <Close style={{ marginRight: '8px' }} className="button-icon" />
-            )}
-            {isCorrect ? 'Verdadeiro' : 'Falso'}
-          </Button>
+        <Typography className={style.label}>Enunciado:</Typography>
+        <Grid>
+          <RichTextField value={description} setValue={handleDescription} className={style.input} />
+          <Grid className={style.btnRow} style={{ display: 'flex' }}>
+            <Button className={getButtonClass()} onClick={() => setIsCorrect(!isCorrect)}>
+              {isCorrect ? (
+                <Check style={{ marginRight: '8px' }} className="button-icon" />
+              ) : (
+                <Close style={{ marginRight: '8px' }} className="button-icon" />
+              )}
+              {isCorrect ? 'Verdadeiro' : 'Falso'}
+            </Button>
+          </Grid>
         </Grid>
         <br />
       </Grid>
-      <Grid className={style.row}>
+      <Grid className={style.row} style={{ paddingLeft: '335px' }}>
         {!showFeedback && (
           <Button variant="contained" onClick={() => setShowFeedback(true)}>
             <Add className="button-icon" />
             Adicionar feedback
           </Button>
         )}
-        <br />
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography style={{ fontWeight: 'bold' }}>Feedback: </Typography>
-          <RichTextField value={feedback} setValue={handleFeedBack} className={style.input} />
-          <Grid className={style.btnRow} style={{ display: 'flex' }}>
-            <Button
-              onClick={() => {
-                setShowFeedback(false);
-                handleFeedBack('');
-              }}
-            >
-              <Remove className={`button-icon ${style.removeIcon}`} />
-              Remover
-            </Button>
+          <Typography className={style.label}>Feedback: </Typography>
+          <Grid>
+            <RichTextField value={feedback} setValue={handleFeedBack} className={style.input} />
+            <Grid className={style.btnRow} style={{ display: 'flex' }}>
+              <Button
+                onClick={() => {
+                  setShowFeedback(false);
+                  handleFeedBack('');
+                }}
+              >
+                <Remove className={`button-icon ${style.removeIcon}`} />
+                Remover
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       )}

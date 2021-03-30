@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Grid, makeStyles, Select, MenuItem } from '@material-ui/core';
+import { Button, Grid, makeStyles, Select, MenuItem, Typography } from '@material-ui/core';
 import { Save, Close } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import {
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     width: '100%',
   },
   content: {
-    padding: '0 calc(50% - 315px)',
+    padding: '0 calc(50% - 400px)',
     height: 'calc(100vh - 70px)',
     overflowY: 'auto',
     textAlign: 'center',
@@ -32,6 +32,12 @@ const useStyles = makeStyles({
   icon: {
     height: '30px',
     width: '30px',
+  },
+  row: { display: 'flex', margin: '24px 0' },
+  label: {
+    width: '120px',
+    fontWeight: 'bold',
+    textAlign: 'left',
   },
 });
 
@@ -78,7 +84,18 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
     close();
   };
   const handleChangeType = (event) => {
-    setNewQuestionType(event.target.value);
+    setDialogParams({
+      title: generalMessages.changeTypeTitle,
+      text: generalMessages.changeType,
+      cancelText: 'Cancelar',
+      confirmText: 'Confirmar',
+      onConfirm: () => {
+        setNewQuestionType(event.target.value);
+        setOpenDialog(false);
+      },
+      canCancel: true,
+    });
+    setOpenDialog(true);
   };
 
   return (
@@ -96,13 +113,17 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
           </Button>
         </Header>
         <Grid className={style.content}>
-          <Select value={newQuestionType} onChange={handleChangeType}>
-            {Object.values(questionType).map((qType) => (
-              <MenuItem key={qType} value={qType}>
-                {qType}
-              </MenuItem>
-            ))}
-          </Select>
+          <Grid className={style.row}>
+            <Typography className={style.label}>Tipo:</Typography>
+            <Select value={newQuestionType} onChange={handleChangeType}>
+              {Object.values(questionType).map((qType) => (
+                <MenuItem key={qType} value={qType}>
+                  {qType}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+
           <Grid style={{ textAlign: 'left' }}>
             {newQuestionType === questionType.descritive && (
               <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />

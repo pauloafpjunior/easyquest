@@ -34,4 +34,8 @@ export const generalMessages = {
 
   deleteQuestionTitle: 'Atenção',
   deleteQuestion: 'Tem certeza que deseja excluir essa questão?',
+
+  changeTypeTitle: 'Atenção',
+  changeType:
+    'Tem certeza que deseja modificar o tipo questão, algumas informações serão permanentemente perdidas?',
 };

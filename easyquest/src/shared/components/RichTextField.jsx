@@ -13,16 +13,12 @@ export default ({ value, setValue }) => {
     } else if (id && !editor) {
       InlineEditor.create(document.querySelector(`#${id}`), {
         initialData: value ?? '',
-      })
-        .then((newEditor) => {
-          newEditor.model.document.on('change:data', () => setValue(newEditor.getData()));
-          setEditor(newEditor);
-        })
-        .catch((err) => {
-          console.error(err.stack);
-        });
+      }).then((newEditor) => {
+        newEditor.model.document.on('change:data', () => setValue(newEditor.getData()));
+        setEditor(newEditor);
+      });
     }
   }, [id, editor]);
 
-  return <div id={id} style={{ width: '600px', border: '1px solid black', marginTop: '40px' }} />;
+  return <div id={id} style={{ width: '600px', border: '1px solid black' }} />;
 };
