@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { Button, Grid, makeStyles, Select, MenuItem, Typography, Input } from '@material-ui/core';
 import { Save, Close, Warning } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
-import {
-  components,
-  questionType,
-  validationMessages,
-  generalMessages,
-} from '../../shared/Constants';
+import { components } from '../../shared/Constants';
+import Language from '../../shared/Languages';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import DescritiveQuestion from './DescritiveQuestion';
 import { validateQuestion } from '../../shared/utils/QuestionValidators';
@@ -47,12 +43,12 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogParams, setDialogParams] = useState({ open: openDialog, setOpen: setOpenDialog });
   const [newQuestionType, setNewQuestionType] = useState(
-    questionToEdit?.type ?? questionType.multiple
+    questionToEdit?.type ?? Language.questionType.multiple.constant
   );
   const close = () => setActive(components.questionList);
   const setErrorDialog = (errorMessage) => {
     setDialogParams({
-      title: validationMessages.invalidQuestion,
+      title: Language.validationMessages.invalidQuestion,
       text: errorMessage,
       confirmText: 'Ok',
     });
@@ -64,8 +60,8 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       close();
     } else {
       setDialogParams({
-        title: generalMessages.confirmCloseTitle,
-        text: generalMessages.confirmClose,
+        title: Language.generalMessages.confirmCloseTitle,
+        text: Language.generalMessages.confirmClose,
         cancelText: 'Cancelar',
         confirmText: (
           <>
@@ -90,8 +86,8 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   };
   const handleChangeType = (event) => {
     setDialogParams({
-      title: generalMessages.changeTypeTitle,
-      text: generalMessages.changeType,
+      title: Language.generalMessages.changeTypeTitle,
+      text: Language.generalMessages.changeType,
       cancelText: 'Cancelar',
       confirmText: (
         <>
@@ -130,9 +126,9 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
           <Grid className={style.row}>
             <Typography className={style.label}>Tipo:</Typography>
             <Select value={newQuestionType} onChange={handleChangeType}>
-              {Object.values(questionType).map((qType) => (
-                <MenuItem key={qType} value={qType}>
-                  {qType}
+              {Object.values(Language.questionType).map((qType) => (
+                <MenuItem key={qType.constant} value={qType.constant}>
+                  {qType.value}
                 </MenuItem>
               ))}
             </Select>
@@ -147,17 +143,17 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
           </Grid>
 
           <Grid style={{ textAlign: 'left' }}>
-            {newQuestionType === questionType.descritive && (
+            {newQuestionType === Language.questionType.descritive.constant && (
               <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
             )}
-            {newQuestionType === questionType.multiple && (
+            {newQuestionType === Language.questionType.multiple.constant && (
               <MultipleChoiceQuestion
                 question={newQuestion}
                 removeQuestion={removeQuestion}
                 setQuestion={setNewQuestion}
               />
             )}
-            {newQuestionType === questionType.trueFalse && (
+            {newQuestionType === Language.questionType.trueFalse.constant && (
               <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />
             )}
           </Grid>

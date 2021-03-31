@@ -10,7 +10,7 @@ import {
   GetApp,
   Warning,
 } from '@material-ui/icons';
-import { questionType, generalMessages } from '../../shared/Constants';
+import Language from '../../shared/Languages';
 import Converter from '../../shared/utils/Converters';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import { DownloadXmlFile } from '../../shared/utils/Utils';
@@ -44,16 +44,15 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
   const [openDialog, setOpenDialog] = useState(false);
   const getIcon = () => {
     switch (question.type) {
-      case questionType.multiple:
+      case Language.questionType.multiple.constant:
         return <Message className={style.typeIcon} />;
-      case questionType.trueFalse:
+      case Language.questionType.trueFalse.constant:
         return <Autorenew className={style.typeIcon} />;
-      case questionType.descritive:
+      case Language.questionType.descritive.constant:
       default:
         return <Book className={style.typeIcon} />;
     }
   };
-  const getText = () => question.description.replace(/(<([^>]+)>)/gi, ' ');
 
   const downloadAsXml = () => {
     DownloadXmlFile(Converter[0].converter(question), 'question.xml');
@@ -87,8 +86,8 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         open={openDialog}
         setOpen={setOpenDialog}
         dialogParams={{
-          title: generalMessages.deleteQuestionTitle,
-          text: generalMessages.deleteQuestion,
+          title: Language.generalMessages.deleteQuestionTitle,
+          text: Language.generalMessages.deleteQuestion,
           cancelText: 'Cancelar',
           confirmText: (
             <>

@@ -3,7 +3,8 @@ import { v4 as uuid } from 'uuid';
 import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
 import { Add, Remove, Check } from '@material-ui/icons';
 import RichTextField from '../../shared/components/RichTextField';
-import { MAX_ALTERNATIVES, questionType } from '../../shared/Constants';
+import { MAX_ALTERNATIVES } from '../../shared/Constants';
+import Language from '../../shared/Languages';
 import { NumberToLetter } from '../../shared/utils/Utils';
 
 const useStyles = makeStyles({
@@ -68,7 +69,7 @@ export default ({ question, setQuestion }) => {
       description,
       alternatives,
       feedback,
-      type: questionType.multiple,
+      type: Language.questionType.multiple.constant,
       modified,
     });
   }, [id, description, alternatives, feedback, modified]);

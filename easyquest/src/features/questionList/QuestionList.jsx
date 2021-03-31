@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Add, Search, Delete, GetApp, Warning } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
-import { components, generalMessages } from '../../shared/Constants';
+import { components } from '../../shared/Constants';
+import Language from '../../shared/Languages';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import Converters from '../../shared/utils/Converters';
@@ -117,8 +118,8 @@ export default ({
         open={openDialog}
         setOpen={setOpenDialog}
         dialogParams={{
-          title: generalMessages.clearQuestionsTitle,
-          text: generalMessages.clearQuestions,
+          title: Language.generalMessages.clearQuestionsTitle,
+          text: Language.generalMessages.clearQuestions,
           cancelText: 'Cancelar',
           confirmText: (
             <>

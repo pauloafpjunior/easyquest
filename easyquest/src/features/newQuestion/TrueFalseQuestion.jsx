@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
 import { Add, Check, Remove, Close } from '@material-ui/icons';
 import RichTextField from '../../shared/components/RichTextField';
-import { questionType } from '../../shared/Constants';
+import Language from '../../shared/Languages';
 
 const useStyles = makeStyles({
   input: {
@@ -63,7 +63,7 @@ export default ({ question, setQuestion }) => {
       description,
       isCorrect,
       feedback,
-      type: questionType.trueFalse,
+      type: Language.questionType.trueFalse.constant,
       modified,
     });
   }, [description, setQuestion]);

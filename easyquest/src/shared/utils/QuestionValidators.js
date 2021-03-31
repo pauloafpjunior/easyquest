@@ -1,8 +1,9 @@
-import { questionType, validationMessages, questionRules } from '../Constants';
+import { questionRules } from '../Constants';
+import Language from '../Languages';
 
 const validateDescritiveQuestion = (question) => {
   if (!question.description) {
-    return validationMessages.missingDescription;
+    return Language.validationMessages.missingDescription;
   }
 
   return false;
@@ -10,23 +11,23 @@ const validateDescritiveQuestion = (question) => {
 
 const validateMultipleChoiceQuestion = (question) => {
   if (!question?.description) {
-    return validationMessages.missingDescription;
+    return Language.validationMessages.missingDescription;
   }
   if (question.alternatives.length < questionRules.minimumAlternatives) {
-    return validationMessages.minimumAlternatives;
+    return Language.validationMessages.minimumAlternatives;
   }
   if (question.alternatives.some((a) => !a.text)) {
-    return validationMessages.alternativeText;
+    return Language.validationMessages.alternativeText;
   }
   if (question.alternatives.filter((a) => a.isCorrect).length !== 1) {
-    return validationMessages.correctAlternative;
+    return Language.validationMessages.correctAlternative;
   }
   return false;
 };
 
 const validateTrueFalseQuestion = (question) => {
   if (!question.description) {
-    return validationMessages.missingDescription;
+    return Language.validationMessages.missingDescription;
   }
 
   return false;
@@ -34,11 +35,11 @@ const validateTrueFalseQuestion = (question) => {
 
 export const validateQuestion = (question) => {
   switch (question.type) {
-    case questionType.descritive:
+    case Language.questionType.descritive.constant:
       return validateDescritiveQuestion(question);
-    case questionType.multiple:
+    case Language.questionType.multiple.constant:
       return validateMultipleChoiceQuestion(question);
-    case questionType.trueFalse:
+    case Language.questionType.trueFalse.constant:
       return validateTrueFalseQuestion(question);
     default:
       throw new Error('Tipo de questão não implementada');
