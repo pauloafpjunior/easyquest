@@ -62,7 +62,15 @@ export default ({ question, setQuestion }) => {
   const [showFeedback, setShowFeedback] = useState(!!question?.feedback);
   const style = useStyles();
   useEffect(() => {
-    setQuestion({ id, description, alternatives, feedback, type: questionType.multiple, modified });
+    setQuestion({
+      ...question,
+      id,
+      description,
+      alternatives,
+      feedback,
+      type: questionType.multiple,
+      modified,
+    });
   }, [id, description, alternatives, feedback, modified]);
 
   const handleAlternative = (newValue, index) => {
@@ -139,7 +147,7 @@ export default ({ question, setQuestion }) => {
               <Grid className={style.buttonRow} style={{ display: 'flex' }}>
                 <Button onClick={() => remove(index)}>
                   <Remove className={`button-icon ${style.removeIcon}`} />
-                  REMOVER
+                  Remover
                 </Button>
                 <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
                   <Check

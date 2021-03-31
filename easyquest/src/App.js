@@ -48,7 +48,7 @@ function App() {
   };
 
   const duplicateQuestion = (question) => {
-    addQuestion({ ...question, description: `(Cópia) ${question.description}`, id: uuid() });
+    addQuestion({ ...question, title: `(Cópia) ${question.title}`, id: uuid() });
   };
 
   const removeQuestion = (id) => {

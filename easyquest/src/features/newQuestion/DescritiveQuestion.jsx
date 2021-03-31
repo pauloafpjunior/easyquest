@@ -37,7 +37,14 @@ export default ({ question, setQuestion }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const style = useStyles();
   useEffect(() => {
-    setQuestion({ id, description, feedback, type: questionType.descritive, modified });
+    setQuestion({
+      ...question,
+      id,
+      description,
+      feedback,
+      type: questionType.descritive,
+      modified,
+    });
   }, [id, description, feedback, modified]);
 
   const handleDescription = (value) => {

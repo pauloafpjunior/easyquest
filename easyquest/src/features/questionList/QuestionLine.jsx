@@ -64,7 +64,7 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
       <Grid className={style.container}>
         {getIcon()}
         <Typography noWrap className={style.description}>
-          {getText()}
+          {question.title}
         </Typography>
         <Tooltip title="Download">
           <GetApp onClick={downloadAsXml} className={style.actionIcon} />

@@ -14,7 +14,7 @@ const multiple = (question) => {
   const xml = `
     <question type="multichoice">
       <name>
-        <text>${question.id}</text>
+        <text>${question.title}</text>
       </name>
       <questiontext format="html">
         <text><![CDATA[${description}]]></text>
@@ -50,7 +50,7 @@ const multiple = (question) => {
 const essay = (question) => `
     <question type="essay">
       <name>
-        <text>${question.id}</text>
+        <text>${question.title}</text>
       </name>
       <questiontext format="html">
         <text><![CDATA[${question.description}]]></text>
@@ -79,7 +79,7 @@ const essay = (question) => `
 const trueFalse = (question) => `
   <question type="truefalse">
     <name>
-      <text>${question.id}</text>
+      <text>${question.title}</text>
     </name>
     <questiontext format="html">
       <text><![CDATA[${question.description}]]></text>

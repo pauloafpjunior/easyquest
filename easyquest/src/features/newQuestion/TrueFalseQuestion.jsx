@@ -57,7 +57,15 @@ export default ({ question, setQuestion }) => {
   const [showFeedback, setShowFeedback] = useState(!!question?.feecback);
   const style = useStyles();
   useEffect(() => {
-    setQuestion({ id, description, isCorrect, feedback, type: questionType.trueFalse, modified });
+    setQuestion({
+      ...question,
+      id,
+      description,
+      isCorrect,
+      feedback,
+      type: questionType.trueFalse,
+      modified,
+    });
   }, [description, setQuestion]);
 
   const handleDescription = (value) => {

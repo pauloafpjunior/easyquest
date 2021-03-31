@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Grid, makeStyles, Select, MenuItem, Typography } from '@material-ui/core';
-import { Save, Close } from '@material-ui/icons';
+import { Button, Grid, makeStyles, Select, MenuItem, Typography, Input } from '@material-ui/core';
+import { Save, Close, Warning } from '@material-ui/icons';
 import Header from '../../shared/components/Header';
 import {
   components,
@@ -67,9 +67,14 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
         title: generalMessages.confirmCloseTitle,
         text: generalMessages.confirmClose,
         cancelText: 'Cancelar',
-        confirmText: 'Confirmar',
+        confirmText: (
+          <>
+            <Warning /> Confirmar
+          </>
+        ),
         onConfirm: close,
         canCancel: true,
+        confirmStyle: { backgroundColor: 'red', color: 'white' },
       });
       setOpenDialog(true);
     }
@@ -88,14 +93,23 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       title: generalMessages.changeTypeTitle,
       text: generalMessages.changeType,
       cancelText: 'Cancelar',
-      confirmText: 'Confirmar',
+      confirmText: (
+        <>
+          <Warning /> Confirmar
+        </>
+      ),
       onConfirm: () => {
         setNewQuestionType(event.target.value);
         setOpenDialog(false);
       },
       canCancel: true,
+      confirmStyle: { backgroundColor: 'red', color: 'white' },
     });
     setOpenDialog(true);
+  };
+
+  const handleTitle = (event) => {
+    setNewQuestion({ ...newQuestion, title: event.target.value });
   };
 
   return (
@@ -122,6 +136,14 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
                 </MenuItem>
               ))}
             </Select>
+          </Grid>
+          <Grid className={style.row}>
+            <Typography className={style.label}>Título:</Typography>
+            <Input
+              style={{ width: '620px' }}
+              value={newQuestion?.title ?? ''}
+              onChange={handleTitle}
+            />
           </Grid>
 
           <Grid style={{ textAlign: 'left' }}>
