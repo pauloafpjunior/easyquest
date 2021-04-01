@@ -11,6 +11,7 @@ export default {
 
   validationMessages: {
     invalidQuestion: 'Questão Inválida',
+    missingTitle: 'É necessário adicionar um título para a questão.',
     missingDescription: 'É necessário adicionar um enunciado para a questão.',
     minimumAlternatives: `É necessário adicionar ao menos ${Constants.questionRules.minimumAlternatives} alternativas para salvar a questão.`,
     correctAlternative: 'É necessário selecionar uma alternativa correta.',

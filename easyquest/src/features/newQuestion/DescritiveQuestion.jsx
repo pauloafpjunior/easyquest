@@ -34,10 +34,10 @@ export default ({ question, setQuestion }) => {
   const style = useStyles();
   const { t } = useTranslation('common');
   const [description, setDescription] = useState(question?.description ?? '');
-  const [modified, setModified] = useState(false);
+  const [modified, setModified] = useState(question?.modified);
   const [id] = useState(question?.id ?? uuid());
-  const [feedback, setFeedback] = useState('');
-  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedback, setFeedback] = useState(question?.feedback ?? '');
+  const [showFeedback, setShowFeedback] = useState(!!question?.feedback);
   useEffect(() => {
     setQuestion({
       ...question,

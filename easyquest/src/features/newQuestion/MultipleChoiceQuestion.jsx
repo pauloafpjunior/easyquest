@@ -50,9 +50,8 @@ const useStyles = makeStyles({
 export default ({ question, setQuestion }) => {
   const style = useStyles();
   const { t } = useTranslation('common');
-
   const [id] = useState(question?.id ?? uuid());
-  const [modified, setModified] = useState(false);
+  const [modified, setModified] = useState(question?.modified);
   const [description, setDescription] = useState(question?.description ?? '');
   const [alternatives, setAlternatives] = useState(
     question?.alternatives ?? [

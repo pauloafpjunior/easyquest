@@ -1,6 +1,9 @@
 import { questionRules, questionType } from '../Constants';
 
 const validateDescritiveQuestion = (question) => {
+  if (!question.title) {
+    return 'validationMessages.missingTitle';
+  }
   if (!question.description) {
     return 'validationMessages.missingDescription';
   }
@@ -9,6 +12,9 @@ const validateDescritiveQuestion = (question) => {
 };
 
 const validateMultipleChoiceQuestion = (question) => {
+  if (!question.title) {
+    return 'validationMessages.missingTitle';
+  }
   if (!question?.description) {
     return 'validationMessages.missingDescription';
   }
@@ -25,6 +31,9 @@ const validateMultipleChoiceQuestion = (question) => {
 };
 
 const validateTrueFalseQuestion = (question) => {
+  if (!question.title) {
+    return 'validationMessages.missingTitle';
+  }
   if (!question.description) {
     return 'validationMessages.missingDescription';
   }

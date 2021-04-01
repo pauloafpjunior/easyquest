@@ -11,6 +11,7 @@ export default {
 
   validationMessages: {
     invalidQuestion: 'Invalid Question',
+    missingTitle: 'You missed the question title.',
     missingDescription: 'You missed the question description.',
     minimumAlternatives: `You need at leas ${Constants.questionRules.minimumAlternatives} alternatives to save the question.`,
     correctAlternative: 'You need to choose the correct alternative.',

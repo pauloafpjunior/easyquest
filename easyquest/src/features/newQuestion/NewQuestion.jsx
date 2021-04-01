@@ -87,7 +87,10 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
     close();
   };
   const handleChangeType = (event) => {
-    if (!newQuestion.modified) {
+    if (
+      newQuestion.type !== questionType.multiple ||
+      newQuestion.alternatives.every((a) => !!a.text)
+    ) {
       setNewQuestionType(event.target.value);
       return;
     }

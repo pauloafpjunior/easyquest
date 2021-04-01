@@ -54,11 +54,11 @@ export default ({ question, setQuestion }) => {
   const { t } = useTranslation('common');
 
   const [id] = useState(question?.id ?? uuid());
-  const [modified, setModified] = useState(false);
+  const [modified, setModified] = useState(question?.modified);
   const [description, setDescription] = useState(question?.description ?? '');
-  const [isCorrect, setIsCorrect] = useState(!!question.isCorrect);
-  const [feedback, setFeedback] = useState(question?.feecback ?? '');
-  const [showFeedback, setShowFeedback] = useState(!!question?.feecback);
+  const [isCorrect, setIsCorrect] = useState(!!question?.isCorrect);
+  const [feedback, setFeedback] = useState(question?.feedback ?? '');
+  const [showFeedback, setShowFeedback] = useState(!!question?.feedback);
   useEffect(() => {
     setQuestion({
       ...question,
@@ -69,7 +69,7 @@ export default ({ question, setQuestion }) => {
       type: questionType.trueFalse.constant,
       modified,
     });
-  }, [description, setQuestion]);
+  }, [description, isCorrect, feedback, modified, setQuestion]);
 
   const handleDescription = (value) => {
     setDescription(value);
