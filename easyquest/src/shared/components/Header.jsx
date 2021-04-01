@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 import { BONDI_BLUE, COD_GRAY } from '../../theme';
+import Language from '../Languages';
 
 const useStyles = makeStyles({
   header: {
@@ -25,7 +26,7 @@ export default ({ children }) => {
   return (
     <Grid className={style.header}>
       <Typography variant="h1" className={style.title}>
-        EasyQuest
+        {Language.appName}
       </Typography>
       {children}
     </Grid>

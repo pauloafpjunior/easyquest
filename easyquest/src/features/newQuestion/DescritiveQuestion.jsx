@@ -60,7 +60,7 @@ export default ({ question, setQuestion }) => {
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography className={style.label}>Enunciado: </Typography>
+        <Typography className={style.label}>{Language.labels.questionDescription}</Typography>
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
@@ -68,13 +68,13 @@ export default ({ question, setQuestion }) => {
         {!showFeedback && (
           <Button variant="contained" onClick={() => setShowFeedback(true)}>
             <Add className="button-icon" />
-            Adicionar feedback
+            {Language.labels.addFeedback}
           </Button>
         )}
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography className={style.label}>Feedback: </Typography>
+          <Typography className={style.label}>{Language.labels.questionFeedback} </Typography>
           <Grid>
             <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
             <Grid className={style.row} style={{ display: 'flex' }}>
@@ -85,7 +85,7 @@ export default ({ question, setQuestion }) => {
                 }}
               >
                 <Remove className={`button-icon ${style.removeIcon}`} />
-                Remover
+                {Language.labels.removeFeedback}
               </Button>
             </Grid>
           </Grid>

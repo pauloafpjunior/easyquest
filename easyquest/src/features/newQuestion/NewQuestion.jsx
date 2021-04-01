@@ -114,17 +114,17 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
         <Header>
           <Button variant="outlined" onClick={save}>
             <Save className="button-icon" />
-            SALVAR
+            {Language.labels.saveNewQuestion}
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={setConfirmCloseDialog}>
             <Close className="button-icon" />
-            FECHAR
+            {Language.labels.closeNewQuestion}
           </Button>
         </Header>
         <Grid className={style.content}>
           <Grid className={style.row}>
-            <Typography className={style.label}>Tipo:</Typography>
+            <Typography className={style.label}>{Language.labels.questionType}</Typography>
             <Select value={newQuestionType} onChange={handleChangeType}>
               {Object.values(Language.questionType).map((qType) => (
                 <MenuItem key={qType.constant} value={qType.constant}>
@@ -134,7 +134,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
             </Select>
           </Grid>
           <Grid className={style.row}>
-            <Typography className={style.label}>Título:</Typography>
+            <Typography className={style.label}>{Language.labels.questionTitle}</Typography>
             <Input
               style={{ width: '620px' }}
               value={newQuestion?.title ?? ''}

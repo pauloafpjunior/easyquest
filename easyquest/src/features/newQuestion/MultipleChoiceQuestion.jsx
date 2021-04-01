@@ -129,16 +129,16 @@ export default ({ question, setQuestion }) => {
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography className={style.label}>Enunciado: </Typography>
+        <Typography className={style.label}>{Language.labels.questionDescription}</Typography>
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
       {alternatives &&
         alternatives.map((alternative, index) => (
           <Grid className={style.row} key={alternative.id}>
-            <Typography className={style.label}>{`Alternativa ${NumberToLetter(
-              index
-            )}:`}</Typography>
+            <Typography className={style.label}>{`${
+              Language.labels.questionAlternative
+            } ${NumberToLetter(index)}:`}</Typography>
             <Grid>
               <RichTextField
                 value={alternative.text}
@@ -148,7 +148,7 @@ export default ({ question, setQuestion }) => {
               <Grid className={style.buttonRow} style={{ display: 'flex' }}>
                 <Button onClick={() => remove(index)}>
                   <Remove className={`button-icon ${style.removeIcon}`} />
-                  Remover
+                  {Language.labels.removeAlternative}
                 </Button>
                 <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
                   <Check
@@ -156,8 +156,8 @@ export default ({ question, setQuestion }) => {
                     className={`button-icon ${isCorrect(index)}`}
                   />
                   {alternative.isCorrect
-                    ? 'Esta é a alternativa correta'
-                    : 'Marcar como alternativa correta'}
+                    ? Language.labels.correctAlternative
+                    : Language.labels.markCorrectAlternative}
                 </Button>
               </Grid>
             </Grid>
@@ -167,19 +167,19 @@ export default ({ question, setQuestion }) => {
         {alternatives?.length < MAX_ALTERNATIVES && (
           <Button style={{ marginRight: '8px' }} variant="contained" onClick={addAlternative}>
             <Add className="button-icon" />
-            Adicionar alternativa
+            {Language.labels.removeAlternative}
           </Button>
         )}
         {!showFeedback && (
           <Button variant="contained" onClick={() => setShowFeedback(true)}>
             <Add className="button-icon" />
-            Adicionar feedback
+            {Language.labels.addFeedback}
           </Button>
         )}
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography className={style.label}>Feedback: </Typography>
+          <Typography className={style.label}>{Language.labels.questionFeedback}</Typography>
           <Grid>
             <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
             <Grid className={style.row} style={{ display: 'flex' }}>
@@ -190,7 +190,7 @@ export default ({ question, setQuestion }) => {
                 }}
               >
                 <Remove className={`button-icon ${style.removeIcon}`} />
-                Remover
+                {Language.labels.removeFeedback}
               </Button>
             </Grid>
           </Grid>

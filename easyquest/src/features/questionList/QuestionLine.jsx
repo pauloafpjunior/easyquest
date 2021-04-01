@@ -65,16 +65,16 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         <Typography noWrap className={style.description}>
           {question.title}
         </Typography>
-        <Tooltip title="Download">
+        <Tooltip title={Language.tooltips.downloadButton}>
           <GetApp onClick={downloadAsXml} className={style.actionIcon} />
         </Tooltip>
-        <Tooltip title="Editar">
+        <Tooltip title={Language.tooltips.editButton}>
           <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
         </Tooltip>
-        <Tooltip title="Duplicar">
+        <Tooltip title={Language.tooltips.duplicateButton}>
           <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
         </Tooltip>
-        <Tooltip title="Excluir">
+        <Tooltip title={Language.tooltips.deleteButton}>
           <Delete
             style={{ marginRight: '24px' }}
             className={style.actionIcon}
@@ -88,10 +88,10 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         dialogParams={{
           title: Language.generalMessages.deleteQuestionTitle,
           text: Language.generalMessages.deleteQuestion,
-          cancelText: 'Cancelar',
+          cancelText: Language.labels.cancelButton,
           confirmText: (
             <>
-              <Warning /> Confirmar
+              <Warning /> {Language.labels.confirmButton}
             </>
           ),
           onConfirm: () => {

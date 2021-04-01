@@ -69,8 +69,8 @@ export default ({
 
   const getEmptyListText = () =>
     filter && questions.length > 0
-      ? 'Não existem questões que correspondem ao filtro inserido.'
-      : 'Você não possui questões cadastradas.';
+      ? Language.generalMessages.noQuestionsMatchFilter
+      : Language.generalMessages.noQuestions;
 
   return (
     <>
@@ -78,16 +78,16 @@ export default ({
         <Header>
           <Button variant="outlined" onClick={addQuestion}>
             <Add className="button-icon" />
-            NOVA
+            {Language.labels.newQuestionButton}
           </Button>
           <Button variant="outlined" onClick={downloadAll} style={{ marginLeft: '8px' }}>
             <GetApp className="button-icon" />
-            DOWNLOAD
+            {Language.labels.downloadAllButton}
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={checkRemoveAll}>
             <Delete className="button-icon" />
-            LIMPAR
+            {Language.labels.cleanQuestionsButton}
           </Button>
         </Header>
         <Input
@@ -99,7 +99,7 @@ export default ({
             </InputAdornment>
           }
           className={style.input}
-          placeholder="Pesquisar..."
+          placeholder={Language.labels.questionFilter}
         />
         {filteredQuestions.length === 0 && (
           <Typography className={style.emptyListText}>{getEmptyListText()}</Typography>
@@ -120,10 +120,10 @@ export default ({
         dialogParams={{
           title: Language.generalMessages.clearQuestionsTitle,
           text: Language.generalMessages.clearQuestions,
-          cancelText: 'Cancelar',
+          cancelText: Language.labels.cancelButton,
           confirmText: (
             <>
-              <Warning /> Confirmar
+              <Warning /> {Language.labels.confirmButton}
             </>
           ),
           onConfirm: () => {
