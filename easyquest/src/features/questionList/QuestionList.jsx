@@ -1,10 +1,10 @@
 import { Button, Input, Grid, InputAdornment, makeStyles, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { Add, Search, Delete, GetApp, Warning } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
 import { components } from '../../shared/Constants';
-import Language from '../../shared/Languages';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import Converters from '../../shared/utils/Converters';
@@ -37,6 +37,7 @@ export default ({
   removeAll,
 }) => {
   const style = useStyles();
+  const { t } = useTranslation('common');
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [filter, setFilter] = useState('');
@@ -69,8 +70,8 @@ export default ({
 
   const getEmptyListText = () =>
     filter && questions.length > 0
-      ? Language.generalMessages.noQuestionsMatchFilter
-      : Language.generalMessages.noQuestions;
+      ? t('generalMessages.noQuestionsMatchFilter')
+      : t('generalMessages.noQuestions');
 
   return (
     <>
@@ -78,16 +79,16 @@ export default ({
         <Header>
           <Button variant="outlined" onClick={addQuestion}>
             <Add className="button-icon" />
-            {Language.labels.newQuestionButton}
+            {t('labels.newQuestionButton')}
           </Button>
           <Button variant="outlined" onClick={downloadAll} style={{ marginLeft: '8px' }}>
             <GetApp className="button-icon" />
-            {Language.labels.downloadAllButton}
+            {t('labels.downloadAllButton')}
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={checkRemoveAll}>
             <Delete className="button-icon" />
-            {Language.labels.cleanQuestionsButton}
+            {t('labels.cleanQuestionsButton')}
           </Button>
         </Header>
         <Input
@@ -99,7 +100,7 @@ export default ({
             </InputAdornment>
           }
           className={style.input}
-          placeholder={Language.labels.questionFilter}
+          placeholder={t('labels.questionFilter')}
         />
         {filteredQuestions.length === 0 && (
           <Typography className={style.emptyListText}>{getEmptyListText()}</Typography>
@@ -118,12 +119,12 @@ export default ({
         open={openDialog}
         setOpen={setOpenDialog}
         dialogParams={{
-          title: Language.generalMessages.clearQuestionsTitle,
-          text: Language.generalMessages.clearQuestions,
-          cancelText: Language.labels.cancelButton,
+          title: t('generalMessages.clearQuestionsTitle'),
+          text: t('generalMessages.clearQuestions'),
+          cancelText: t('labels.cancelButton'),
           confirmText: (
             <>
-              <Warning /> {Language.labels.confirmButton}
+              <Warning /> {t('labels.confirmButton')}
             </>
           ),
           onConfirm: () => {

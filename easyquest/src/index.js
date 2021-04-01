@@ -8,9 +8,20 @@ import i18next from 'i18next';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorkerRegistration';
+import ptBr from './shared/translations/pt-br';
+import en from './shared/translations/en';
 
 i18next.init({
-  interpolation: { escapeValue: false }, // React already does escaping
+  interpolation: { escapeValue: false },
+  lng: 'en', // language to use
+  resources: {
+    pt: {
+      common: ptBr, // 'common' is our custom namespace
+    },
+    en: {
+      common: en, // 'common' is our custom namespace
+    },
+  },
 });
 
 ReactDOM.render(
