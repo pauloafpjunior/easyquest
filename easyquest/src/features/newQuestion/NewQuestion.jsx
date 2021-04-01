@@ -64,10 +64,10 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       setDialogParams({
         title: t('generalMessages.confirmCloseTitle'),
         text: t('generalMessages.confirmClose'),
-        cancelText: 'Cancelar',
+        cancelText: t('labels.cancelButton'),
         confirmText: (
           <>
-            <Warning /> Confirmar
+            <Warning /> {t('labels.confirmButton')}
           </>
         ),
         onConfirm: close,
@@ -78,7 +78,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
     }
   };
   const save = () => {
-    const error = validateQuestion(newQuestion);
+    const error = validateQuestion(newQuestion, t);
     if (error) {
       setErrorDialog(error);
       return;
@@ -87,13 +87,17 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
     close();
   };
   const handleChangeType = (event) => {
+    if (!newQuestion.modified) {
+      setNewQuestionType(event.target.value);
+      return;
+    }
     setDialogParams({
       title: t('generalMessages.changeTypeTitle'),
       text: t('generalMessages.changeType'),
-      cancelText: 'Cancelar',
+      cancelText: t('labels.cancelButton'),
       confirmText: (
         <>
-          <Warning /> Confirmar
+          <Warning /> {t('labels.confirmButton')}
         </>
       ),
       onConfirm: () => {
@@ -107,7 +111,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   };
 
   const handleTitle = (event) => {
-    setNewQuestion({ ...newQuestion, title: event.target.value });
+    setNewQuestion({ ...newQuestion, title: event.target.value, modified: true });
   };
 
   return (

@@ -33,14 +33,20 @@ const validateTrueFalseQuestion = (question) => {
 };
 
 export const validateQuestion = (question, t) => {
+  let message;
   switch (question.type) {
     case questionType.descritive.constant:
-      return t(validateDescritiveQuestion(question));
+      message = validateDescritiveQuestion(question);
+      break;
     case questionType.multiple.constant:
-      return t(validateMultipleChoiceQuestion(question));
+      message = validateMultipleChoiceQuestion(question);
+      break;
     case questionType.trueFalse.constant:
-      return t(validateTrueFalseQuestion(question));
+      message = validateTrueFalseQuestion(question);
+      break;
     default:
       throw new Error('Not implemented type');
   }
+
+  return message ? t(message) : false;
 };
