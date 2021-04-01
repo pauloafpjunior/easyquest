@@ -14,7 +14,7 @@ const multiple = (question) => {
   const xml = `
     <question type="multichoice">
       <name>
-        <text>${question.id}</text>
+        <text>${question.title}</text>
       </name>
       <questiontext format="html">
         <text><![CDATA[${description}]]></text>
@@ -50,7 +50,7 @@ const multiple = (question) => {
 const essay = (question) => `
     <question type="essay">
       <name>
-        <text>${question.id}</text>
+        <text>${question.title}</text>
       </name>
       <questiontext format="html">
         <text><![CDATA[${question.description}]]></text>
@@ -79,7 +79,7 @@ const essay = (question) => `
 const trueFalse = (question) => `
   <question type="truefalse">
     <name>
-      <text>${question.id}</text>
+      <text>${question.title}</text>
     </name>
     <questiontext format="html">
       <text><![CDATA[${question.description}]]></text>
@@ -107,11 +107,11 @@ const trueFalse = (question) => `
 
 const convertByType = (question) => {
   switch (question.type) {
-    case questionType.multiple:
+    case questionType.multiple.constant:
       return multiple(question);
-    case questionType.descritive:
+    case questionType.descritive.constant:
       return essay(question);
-    case questionType.trueFalse:
+    case questionType.trueFalse.constant:
       return trueFalse(question);
 
     default:

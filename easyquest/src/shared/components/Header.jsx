@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { BONDI_BLUE, COD_GRAY } from '../../theme';
 
 const useStyles = makeStyles({
@@ -22,10 +23,11 @@ const useStyles = makeStyles({
 
 export default ({ children }) => {
   const style = useStyles();
+  const { t } = useTranslation('common');
   return (
     <Grid className={style.header}>
       <Typography variant="h1" className={style.title}>
-        EasyQuest
+        {t('appName')}
       </Typography>
       {children}
     </Grid>
