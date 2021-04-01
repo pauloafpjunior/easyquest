@@ -4,9 +4,9 @@ export default {
   appName: 'EasyQuest',
 
   questionType: {
-    descritive: { constant: 'descritive', value: 'Dissertativa' },
-    multiple: { constant: 'multiple', value: 'Multipla escolha' },
-    trueFalse: { constant: 'trueFalse', value: 'Verdadeiro/Falso' },
+    descritive: 'Dissertativa',
+    multiple: 'Multipla escolha',
+    trueFalse: 'Verdadeiro/Falso',
   },
 
   validationMessages: {

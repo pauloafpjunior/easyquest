@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
 import { Add, Check, Remove, Close } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import RichTextField from '../../shared/components/RichTextField';
-import Language from '../../shared/Languages';
+import { questionType } from '../../shared/Constants';
 
 const useStyles = makeStyles({
   input: {
@@ -49,13 +50,15 @@ const useStyles = makeStyles({
 });
 
 export default ({ question, setQuestion }) => {
+  const style = useStyles();
+  const { t } = useTranslation('common');
+
   const [id] = useState(question?.id ?? uuid());
   const [modified, setModified] = useState(false);
   const [description, setDescription] = useState(question?.description ?? '');
   const [isCorrect, setIsCorrect] = useState(!!question.isCorrect);
   const [feedback, setFeedback] = useState(question?.feecback ?? '');
   const [showFeedback, setShowFeedback] = useState(!!question?.feecback);
-  const style = useStyles();
   useEffect(() => {
     setQuestion({
       ...question,
@@ -63,7 +66,7 @@ export default ({ question, setQuestion }) => {
       description,
       isCorrect,
       feedback,
-      type: Language.questionType.trueFalse.constant,
+      type: questionType.trueFalse.constant,
       modified,
     });
   }, [description, setQuestion]);
@@ -83,7 +86,7 @@ export default ({ question, setQuestion }) => {
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography className={style.label}>{Language.labels.questionDescription}</Typography>
+        <Typography className={style.label}>{t('labels.questionDescription')}</Typography>
         <Grid>
           <RichTextField value={description} setValue={handleDescription} className={style.input} />
           <Grid className={style.btnRow} style={{ display: 'flex' }}>
@@ -103,13 +106,13 @@ export default ({ question, setQuestion }) => {
         {!showFeedback && (
           <Button variant="contained" onClick={() => setShowFeedback(true)}>
             <Add className="button-icon" />
-            {Language.labels.addFeedback}
+            {t('labels.addFeedback')}
           </Button>
         )}
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography className={style.label}>{Language.labels.questionFeedback}</Typography>
+          <Typography className={style.label}>{t('labels.questionFeedback')}</Typography>
           <Grid>
             <RichTextField value={feedback} setValue={handleFeedBack} className={style.input} />
             <Grid className={style.btnRow} style={{ display: 'flex' }}>
@@ -120,7 +123,7 @@ export default ({ question, setQuestion }) => {
                 }}
               >
                 <Remove className={`button-icon ${style.removeIcon}`} />
-                {Language.labels.removeFeedback}
+                {t('labels.removeFeedback')}
               </Button>
             </Grid>
           </Grid>

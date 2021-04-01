@@ -13,13 +13,13 @@ import en from './shared/translations/en';
 
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: 'en', // language to use
+  lng: 'pt',
   resources: {
     pt: {
-      common: ptBr, // 'common' is our custom namespace
+      common: ptBr,
     },
     en: {
-      common: en, // 'common' is our custom namespace
+      common: en,
     },
   },
 });
@@ -31,8 +31,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 serviceWorker.register();

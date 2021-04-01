@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Grid, makeStyles, Select, MenuItem, Typography, Input } from '@material-ui/core';
 import { Save, Close, Warning } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import Header from '../../shared/components/Header';
-import { components } from '../../shared/Constants';
-import Language from '../../shared/Languages';
+import { components, questionType } from '../../shared/Constants';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import DescritiveQuestion from './DescritiveQuestion';
 import { validateQuestion } from '../../shared/utils/QuestionValidators';
@@ -39,16 +39,18 @@ const useStyles = makeStyles({
 
 export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   const style = useStyles();
+  const { t } = useTranslation('common');
+
   const [newQuestion, setNewQuestion] = useState(questionToEdit ?? null);
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogParams, setDialogParams] = useState({ open: openDialog, setOpen: setOpenDialog });
   const [newQuestionType, setNewQuestionType] = useState(
-    questionToEdit?.type ?? Language.questionType.multiple.constant
+    questionToEdit?.type ?? questionType.multiple.constant
   );
   const close = () => setActive(components.questionList);
   const setErrorDialog = (errorMessage) => {
     setDialogParams({
-      title: Language.validationMessages.invalidQuestion,
+      title: t('validationMessages.invalidQuestion'),
       text: errorMessage,
       confirmText: 'Ok',
     });
@@ -60,8 +62,8 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       close();
     } else {
       setDialogParams({
-        title: Language.generalMessages.confirmCloseTitle,
-        text: Language.generalMessages.confirmClose,
+        title: t('generalMessages.confirmCloseTitle'),
+        text: t('generalMessages.confirmClose'),
         cancelText: 'Cancelar',
         confirmText: (
           <>
@@ -86,8 +88,8 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   };
   const handleChangeType = (event) => {
     setDialogParams({
-      title: Language.generalMessages.changeTypeTitle,
-      text: Language.generalMessages.changeType,
+      title: t('generalMessages.changeTypeTitle'),
+      text: t('generalMessages.changeType'),
       cancelText: 'Cancelar',
       confirmText: (
         <>
@@ -114,27 +116,27 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
         <Header>
           <Button variant="outlined" onClick={save}>
             <Save className="button-icon" />
-            {Language.labels.saveNewQuestion}
+            {t('labels.saveNewQuestion')}
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={setConfirmCloseDialog}>
             <Close className="button-icon" />
-            {Language.labels.closeNewQuestion}
+            {t('labels.closeNewQuestion')}
           </Button>
         </Header>
         <Grid className={style.content}>
           <Grid className={style.row}>
-            <Typography className={style.label}>{Language.labels.questionType}</Typography>
+            <Typography className={style.label}>{t('labels.questionType')}</Typography>
             <Select value={newQuestionType} onChange={handleChangeType}>
-              {Object.values(Language.questionType).map((qType) => (
+              {Object.values(questionType).map((qType) => (
                 <MenuItem key={qType.constant} value={qType.constant}>
-                  {qType.value}
+                  {t(qType.value)}
                 </MenuItem>
               ))}
             </Select>
           </Grid>
           <Grid className={style.row}>
-            <Typography className={style.label}>{Language.labels.questionTitle}</Typography>
+            <Typography className={style.label}>{t('labels.questionTitle')}</Typography>
             <Input
               style={{ width: '620px' }}
               value={newQuestion?.title ?? ''}
@@ -143,17 +145,17 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
           </Grid>
 
           <Grid style={{ textAlign: 'left' }}>
-            {newQuestionType === Language.questionType.descritive.constant && (
+            {newQuestionType === questionType.descritive.constant && (
               <DescritiveQuestion question={newQuestion} setQuestion={setNewQuestion} />
             )}
-            {newQuestionType === Language.questionType.multiple.constant && (
+            {newQuestionType === questionType.multiple.constant && (
               <MultipleChoiceQuestion
                 question={newQuestion}
                 removeQuestion={removeQuestion}
                 setQuestion={setNewQuestion}
               />
             )}
-            {newQuestionType === Language.questionType.trueFalse.constant && (
+            {newQuestionType === questionType.trueFalse.constant && (
               <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />
             )}
           </Grid>

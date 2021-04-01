@@ -1,9 +1,8 @@
-import { questionRules } from '../Constants';
-import Language from '../Languages';
+import { questionRules, questionType } from '../Constants';
 
 const validateDescritiveQuestion = (question) => {
   if (!question.description) {
-    return Language.validationMessages.missingDescription;
+    return 'validationMessages.missingDescription';
   }
 
   return false;
@@ -11,37 +10,37 @@ const validateDescritiveQuestion = (question) => {
 
 const validateMultipleChoiceQuestion = (question) => {
   if (!question?.description) {
-    return Language.validationMessages.missingDescription;
+    return 'validationMessages.missingDescription';
   }
   if (question.alternatives.length < questionRules.minimumAlternatives) {
-    return Language.validationMessages.minimumAlternatives;
+    return 'validationMessages.minimumAlternatives';
   }
   if (question.alternatives.some((a) => !a.text)) {
-    return Language.validationMessages.alternativeText;
+    return 'validationMessages.alternativeText';
   }
   if (question.alternatives.filter((a) => a.isCorrect).length !== 1) {
-    return Language.validationMessages.correctAlternative;
+    return 'validationMessages.correctAlternative';
   }
   return false;
 };
 
 const validateTrueFalseQuestion = (question) => {
   if (!question.description) {
-    return Language.validationMessages.missingDescription;
+    return 'validationMessages.missingDescription';
   }
 
   return false;
 };
 
-export const validateQuestion = (question) => {
+export const validateQuestion = (question, t) => {
   switch (question.type) {
-    case Language.questionType.descritive.constant:
-      return validateDescritiveQuestion(question);
-    case Language.questionType.multiple.constant:
-      return validateMultipleChoiceQuestion(question);
-    case Language.questionType.trueFalse.constant:
-      return validateTrueFalseQuestion(question);
+    case questionType.descritive.constant:
+      return t(validateDescritiveQuestion(question));
+    case questionType.multiple.constant:
+      return t(validateMultipleChoiceQuestion(question));
+    case questionType.trueFalse.constant:
+      return t(validateTrueFalseQuestion(question));
     default:
-      throw new Error('Tipo de questão não implementada');
+      throw new Error('Not implemented type');
   }
 };

@@ -1,4 +1,4 @@
-import Language from '../../Languages';
+import { questionType } from '../../Constants';
 
 const multiple = (question) => {
   const { description, alternatives, feedback } = question;
@@ -107,11 +107,11 @@ const trueFalse = (question) => `
 
 const convertByType = (question) => {
   switch (question.type) {
-    case Language.questionType.multiple.constant:
+    case questionType.multiple.constant:
       return multiple(question);
-    case Language.questionType.descritive.constant:
+    case questionType.descritive.constant:
       return essay(question);
-    case Language.questionType.trueFalse.constant:
+    case questionType.trueFalse.constant:
       return trueFalse(question);
 
     default:

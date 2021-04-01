@@ -10,10 +10,11 @@ import {
   GetApp,
   Warning,
 } from '@material-ui/icons';
-import Language from '../../shared/Languages';
+import { useTranslation } from 'react-i18next';
 import Converter from '../../shared/utils/Converters';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import { DownloadXmlFile } from '../../shared/utils/Utils';
+import { questionType } from '../../shared/Constants';
 
 const useStyles = makeStyles({
   container: {
@@ -41,14 +42,15 @@ const useStyles = makeStyles({
 
 export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) => {
   const style = useStyles();
+  const { t } = useTranslation('common');
   const [openDialog, setOpenDialog] = useState(false);
   const getIcon = () => {
     switch (question.type) {
-      case Language.questionType.multiple.constant:
+      case questionType.multiple.constant:
         return <Message className={style.typeIcon} />;
-      case Language.questionType.trueFalse.constant:
+      case questionType.trueFalse.constant:
         return <Autorenew className={style.typeIcon} />;
-      case Language.questionType.descritive.constant:
+      case questionType.descritive.constant:
       default:
         return <Book className={style.typeIcon} />;
     }
@@ -65,16 +67,16 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         <Typography noWrap className={style.description}>
           {question.title}
         </Typography>
-        <Tooltip title={Language.tooltips.downloadButton}>
+        <Tooltip title={t('tooltips.downloadButton')}>
           <GetApp onClick={downloadAsXml} className={style.actionIcon} />
         </Tooltip>
-        <Tooltip title={Language.tooltips.editButton}>
+        <Tooltip title={t('tooltips.editButton')}>
           <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
         </Tooltip>
-        <Tooltip title={Language.tooltips.duplicateButton}>
+        <Tooltip title={t('tooltips.duplicateButton')}>
           <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
         </Tooltip>
-        <Tooltip title={Language.tooltips.deleteButton}>
+        <Tooltip title={t('tooltips.deleteButton')}>
           <Delete
             style={{ marginRight: '24px' }}
             className={style.actionIcon}
@@ -86,12 +88,12 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         open={openDialog}
         setOpen={setOpenDialog}
         dialogParams={{
-          title: Language.generalMessages.deleteQuestionTitle,
-          text: Language.generalMessages.deleteQuestion,
-          cancelText: Language.labels.cancelButton,
+          title: t('generalMessages.deleteQuestionTitle'),
+          text: t('generalMessages.deleteQuestion'),
+          cancelText: t('labels.cancelButton'),
           confirmText: (
             <>
-              <Warning /> {Language.labels.confirmButton}
+              <Warning /> {t('labels.confirmButton')}
             </>
           ),
           onConfirm: () => {
