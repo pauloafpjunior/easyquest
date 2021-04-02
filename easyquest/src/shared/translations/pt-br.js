@@ -5,7 +5,7 @@ export default {
 
   questionType: {
     descritive: 'Dissertativa',
-    multiple: 'Multipla escolha',
+    multiple: 'Múltipla escolha',
     trueFalse: 'Verdadeiro/Falso',
   },
 
