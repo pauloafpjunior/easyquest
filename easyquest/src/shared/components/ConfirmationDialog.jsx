@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dialog, DialogTitle, Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import { BONDI_BLUE } from '../../theme';
 
 const useStyles = makeStyles({
   container: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles({
   },
   cancelRow: {
     display: 'flex',
-    padding: '0 60px 0 200px',
+    margin: '0 60px 0 auto',
     justifyContent: 'space-between',
     marginBottom: '16px',
   },
@@ -20,6 +21,9 @@ const useStyles = makeStyles({
   },
   text: {
     padding: '0 24px 16px 24px',
+  },
+  confirm: {
+    marginLeft: '8px',
   },
 });
 
@@ -48,17 +52,30 @@ export default ({ open, setOpen, dialogParams }) => {
         {text && <Typography className={styles.text}>{text}</Typography>}
         {canCancel && (
           <Grid className={styles.cancelRow}>
-            <Button style={cancelStyle ?? {}} onClick={onCancel ?? defaultClose}>
+            <Button
+              style={cancelStyle ?? { border: `1px solid ${BONDI_BLUE}` }}
+              onClick={onCancel ?? defaultClose}
+            >
               {cancelText}
             </Button>
-            <Button style={confirmStyle ?? {}} onClick={onConfirm ?? defaultClose}>
+            <Button
+              className={styles.confirm}
+              style={confirmStyle ?? { border: `1px solid ${BONDI_BLUE}` }}
+              onClick={onConfirm ?? defaultClose}
+            >
               {confirmText}
             </Button>
           </Grid>
         )}
         {!canCancel && (
           <Grid className={styles.confirmRow}>
-            <Button onClick={onConfirm ?? defaultClose}>{confirmText}</Button>
+            <Button
+              className={styles.confirm}
+              style={confirmStyle ?? { border: `1px solid ${BONDI_BLUE}` }}
+              onClick={onConfirm ?? defaultClose}
+            >
+              {confirmText}
+            </Button>
           </Grid>
         )}
       </Grid>

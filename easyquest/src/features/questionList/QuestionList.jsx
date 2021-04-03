@@ -4,11 +4,12 @@ import { Add, Search, Delete, GetApp, Warning } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import Header from '../../shared/components/Header';
 import QuestionLine from './QuestionLine';
-import { components } from '../../shared/Constants';
+import { appDontShowDownloadMessageStorageKey, components } from '../../shared/Constants';
 import HeaderDivider from '../../shared/components/HeaderDivider';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import Converters from '../../shared/utils/Converters';
 import { DownloadXmlFile } from '../../shared/utils/Utils';
+import { BONDI_BLUE } from '../../theme';
 
 const useStyles = makeStyles({
   container: {
@@ -41,6 +42,7 @@ export default ({
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [filter, setFilter] = useState('');
+  const [dialogParams, setDialogParams] = useState({});
 
   useEffect(() => {
     if (filter) {
@@ -60,12 +62,50 @@ export default ({
 
   const checkRemoveAll = () => {
     if (questions.length > 0) {
+      setDialogParams({
+        title: t('generalMessages.clearQuestionsTitle'),
+        text: t('generalMessages.clearQuestions'),
+        cancelText: t('labels.cancelButton'),
+        confirmText: (
+          <>
+            <Warning /> {t('labels.confirmButton')}
+          </>
+        ),
+        onConfirm: () => {
+          removeAll();
+          setOpenDialog(false);
+        },
+        canCancel: true,
+        confirmStyle: { backgroundColor: 'red', color: 'white' },
+      });
       setOpenDialog(true);
     }
   };
 
   const downloadAll = () => {
-    DownloadXmlFile(Converters[0].multipleConverter(questions), 'questions.xml');
+    const localDontShowMessage = localStorage.getItem(appDontShowDownloadMessageStorageKey);
+    if (localDontShowMessage) {
+      DownloadXmlFile(Converters.MoodleXml.multipleConverter(questions), 'questions.xml');
+    } else {
+      setDialogParams({
+        title: t('generalMessages.downloadFormatTitle'),
+        text: t('generalMessages.downloadFormat'),
+        cancelText: t('labels.downloadFormatCancel'),
+        confirmText: t('labels.confirmButton'),
+        onCancel: () => {
+          localStorage.setItem(appDontShowDownloadMessageStorageKey, true);
+          DownloadXmlFile(Converters.MoodleXml.multipleConverter(questions), 'questions.xml');
+          setOpenDialog(false);
+        },
+        onConfirm: () => {
+          DownloadXmlFile(Converters.MoodleXml.multipleConverter(questions), 'questions.xml');
+          setOpenDialog(false);
+        },
+        canCancel: true,
+        cancelStyle: { backgroundColor: BONDI_BLUE, color: 'white' },
+      });
+      setOpenDialog(true);
+    }
   };
 
   const getEmptyListText = () =>
@@ -115,26 +155,7 @@ export default ({
           />
         ))}
       </Grid>
-      <ConfirmationDialog
-        open={openDialog}
-        setOpen={setOpenDialog}
-        dialogParams={{
-          title: t('generalMessages.clearQuestionsTitle'),
-          text: t('generalMessages.clearQuestions'),
-          cancelText: t('labels.cancelButton'),
-          confirmText: (
-            <>
-              <Warning /> {t('labels.confirmButton')}
-            </>
-          ),
-          onConfirm: () => {
-            removeAll();
-            setOpenDialog(false);
-          },
-          canCancel: true,
-          confirmStyle: { backgroundColor: 'red', color: 'white' },
-        }}
-      />
+      <ConfirmationDialog open={openDialog} setOpen={setOpenDialog} dialogParams={dialogParams} />
     </>
   );
 };

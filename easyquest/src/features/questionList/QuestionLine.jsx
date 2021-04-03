@@ -11,10 +11,11 @@ import {
   Warning,
 } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
-import Converter from '../../shared/utils/Converters';
+import Converters from '../../shared/utils/Converters';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import { DownloadXmlFile } from '../../shared/utils/Utils';
-import { questionType } from '../../shared/Constants';
+import { appDontShowDownloadMessageStorageKey, questionType } from '../../shared/Constants';
+import { BONDI_BLUE } from '../../theme';
 
 const useStyles = makeStyles({
   container: {
@@ -44,6 +45,7 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
   const style = useStyles();
   const { t } = useTranslation('common');
   const [openDialog, setOpenDialog] = useState(false);
+  const [dialogParams, setDialogParams] = useState({});
   const getIcon = () => {
     switch (question.type) {
       case questionType.multiple.constant:
@@ -57,7 +59,49 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
   };
 
   const downloadAsXml = () => {
-    DownloadXmlFile(Converter[0].converter(question), 'question.xml');
+    const localDontShowMessage = localStorage.getItem(appDontShowDownloadMessageStorageKey);
+    if (localDontShowMessage) {
+      DownloadXmlFile(Converters.MoodleXml.converter(question), 'question.xml');
+    } else {
+      setDialogParams({
+        title: t('generalMessages.downloadFormatTitle'),
+        text: t('generalMessages.downloadFormat'),
+        cancelText: t('labels.downloadFormatCancel'),
+        confirmText: t('labels.confirmButton'),
+        onCancel: () => {
+          localStorage.setItem(appDontShowDownloadMessageStorageKey, true);
+          DownloadXmlFile(Converters.converter(question), 'question.xml');
+          setOpenDialog(false);
+        },
+        onConfirm: () => {
+          DownloadXmlFile(Converters.converter(question), 'question.xml');
+          setOpenDialog(false);
+        },
+        canCancel: true,
+        cancelStyle: { backgroundColor: BONDI_BLUE, color: 'white' },
+      });
+      setOpenDialog(true);
+    }
+  };
+
+  const verifyRemoveQuestion = () => {
+    setDialogParams({
+      title: t('generalMessages.deleteQuestionTitle'),
+      text: t('generalMessages.deleteQuestion'),
+      cancelText: t('labels.cancelButton'),
+      confirmText: (
+        <>
+          <Warning /> {t('labels.confirmButton')}
+        </>
+      ),
+      onConfirm: () => {
+        removeQuestion(question.id);
+        setOpenDialog(false);
+      },
+      canCancel: true,
+      confirmStyle: { backgroundColor: 'red', color: 'white' },
+    });
+    setOpenDialog(true);
   };
 
   return (
@@ -80,30 +124,11 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
           <Delete
             style={{ marginRight: '24px' }}
             className={style.actionIcon}
-            onClick={() => setOpenDialog(true)}
+            onClick={verifyRemoveQuestion}
           />
         </Tooltip>
       </Grid>
-      <ConfirmationDialog
-        open={openDialog}
-        setOpen={setOpenDialog}
-        dialogParams={{
-          title: t('generalMessages.deleteQuestionTitle'),
-          text: t('generalMessages.deleteQuestion'),
-          cancelText: t('labels.cancelButton'),
-          confirmText: (
-            <>
-              <Warning /> {t('labels.confirmButton')}
-            </>
-          ),
-          onConfirm: () => {
-            removeQuestion(question.id);
-            setOpenDialog(false);
-          },
-          canCancel: true,
-          confirmStyle: { backgroundColor: 'red', color: 'white' },
-        }}
-      />
+      <ConfirmationDialog open={openDialog} setOpen={setOpenDialog} dialogParams={dialogParams} />
     </>
   );
 };

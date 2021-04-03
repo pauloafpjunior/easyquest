@@ -34,9 +34,16 @@ export default {
 
     noQuestions: 'You do not have any questions.',
     noQuestionsMatchFilter: 'There are no questions that match the filter.',
+
+    downloadFormatTitle: 'Atention',
+
+    downloadFormat:
+      'The download format is MoodleXML and must be used to import your questions on Moodle.',
   },
 
   labels: {
+    downloadFormatCancel: "Don't show again",
+
     questionDescription: 'Description: ',
     questionFeedback: 'Feedback: ',
     addFeedback: 'Add feedback',
