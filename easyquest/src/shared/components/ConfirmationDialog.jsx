@@ -40,6 +40,7 @@ export default ({ open, setOpen, dialogParams }) => {
     cancelText,
     confirmStyle,
     cancelStyle,
+    asHtml,
   } = dialogParams;
 
   const defaultClose = () => {
@@ -49,7 +50,11 @@ export default ({ open, setOpen, dialogParams }) => {
     <Dialog onClose={onClose} open={open}>
       <Grid className={styles.container}>
         <DialogTitle>{title}</DialogTitle>
-        {text && <Typography className={styles.text}>{text}</Typography>}
+        {text && asHtml ? (
+          <Typography className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
+        ) : (
+          <Typography className={styles.text}>{text}</Typography>
+        )}
         {canCancel && (
           <Grid className={styles.cancelRow}>
             <Button

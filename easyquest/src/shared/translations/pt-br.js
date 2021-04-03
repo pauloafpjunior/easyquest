@@ -37,7 +37,7 @@ export default {
 
     downloadFormatTitle: 'Atenção',
     downloadFormat:
-      'O formato de download é MoodleXML e deve ser utilizado para importar as questões no Moodle.',
+      'O formato de download é <b>MoodleXML</b> e deve ser utilizado para importar as questões no Moodle.',
   },
 
   labels: {

@@ -9,7 +9,7 @@
 **/coverage/
 
 # production
-/build
+easyquest/build
 
 # misc
 .DS_Store

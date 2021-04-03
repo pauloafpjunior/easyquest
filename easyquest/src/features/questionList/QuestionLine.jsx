@@ -79,6 +79,7 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         },
         canCancel: true,
         cancelStyle: { backgroundColor: BONDI_BLUE, color: 'white' },
+        asHtml: true,
       });
       setOpenDialog(true);
     }

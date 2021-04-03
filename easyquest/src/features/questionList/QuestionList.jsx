@@ -103,6 +103,7 @@ export default ({
         },
         canCancel: true,
         cancelStyle: { backgroundColor: BONDI_BLUE, color: 'white' },
+        asHtml: true,
       });
       setOpenDialog(true);
     }
