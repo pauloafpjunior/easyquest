@@ -48,10 +48,10 @@ export default {
     removeFeedback: 'Remover feedback',
 
     questionAlternative: 'Alternativa',
-    removeAlternative: 'Remover alterntiva',
+    removeAlternative: 'Remover alternativa',
     addAlternative: 'Adicionar alternativa',
-    correctAlternative: 'Esta é a alternativa correta',
-    markCorrectAlternative: 'Marcar como alternativa correta',
+    correctAlternative: 'Esta é a correta',
+    markCorrectAlternative: 'Marcar como correta',
 
     saveNewQuestion: 'SALVAR',
     closeNewQuestion: 'FECHAR',
