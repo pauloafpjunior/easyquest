@@ -70,11 +70,11 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         confirmText: t('labels.confirmButton'),
         onCancel: () => {
           localStorage.setItem(appDontShowDownloadMessageStorageKey, true);
-          DownloadXmlFile(Converters.converter(question), 'question.xml');
+          DownloadXmlFile(Converters.MoodleXml.converter(question), 'question.xml');
           setOpenDialog(false);
         },
         onConfirm: () => {
-          DownloadXmlFile(Converters.converter(question), 'question.xml');
+          DownloadXmlFile(Converters.MoodleXml.converter(question), 'question.xml');
           setOpenDialog(false);
         },
         canCancel: true,

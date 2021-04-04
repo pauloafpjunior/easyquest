@@ -13,13 +13,13 @@ export default {
     invalidQuestion: 'Invalid Question',
     missingTitle: 'You missed the question title.',
     missingDescription: 'You missed the question description.',
-    minimumAlternatives: `You need at leas ${Constants.questionRules.minimumAlternatives} alternatives to save the question.`,
+    minimumAlternatives: `You need at least ${Constants.questionRules.minimumAlternatives} alternatives to save the question.`,
     correctAlternative: 'You need to choose the correct alternative.',
     alternativeText: 'You need to fill the alternative text.',
   },
 
   generalMessages: {
-    confirmCloseTitle: 'Not Saved Changes',
+    confirmCloseTitle: 'Atention',
     confirmClose: 'The changes have not been saved. Are you sure you want to close?',
 
     clearQuestionsTitle: 'Atention',
@@ -37,20 +37,19 @@ export default {
 
     downloadFormatTitle: 'Atention',
 
-    downloadFormat:
-      'The download format is MoodleXML and must be used to import your questions on Moodle.',
+    downloadFormat: 'Use the MoodleXML template to import your questions on Moodle.',
   },
 
   labels: {
-    downloadFormatCancel: "Don't show again",
+    downloadFormatCancel: "Don't show it again",
 
     questionDescription: 'Description: ',
     questionFeedback: 'Feedback: ',
     addFeedback: 'Add feedback',
-    removeFeedback: 'Remove',
+    removeFeedback: 'Remove feedback',
 
     questionAlternative: 'Alternative',
-    removeAlternative: 'Remove',
+    removeAlternative: 'Remove alternative',
     addAlternative: 'Add alternative',
     correctAlternative: 'This is the correct alternative',
     markCorrectAlternative: 'Mark as correct',

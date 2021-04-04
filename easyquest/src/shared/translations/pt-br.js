@@ -5,39 +5,38 @@ export default {
 
   questionType: {
     descritive: 'Dissertativa',
-    multiple: 'Múltipla escolha',
+    multiple: 'Múltipla Escolha',
     trueFalse: 'Verdadeiro/Falso',
   },
 
   validationMessages: {
-    invalidQuestion: 'Questão Inválida',
+    invalidQuestion: 'Questão inválida',
+    minimumAlternatives: `É necessário adicionar ao menos ${Constants.questionRules.minimumAlternatives} alternativas para a questão.`,
     missingTitle: 'É necessário adicionar um título para a questão.',
     missingDescription: 'É necessário adicionar um enunciado para a questão.',
-    minimumAlternatives: `É necessário adicionar ao menos ${Constants.questionRules.minimumAlternatives} alternativas para salvar a questão.`,
-    correctAlternative: 'É necessário selecionar uma alternativa correta.',
-    alternativeText: 'É necessário preencher o texto das alternativas.',
+    correctAlternative: 'É necessário selecionar uma alternativa correta para a questão.',
+    alternativeText: 'É necessário preencher o texto das alternativas da questão.',
   },
 
   generalMessages: {
-    confirmCloseTitle: 'Alterações Não Salvas',
-    confirmClose: 'As alterações não foram salvas. Tem certeza que deseja fechar?',
+    confirmCloseTitle: 'Atenção',
+    confirmClose: 'As alterações não foram salvas. Tem certeza que deseja prosseguir?',
 
     clearQuestionsTitle: 'Atenção',
-    clearQuestions: 'Todas as questões serão apagadas. Tem certeza que deseja prosseguir?',
+    clearQuestions: 'Todas as questões serão removidas. Tem certeza que deseja prosseguir?',
 
     deleteQuestionTitle: 'Atenção',
-    deleteQuestion: 'Tem certeza que deseja excluir essa questão?',
+    deleteQuestion: 'Esta questão será removida. Tem certeza que deseja prosseguir?',
 
     changeTypeTitle: 'Atenção',
     changeType:
-      'Tem certeza que deseja modificar o tipo questão, algumas informações serão permanentemente perdidas?',
+      'Ao alterar o tipo questão, algumas informações podem ser perdidas. Tem certeza que deseja prosseguir?',
 
-    noQuestions: 'Você não possui questões cadastradas.',
-    noQuestionsMatchFilter: 'Não existem questões que correspondem ao filtro inserido.',
+    noQuestions: 'Não há questões cadastradas até o momento.',
+    noQuestionsMatchFilter: 'Não há questões que correspondam ao texto de busca informado.',
 
-    downloadFormatTitle: 'Atenção',
-    downloadFormat:
-      'O formato de download é <b>MoodleXML</b> e deve ser utilizado para importar as questões no Moodle.',
+    downloadFormatTitle: 'Informação',
+    downloadFormat: 'Utilize o formato <b>MoodleXML</b> ao importar as questões no Moodle.',
   },
 
   labels: {
@@ -46,10 +45,10 @@ export default {
     questionDescription: 'Enunciado: ',
     questionFeedback: 'Feedback: ',
     addFeedback: 'Adicionar feedback',
-    removeFeedback: 'Remover',
+    removeFeedback: 'Remover feedback',
 
     questionAlternative: 'Alternativa',
-    removeAlternative: 'Remover',
+    removeAlternative: 'Remover alterntiva',
     addAlternative: 'Adicionar alternativa',
     correctAlternative: 'Esta é a alternativa correta',
     markCorrectAlternative: 'Marcar como alternativa correta',
@@ -74,6 +73,6 @@ export default {
     downloadButton: 'Download',
     editButton: 'Editar',
     duplicateButton: 'Duplicar',
-    deleteButton: 'Excluir',
+    deleteButton: 'Remover',
   },
 };
