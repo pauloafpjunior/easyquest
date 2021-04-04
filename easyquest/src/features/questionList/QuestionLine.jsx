@@ -112,9 +112,9 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         <Typography noWrap className={style.description}>
           {question.title}
         </Typography>
-        <Tooltip title={t('tooltips.downloadButton')}>
+        {/* <Tooltip title={t('tooltips.downloadButton')}>
           <GetApp onClick={downloadAsXml} className={style.actionIcon} />
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip title={t('tooltips.editButton')}>
           <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
         </Tooltip>
