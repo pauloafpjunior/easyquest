@@ -5,7 +5,7 @@ const multiple = (question) => {
   const alternativesText = alternatives.map((alternative) => {
     const value = alternative.isCorrect ? 100 : 0;
     return `<answer fraction="${value}" format="html">
-    <text><![CDATA[${alternative.text}'}]]></text>
+    <text><![CDATA[${alternative.text}]]></text>
     <feedback format="html">
       <text></text>
     </feedback>
