@@ -7,6 +7,7 @@ export default {
     descritive: 'Descritive',
     multiple: 'Multiple Choice',
     trueFalse: 'True/False',
+    associative: 'Associative',
   },
 
   validationMessages: {
@@ -16,6 +17,8 @@ export default {
     minimumAlternatives: `You need at least ${Constants.questionRules.minimumAlternatives} alternatives to save the question.`,
     correctAlternative: 'You need to choose the correct alternative.',
     alternativeText: 'You need to fill the alternative text.',
+    minimumItems: `You need at least ${Constants.questionRules.minimumItems} items to save the question.`,
+    itemAnswer: 'All items must have an answer.',
   },
 
   generalMessages: {
@@ -68,6 +71,11 @@ export default {
     cleanQuestionsButton: 'CLEAN',
 
     questionFilter: 'Search...',
+
+    questionItem: 'Item',
+    itemAnswer: 'Answer',
+    addItem: 'Add item',
+    removeItem: 'Remove item',
   },
 
   tooltips: {

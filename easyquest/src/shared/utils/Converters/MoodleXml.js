@@ -105,7 +105,51 @@ const trueFalse = (question) => `
     </answer>
   </question>`;
 
+const associative = (question) => {
+  const { description, items, feedback, title } = question;
+  const alternativesText = items.map(
+    (item) => `<subquestion format="html">
+    <text><![CDATA[${item.text}]]></text>
+    <answer>
+      <text>${item.answer}</text>
+    </answer>
+  </subquestion>`
+  );
+  const xml = `
+  <question type="matching">
+    <name>
+      <text>${title}</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[${description}]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[${feedback}]]></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Sua resposta está correta.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Sua resposta está parcialmente correta.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Sua resposta está incorreta.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+      ${alternativesText}
+    </question>
+  `;
+
+  return xml;
+};
+
 const convertByType = (question) => {
+  console.log(question.type);
   switch (question.type) {
     case questionType.multiple.constant:
       return multiple(question);
@@ -113,6 +157,8 @@ const convertByType = (question) => {
       return essay(question);
     case questionType.trueFalse.constant:
       return trueFalse(question);
+    case questionType.associative.constant:
+      return associative(question);
 
     default:
       throw new Error('Not implemented');

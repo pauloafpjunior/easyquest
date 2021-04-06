@@ -10,6 +10,7 @@ import { validateQuestion } from '../../shared/utils/QuestionValidators';
 import MultipleChoiceQuestion from './MultipleChoiceQuestion';
 import TrueFalseQuestion from './TrueFalseQuestion';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
+import AssociativeQuestion from './AssociativeQuestion';
 
 const useStyles = makeStyles({
   container: {
@@ -164,6 +165,13 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
             )}
             {newQuestionType === questionType.trueFalse.constant && (
               <TrueFalseQuestion trueFalse question={newQuestion} setQuestion={setNewQuestion} />
+            )}
+            {newQuestionType === questionType.associative.constant && (
+              <AssociativeQuestion
+                question={newQuestion}
+                removeQuestion={removeQuestion}
+                setQuestion={setNewQuestion}
+              />
             )}
           </Grid>
         </Grid>

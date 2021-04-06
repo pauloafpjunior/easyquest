@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Grid, makeStyles, Typography, Button } from '@material-ui/core';
-import { Add, Remove, Check } from '@material-ui/icons';
+import { Grid, makeStyles, Typography, Button, Input } from '@material-ui/core';
+import { Add, Remove } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import RichTextField from '../../shared/components/RichTextField';
-import { MAX_ALTERNATIVES, questionType } from '../../shared/Constants';
+import { MAX_ITEMS, questionType } from '../../shared/Constants';
 import { NumberToLetter } from '../../shared/utils/Utils';
 
 const useStyles = makeStyles({
   input: {
     width: '500px',
   },
-  row: { display: 'flex', marginBottom: '16px' },
+  row: { display: 'flex', marginBottom: '8px' },
+  answerRow: { display: 'flex', marginBottom: '8px' },
   buttonRow: {
     width: 'max-content',
-    marginTop: '8px',
+    marginBottom: '24px',
+    paddingLeft: '120px',
   },
   removeIcon: {
     marginTop: '4px',
@@ -37,10 +39,6 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'left',
   },
-  selectdAlternative: {
-    border: '1px solid green',
-    color: 'green',
-  },
   label: {
     width: '120px',
     fontWeight: 'bold',
@@ -53,12 +51,12 @@ export default ({ question, setQuestion }) => {
   const [id] = useState(question?.id ?? uuid());
   const [modified, setModified] = useState(question?.modified);
   const [description, setDescription] = useState(question?.description ?? '');
-  const [alternatives, setAlternatives] = useState(
-    question?.alternatives ?? [
-      { isCorrect: false, text: '', id: uuid() },
-      { isCorrect: false, text: '', id: uuid() },
-      { isCorrect: false, text: '', id: uuid() },
-      { isCorrect: false, text: '', id: uuid() },
+  const [items, setItems] = useState(
+    question?.items ?? [
+      { answer: '', text: '', id: uuid() },
+      { answer: '', text: '', id: uuid() },
+      { answer: '', text: '', id: uuid() },
+      { answer: '', text: '', id: uuid() },
     ]
   );
   const [feedback, setFeedback] = useState(question?.feedback ?? '');
@@ -68,44 +66,32 @@ export default ({ question, setQuestion }) => {
       ...question,
       id,
       description,
-      alternatives,
+      items,
       feedback,
-      type: questionType.multiple.constant,
+      type: questionType.associative.constant,
       modified,
     });
-  }, [id, description, alternatives, feedback, modified]);
+  }, [id, description, items, feedback, modified]);
 
-  const handleAlternative = (newValue, index) => {
-    alternatives[index].text = newValue;
-    setAlternatives([...alternatives]);
+  const handleItem = (newValue, index) => {
+    items[index].text = newValue;
+    setItems([...items]);
     setModified(true);
   };
 
-  const addAlternative = () => {
-    alternatives.push({
-      isCorrect: false,
+  const addItem = () => {
+    items.push({
+      answer: '',
       text: '',
       id: uuid(),
     });
-    setAlternatives([...alternatives]);
-    setModified(true);
-  };
-
-  const isCorrect = (index) => (alternatives[index].isCorrect ? style.correct : style.incorrect);
-
-  const markAsCorrect = (index) => {
-    const newVal = !alternatives[index].isCorrect;
-    alternatives.forEach((alternative, i) => {
-      alternative.isCorrect = i === index && newVal;
-    });
-
-    setAlternatives([...alternatives]);
+    setItems([...items]);
     setModified(true);
   };
 
   const remove = (index) => {
-    alternatives.splice(index, 1);
-    setAlternatives([...alternatives]);
+    items.splice(index, 1);
+    setItems([...items]);
     setModified(true);
   };
 
@@ -119,12 +105,15 @@ export default ({ question, setQuestion }) => {
     setModified(true);
   };
 
-  const getButtonClass = (index) => (alternatives[index].isCorrect ? style.selectdAlternative : '');
-
   const getButtonsPadding = () => {
-    if (alternatives.length < 5 && !showFeedback) return '230px';
+    if (items.length < 5 && !showFeedback) return '230px';
     if (!showFeedback) return '335px';
     return '330px';
+  };
+
+  const handleItemAnswer = (event, index) => {
+    items[index].answer = event.target.value;
+    setItems([...items]);
   };
 
   return (
@@ -134,41 +123,42 @@ export default ({ question, setQuestion }) => {
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
-      {alternatives &&
-        alternatives.map((alternative, index) => (
-          <Grid className={style.row} key={alternative.id}>
-            <Typography className={style.label}>{`${t(
-              'labels.questionAlternative'
-            )} ${NumberToLetter(index)}:`}</Typography>
-            <Grid>
-              <RichTextField
-                value={alternative.text}
-                setValue={(value) => handleAlternative(value, index)}
-                className={style.input}
-              />
-              <Grid className={style.buttonRow} style={{ display: 'flex' }}>
-                <Button onClick={() => remove(index)}>
-                  <Remove className={`button-icon ${style.removeIcon}`} />
-                  {t('labels.removeAlternative')}
-                </Button>
-                <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
-                  <Check
-                    style={{ marginRight: '8px' }}
-                    className={`button-icon ${isCorrect(index)}`}
-                  />
-                  {alternative.isCorrect
-                    ? t('labels.correctAlternative')
-                    : t('labels.markCorrectAlternative')}
-                </Button>
+      {items &&
+        items.map((item, index) => (
+          <React.Fragment key={item.id}>
+            <Grid className={style.row}>
+              <Typography className={style.label}>{`${t('labels.questionItem')} ${NumberToLetter(
+                index
+              )}:`}</Typography>
+              <Grid>
+                <RichTextField
+                  value={item.text}
+                  setValue={(value) => handleItem(value, index)}
+                  className={style.input}
+                />
               </Grid>
             </Grid>
-          </Grid>
+            <Grid className={style.answerRow}>
+              <Typography className={style.label}>{`${t('labels.itemAnswer')}:`}</Typography>
+              <Input
+                style={{ width: '620px' }}
+                value={item.answer}
+                onChange={(event) => handleItemAnswer(event, index)}
+              />
+            </Grid>
+            <Grid className={style.buttonRow} style={{ display: 'flex' }}>
+              <Button onClick={() => remove(index)}>
+                <Remove className={`button-icon ${style.removeIcon}`} />
+                {t('labels.removeItem')}
+              </Button>
+            </Grid>
+          </React.Fragment>
         ))}
       <Grid className={style.row} style={{ paddingLeft: getButtonsPadding() }}>
-        {alternatives?.length < MAX_ALTERNATIVES && (
-          <Button style={{ marginRight: '8px' }} variant="contained" onClick={addAlternative}>
+        {items?.length < MAX_ITEMS && (
+          <Button style={{ marginRight: '8px' }} variant="contained" onClick={addItem}>
             <Add className="button-icon" />
-            {t('labels.addAlternative')}
+            {t('labels.addItem')}
           </Button>
         )}
         {!showFeedback && (

@@ -41,6 +41,25 @@ const validateTrueFalseQuestion = (question) => {
   return false;
 };
 
+const validateAssociativeQuestion = (question) => {
+  if (!question.title) {
+    return 'validationMessages.missingTitle';
+  }
+  if (!question?.description) {
+    return 'validationMessages.missingDescription';
+  }
+  if (
+    question.items.filter((item) => item.text && item.answer).length < questionRules.minimumItems
+  ) {
+    return 'validationMessages.minimumItems';
+  }
+
+  if (question.items.some((item) => !item.answer)) {
+    return 'validationMessages.itemAnswer';
+  }
+  return false;
+};
+
 export const validateQuestion = (question, t) => {
   let message;
   switch (question.type) {
@@ -52,6 +71,9 @@ export const validateQuestion = (question, t) => {
       break;
     case questionType.trueFalse.constant:
       message = validateTrueFalseQuestion(question);
+      break;
+    case questionType.associative.constant:
+      message = validateAssociativeQuestion(question);
       break;
     default:
       throw new Error('Not implemented type');

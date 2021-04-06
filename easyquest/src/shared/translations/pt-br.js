@@ -7,6 +7,7 @@ export default {
     descritive: 'Dissertativa',
     multiple: 'Múltipla Escolha',
     trueFalse: 'Verdadeiro/Falso',
+    associative: 'Associativa',
   },
 
   validationMessages: {
@@ -16,6 +17,8 @@ export default {
     missingDescription: 'É necessário adicionar um enunciado para a questão.',
     correctAlternative: 'É necessário selecionar uma alternativa correta para a questão.',
     alternativeText: 'É necessário preencher o texto das alternativas da questão.',
+    minimumItems: `É necessário adicionar ao menos ${Constants.questionRules.minimumItems} itens para a questão.`,
+    itemAnswer: 'Todos os itens devem possuir uma resposta correspondente.',
   },
 
   generalMessages: {
@@ -48,7 +51,7 @@ export default {
     removeFeedback: 'Remover feedback',
 
     questionAlternative: 'Alternativa',
-    removeAlternative: 'Remover alternativa',
+    removeAlternative: 'Remove alternativa',
     addAlternative: 'Adicionar alternativa',
     correctAlternative: 'Esta é a correta',
     markCorrectAlternative: 'Marcar como correta',
@@ -67,6 +70,11 @@ export default {
     cleanQuestionsButton: 'LIMPAR',
 
     questionFilter: 'Pesquisar...',
+
+    questionItem: 'Item',
+    itemAnswer: 'Resposta',
+    addItem: 'Adicionar item',
+    removeItem: 'Remover item',
   },
 
   tooltips: {

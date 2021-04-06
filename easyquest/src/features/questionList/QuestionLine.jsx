@@ -9,6 +9,7 @@ import {
   Autorenew,
   GetApp,
   Warning,
+  SyncAlt,
 } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import Converters from '../../shared/utils/Converters';
@@ -52,6 +53,8 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         return <Message className={style.typeIcon} />;
       case questionType.trueFalse.constant:
         return <Autorenew className={style.typeIcon} />;
+      case questionType.associative.constant:
+        return <SyncAlt className={style.typeIcon} />;
       case questionType.descritive.constant:
       default:
         return <Book className={style.typeIcon} />;
