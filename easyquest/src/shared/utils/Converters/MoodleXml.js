@@ -149,7 +149,6 @@ const associative = (question) => {
 };
 
 const convertByType = (question) => {
-  console.log(question.type);
   switch (question.type) {
     case questionType.multiple.constant:
       return multiple(question);

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { BONDI_BLUE, COD_GRAY } from '../../theme';
+import HelpIcon from '@material-ui/icons/Help';
+import { BONDI_BLUE, COD_GRAY, WHITE } from '../../theme';
+import HelpModal from './HelpModal';
 
 const useStyles = makeStyles({
   header: {
@@ -16,20 +18,26 @@ const useStyles = makeStyles({
     alignItems: 'center',
     padding: '0px 10px',
   },
-  title: {
+  helpIcon: {
+    marginLeft: '8px',
     marginRight: 'auto',
+    color: WHITE,
+    width: '28px',
+    height: '28px',
+    cursor: 'pointer',
   },
 });
 
 export default ({ children }) => {
   const style = useStyles();
+  const [open, setOpen] = useState(true);
   const { t } = useTranslation('common');
   return (
     <Grid className={style.header}>
-      <Typography variant="h1" className={style.title}>
-        {t('appName')}
-      </Typography>
+      <Typography variant="h1">{t('appName')}</Typography>
+      <HelpIcon className={style.helpIcon} onClick={() => setOpen(true)} />
       {children}
+      <HelpModal open={open} setOpen={setOpen} />
     </Grid>
   );
 };

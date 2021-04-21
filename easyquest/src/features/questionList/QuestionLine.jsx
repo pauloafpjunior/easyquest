@@ -7,16 +7,12 @@ import {
   Delete,
   Message,
   Autorenew,
-  GetApp,
   Warning,
   SyncAlt,
 } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
-import Converters from '../../shared/utils/Converters';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
-import { DownloadXmlFile } from '../../shared/utils/Utils';
-import { appDontShowDownloadMessageStorageKey, questionType } from '../../shared/Constants';
-import { BONDI_BLUE } from '../../theme';
+import { questionType } from '../../shared/Constants';
 
 const useStyles = makeStyles({
   container: {
@@ -58,33 +54,6 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
       case questionType.descritive.constant:
       default:
         return <Book className={style.typeIcon} />;
-    }
-  };
-
-  const downloadAsXml = () => {
-    const localDontShowMessage = localStorage.getItem(appDontShowDownloadMessageStorageKey);
-    if (localDontShowMessage) {
-      DownloadXmlFile(Converters.MoodleXml.converter(question), 'question.xml');
-    } else {
-      setDialogParams({
-        title: t('generalMessages.downloadFormatTitle'),
-        text: t('generalMessages.downloadFormat'),
-        cancelText: t('labels.downloadFormatCancel'),
-        confirmText: t('labels.confirmButton'),
-        onCancel: () => {
-          localStorage.setItem(appDontShowDownloadMessageStorageKey, true);
-          DownloadXmlFile(Converters.MoodleXml.converter(question), 'question.xml');
-          setOpenDialog(false);
-        },
-        onConfirm: () => {
-          DownloadXmlFile(Converters.MoodleXml.converter(question), 'question.xml');
-          setOpenDialog(false);
-        },
-        canCancel: true,
-        cancelStyle: { backgroundColor: BONDI_BLUE, color: 'white' },
-        asHtml: true,
-      });
-      setOpenDialog(true);
     }
   };
 
