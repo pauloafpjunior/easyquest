@@ -11,6 +11,7 @@ import MultipleChoiceQuestion from './MultipleChoiceQuestion';
 import TrueFalseQuestion from './TrueFalseQuestion';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import AssociativeQuestion from './AssociativeQuestion';
+import textConstants from '../../shared/translations/textConstants';
 
 const useStyles = makeStyles({
   container: {
@@ -51,7 +52,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   const close = () => setActive(components.questionList);
   const setErrorDialog = (errorMessage) => {
     setDialogParams({
-      title: t('validationMessages.invalidQuestion'),
+      title: t(textConstants.validationMessages.invalidQuestion),
       text: errorMessage,
       confirmText: 'Ok',
     });
@@ -63,12 +64,12 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       close();
     } else {
       setDialogParams({
-        title: t('generalMessages.confirmCloseTitle'),
-        text: t('generalMessages.confirmClose'),
-        cancelText: t('labels.cancelButton'),
+        title: t(textConstants.generalMessages.confirmCloseTitle),
+        text: t(textConstants.generalMessages.confirmClose),
+        cancelText: t(textConstants.labels.cancelButton),
         confirmText: (
           <>
-            <Warning /> {t('labels.confirmButton')}
+            <Warning /> {t(textConstants.labels.confirmButton)}
           </>
         ),
         onConfirm: close,
@@ -96,12 +97,12 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       return;
     }
     setDialogParams({
-      title: t('generalMessages.changeTypeTitle'),
-      text: t('generalMessages.changeType'),
-      cancelText: t('labels.cancelButton'),
+      title: t(textConstants.generalMessages.changeTypeTitle),
+      text: t(textConstants.generalMessages.changeType),
+      cancelText: t(textConstants.labels.cancelButton),
       confirmText: (
         <>
-          <Warning /> {t('labels.confirmButton')}
+          <Warning /> {t(textConstants.labels.confirmButton)}
         </>
       ),
       onConfirm: () => {
@@ -124,17 +125,17 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
         <Header>
           <Button variant="outlined" onClick={save}>
             <Save className="button-icon" />
-            {t('labels.saveNewQuestion')}
+            {t(textConstants.labels.saveNewQuestion)}
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={setConfirmCloseDialog}>
             <Close className="button-icon" />
-            {t('labels.closeNewQuestion')}
+            {t(textConstants.labels.closeNewQuestion)}
           </Button>
         </Header>
         <Grid className={style.content}>
           <Grid className={style.row}>
-            <Typography className={style.label}>{t('labels.questionType')}</Typography>
+            <Typography className={style.label}>{t(textConstants.labels.questionType)}</Typography>
             <Select value={newQuestionType} onChange={handleChangeType}>
               {Object.values(questionType).map((qType) => (
                 <MenuItem key={qType.constant} value={qType.constant}>
@@ -144,7 +145,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
             </Select>
           </Grid>
           <Grid className={style.row}>
-            <Typography className={style.label}>{t('labels.questionTitle')}</Typography>
+            <Typography className={style.label}>{t(textConstants.labels.questionTitle)}</Typography>
             <Input
               style={{ width: '620px' }}
               value={newQuestion?.title ?? ''}

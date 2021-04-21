@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import RichTextField from '../../shared/components/RichTextField';
 import { MAX_ITEMS, questionType } from '../../shared/Constants';
 import { NumberToLetter } from '../../shared/utils/Utils';
+import textConstants from '../../shared/translations/textConstants';
 
 const useStyles = makeStyles({
   input: {
@@ -119,7 +120,9 @@ export default ({ question, setQuestion }) => {
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography className={style.label}>{t('labels.questionDescription')}</Typography>
+        <Typography className={style.label}>
+          {t(textConstants.labels.questionDescription)}
+        </Typography>
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
@@ -127,9 +130,9 @@ export default ({ question, setQuestion }) => {
         items.map((item, index) => (
           <React.Fragment key={item.id}>
             <Grid className={style.row}>
-              <Typography className={style.label}>{`${t('labels.questionItem')} ${NumberToLetter(
-                index
-              )}:`}</Typography>
+              <Typography className={style.label}>{`${t(
+                textConstants.labels.questionItem
+              )} ${NumberToLetter(index)}:`}</Typography>
               <Grid>
                 <RichTextField
                   value={item.text}
@@ -139,7 +142,9 @@ export default ({ question, setQuestion }) => {
               </Grid>
             </Grid>
             <Grid className={style.answerRow}>
-              <Typography className={style.label}>{`${t('labels.itemAnswer')}:`}</Typography>
+              <Typography className={style.label}>{`${t(
+                textConstants.labels.itemAnswer
+              )}:`}</Typography>
               <Input
                 style={{ width: '620px' }}
                 value={item.answer}
@@ -149,7 +154,7 @@ export default ({ question, setQuestion }) => {
             <Grid className={style.buttonRow} style={{ display: 'flex' }}>
               <Button onClick={() => remove(index)}>
                 <Remove className={`button-icon ${style.removeIcon}`} />
-                {t('labels.removeItem')}
+                {t(textConstants.labels.removeItem)}
               </Button>
             </Grid>
           </React.Fragment>
@@ -158,19 +163,21 @@ export default ({ question, setQuestion }) => {
         {items?.length < MAX_ITEMS && (
           <Button style={{ marginRight: '8px' }} variant="contained" onClick={addItem}>
             <Add className="button-icon" />
-            {t('labels.addItem')}
+            {t(textConstants.labels.addItem)}
           </Button>
         )}
         {!showFeedback && (
           <Button variant="contained" onClick={() => setShowFeedback(true)}>
             <Add className="button-icon" />
-            {t('labels.addFeedback')}
+            {t(textConstants.labels.addFeedback)}
           </Button>
         )}
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography className={style.label}>{t('labels.questionFeedback')}</Typography>
+          <Typography className={style.label}>
+            {t(textConstants.labels.questionFeedback)}
+          </Typography>
           <Grid>
             <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
             <Grid className={style.row} style={{ display: 'flex' }}>
@@ -181,7 +188,7 @@ export default ({ question, setQuestion }) => {
                 }}
               >
                 <Remove className={`button-icon ${style.removeIcon}`} />
-                {t('labels.removeFeedback')}
+                {t(textConstants.labels.removeFeedback)}
               </Button>
             </Grid>
           </Grid>

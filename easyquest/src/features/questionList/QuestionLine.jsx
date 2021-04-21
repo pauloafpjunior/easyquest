@@ -13,6 +13,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import { questionType } from '../../shared/Constants';
+import textConstants from '../../shared/translations/textConstants';
 
 const useStyles = makeStyles({
   container: {
@@ -59,12 +60,12 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
 
   const verifyRemoveQuestion = () => {
     setDialogParams({
-      title: t('generalMessages.deleteQuestionTitle'),
-      text: t('generalMessages.deleteQuestion'),
-      cancelText: t('labels.cancelButton'),
+      title: t(textConstants.generalMessages.deleteQuestionTitle),
+      text: t(textConstants.generalMessages.deleteQuestion),
+      cancelText: t(textConstants.labels.cancelButton),
       confirmText: (
         <>
-          <Warning /> {t('labels.confirmButton')}
+          <Warning /> {t(textConstants.labels.confirmButton)}
         </>
       ),
       onConfirm: () => {
@@ -84,16 +85,16 @@ export default ({ question, editQuestion, duplicateQuestion, removeQuestion }) =
         <Typography noWrap className={style.description}>
           {question.title}
         </Typography>
-        {/* <Tooltip title={t('tooltips.downloadButton')}>
+        {/* <Tooltip title={t(textConstants.tooltips.downloadButton)}>
           <GetApp onClick={downloadAsXml} className={style.actionIcon} />
         </Tooltip> */}
-        <Tooltip title={t('tooltips.editButton')}>
+        <Tooltip title={t(textConstants.tooltips.editButton)}>
           <Edit className={style.actionIcon} onClick={() => editQuestion(question)} />
         </Tooltip>
-        <Tooltip title={t('tooltips.duplicateButton')}>
+        <Tooltip title={t(textConstants.tooltips.duplicateButton)}>
           <FileCopy className={style.actionIcon} onClick={() => duplicateQuestion(question)} />
         </Tooltip>
-        <Tooltip title={t('tooltips.deleteButton')}>
+        <Tooltip title={t(textConstants.tooltips.deleteButton)}>
           <Delete
             style={{ marginRight: '24px' }}
             className={style.actionIcon}

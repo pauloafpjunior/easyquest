@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import HelpIcon from '@material-ui/icons/Help';
 import { BONDI_BLUE, COD_GRAY, WHITE } from '../../theme';
 import HelpModal from './HelpModal';
+import textConstants from '../translations/textConstants';
 
 const useStyles = makeStyles({
   header: {
@@ -30,11 +31,11 @@ const useStyles = makeStyles({
 
 export default ({ children }) => {
   const style = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const { t } = useTranslation('common');
   return (
     <Grid className={style.header}>
-      <Typography variant="h1">{t('appName')}</Typography>
+      <Typography variant="h1">{t(textConstants.appName)}</Typography>
       <HelpIcon className={style.helpIcon} onClick={() => setOpen(true)} />
       {children}
       <HelpModal open={open} setOpen={setOpen} />

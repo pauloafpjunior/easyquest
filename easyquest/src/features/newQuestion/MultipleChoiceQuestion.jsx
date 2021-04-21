@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import RichTextField from '../../shared/components/RichTextField';
 import { MAX_ALTERNATIVES, questionType } from '../../shared/Constants';
 import { NumberToLetter } from '../../shared/utils/Utils';
+import textConstants from '../../shared/translations/textConstants';
 
 const useStyles = makeStyles({
   input: {
@@ -130,7 +131,9 @@ export default ({ question, setQuestion }) => {
   return (
     <Grid className={style.container}>
       <Grid className={style.row}>
-        <Typography className={style.label}>{t('labels.questionDescription')}</Typography>
+        <Typography className={style.label}>
+          {t(textConstants.labels.questionDescription)}
+        </Typography>
         <RichTextField value={description} setValue={handleDescription} className={style.input} />
       </Grid>
       <br />
@@ -149,7 +152,7 @@ export default ({ question, setQuestion }) => {
               <Grid className={style.buttonRow} style={{ display: 'flex' }}>
                 <Button onClick={() => remove(index)}>
                   <Remove className={`button-icon ${style.removeIcon}`} />
-                  {t('labels.removeAlternative')}
+                  {t(textConstants.labels.removeAlternative)}
                 </Button>
                 <Button className={getButtonClass(index)} onClick={() => markAsCorrect(index)}>
                   <Check
@@ -157,8 +160,8 @@ export default ({ question, setQuestion }) => {
                     className={`button-icon ${isCorrect(index)}`}
                   />
                   {alternative.isCorrect
-                    ? t('labels.correctAlternative')
-                    : t('labels.markCorrectAlternative')}
+                    ? t(textConstants.labels.correctAlternative)
+                    : t(textConstants.labels.markCorrectAlternative)}
                 </Button>
               </Grid>
             </Grid>
@@ -168,19 +171,21 @@ export default ({ question, setQuestion }) => {
         {alternatives?.length < MAX_ALTERNATIVES && (
           <Button style={{ marginRight: '8px' }} variant="contained" onClick={addAlternative}>
             <Add className="button-icon" />
-            {t('labels.addAlternative')}
+            {t(textConstants.labels.addAlternative)}
           </Button>
         )}
         {!showFeedback && (
           <Button variant="contained" onClick={() => setShowFeedback(true)}>
             <Add className="button-icon" />
-            {t('labels.addFeedback')}
+            {t(textConstants.labels.addFeedback)}
           </Button>
         )}
       </Grid>
       {showFeedback && (
         <Grid className={style.row}>
-          <Typography className={style.label}>{t('labels.questionFeedback')}</Typography>
+          <Typography className={style.label}>
+            {t(textConstants.labels.questionFeedback)}
+          </Typography>
           <Grid>
             <RichTextField value={feedback} setValue={handleFeedback} className={style.input} />
             <Grid className={style.row} style={{ display: 'flex' }}>
@@ -191,7 +196,7 @@ export default ({ question, setQuestion }) => {
                 }}
               >
                 <Remove className={`button-icon ${style.removeIcon}`} />
-                {t('labels.removeFeedback')}
+                {t(textConstants.labels.removeFeedback)}
               </Button>
             </Grid>
           </Grid>

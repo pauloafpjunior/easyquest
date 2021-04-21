@@ -10,6 +10,7 @@ import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import Converters from '../../shared/utils/Converters';
 import { DownloadXmlFile } from '../../shared/utils/Utils';
 import { BONDI_BLUE } from '../../theme';
+import textConstants from '../../shared/translations/textConstants';
 
 const useStyles = makeStyles({
   container: {
@@ -63,12 +64,12 @@ export default ({
   const checkRemoveAll = () => {
     if (questions.length > 0) {
       setDialogParams({
-        title: t('generalMessages.clearQuestionsTitle'),
-        text: t('generalMessages.clearQuestions'),
-        cancelText: t('labels.cancelButton'),
+        title: t(textConstants.generalMessages.clearQuestionsTitle),
+        text: t(textConstants.generalMessages.clearQuestions),
+        cancelText: t(textConstants.labels.cancelButton),
         confirmText: (
           <>
-            <Warning /> {t('labels.confirmButton')}
+            <Warning /> {t(textConstants.labels.confirmButton)}
           </>
         ),
         onConfirm: () => {
@@ -88,10 +89,10 @@ export default ({
       DownloadXmlFile(Converters.MoodleXml.multipleConverter(questions), 'questions.xml');
     } else {
       setDialogParams({
-        title: t('generalMessages.downloadFormatTitle'),
-        text: t('generalMessages.downloadFormat'),
-        cancelText: t('labels.downloadFormatCancel'),
-        confirmText: t('labels.confirmButton'),
+        title: t(textConstants.generalMessages.downloadFormatTitle),
+        text: t(textConstants.generalMessages.downloadFormat),
+        cancelText: t(textConstants.labels.downloadFormatCancel),
+        confirmText: t(textConstants.labels.confirmButton),
         onCancel: () => {
           localStorage.setItem(appDontShowDownloadMessageStorageKey, true);
           DownloadXmlFile(Converters.MoodleXml.multipleConverter(questions), 'questions.xml');
@@ -111,8 +112,8 @@ export default ({
 
   const getEmptyListText = () =>
     filter && questions.length > 0
-      ? t('generalMessages.noQuestionsMatchFilter')
-      : t('generalMessages.noQuestions');
+      ? t(textConstants.generalMessages.noQuestionsMatchFilter)
+      : t(textConstants.generalMessages.noQuestions);
 
   return (
     <>
@@ -120,16 +121,16 @@ export default ({
         <Header>
           <Button variant="outlined" onClick={addQuestion}>
             <Add className="button-icon" />
-            {t('labels.newQuestionButton')}
+            {t(textConstants.labels.newQuestionButton)}
           </Button>
           <Button variant="outlined" onClick={downloadAll} style={{ marginLeft: '8px' }}>
             <GetApp className="button-icon" />
-            {t('labels.downloadAllButton')}
+            {t(textConstants.labels.downloadAllButton)}
           </Button>
           <HeaderDivider />
           <Button variant="outlined" onClick={checkRemoveAll}>
             <Delete className="button-icon" />
-            {t('labels.cleanQuestionsButton')}
+            {t(textConstants.labels.cleanQuestionsButton)}
           </Button>
         </Header>
         <Input
@@ -141,7 +142,7 @@ export default ({
             </InputAdornment>
           }
           className={style.input}
-          placeholder={t('labels.questionFilter')}
+          placeholder={t(textConstants.labels.questionFilter)}
         />
         {filteredQuestions.length === 0 && (
           <Typography className={style.emptyListText}>{getEmptyListText()}</Typography>
