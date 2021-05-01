@@ -83,4 +83,11 @@ export default {
     duplicateButton: 'Duplicar',
     deleteButton: 'Remover',
   },
+
+  helpMessage: {
+    easyQuest:
+      'EasyQuest é uma aplicação web que tem por finalidade auxiliar usuários Moodle quanto ao cadastramento de questões nesta plataforma. As questões criadas no EasyQuest podem ser facilmente baixadas e importadas no Moodle, usando o formato "Moodle XML".',
+    creators:
+      'Esta aplicação foi desenvolvida no Departamento de Ciência da Computação do Instituto de Ciências Exatas e Tecnológica (DCC/ICET) da Universidade Federal de Lavras (UFLA).',
+  },
 };

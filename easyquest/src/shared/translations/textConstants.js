@@ -80,4 +80,8 @@ export default {
     duplicateButton: 'tooltips.duplicateButton',
     deleteButton: 'tooltips.deleteButton',
   },
+  helpMessage: {
+    easyQuest: 'helpMessage.easyQuest',
+    creators: 'helpMessage.creators',
+  },
 };

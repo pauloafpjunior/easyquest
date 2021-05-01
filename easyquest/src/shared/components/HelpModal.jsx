@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dialog, Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { BONDI_BLUE } from '../../theme';
+import textConstants from '../translations/textConstants';
 
 const useStyles = makeStyles({
   title: {
@@ -17,19 +19,14 @@ const useStyles = makeStyles({
 });
 
 export default ({ open, setOpen }) => {
+  const { t } = useTranslation('common');
   const styles = useStyles();
   return (
     <Dialog onBackdropClick={() => setOpen(false)} open={open}>
       <Grid className={styles.container}>
         <Typography className={styles.title}>EasyQuest</Typography>
-        <p>
-          O EasyQuest tem como objetivo auxiliar usuários de sistemas Moodle oferecendo uma
-          interface ágil e amigavel como alternativa à criação de questões padrão do Moodle.
-        </p>
-        <p>
-          As questões criadas no EasyQuest podem ser exportadas através do botão
-          &quot;Download&quot; e importadas no Moodle.
-        </p>
+        <p>{t(textConstants.helpMessage.easyQuest)}</p>
+        <p>{t(textConstants.helpMessage.creators)}</p>
         <Button className={styles.confirm} onClick={() => setOpen(false)}>
           Entendi
         </Button>
