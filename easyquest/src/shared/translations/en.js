@@ -87,7 +87,7 @@ export default {
 
   helpMessage: {
     easyQuest:
-      'EasyQuest is a webapp with the goal of helping Moodle users to create questions in this plataform. The questions created on EasyQuest can be easily downloaded and imported on Moodle, using the format "Moodle XML".',
+      'EasyQuest is a webapp with the goal of helping Moodle users to create questions in this plataform. The questions created on EasyQuest can be easily downloaded and imported on Moodle, using the format "Moodle XML". The questions created on EasyQuest will be stored only in the user device and will not be sent to any third party applications.',
     creators:
       'This application was developed on the Computer Science Department of Institute of Exact and Technological Sciences (DCC/ICET) from the Federal Universiti of Lavras (UFLA).',
   },
