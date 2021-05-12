@@ -1,0 +1,18 @@
+<svg width="96.17" height="122.88" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="514" width="514" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_3" height="113.968218" width="60.634902" y="2.218787" x="3.005639" stroke-width="0.001" stroke="#FF0000" fill="#ffffff"/>
+  <rect id="svg_4" height="89.841242" width="28.253959" y="1.266406" x="61.418319" stroke-width="0.001" stroke="#FF0000" fill="#ffffff"/>
+  <rect id="svg_7" height="50.476175" width="25.396817" y="60.314007" x="46.180228" fill-opacity="null" stroke-opacity="null" stroke-width="0.001" stroke="#FF0000" fill="#ffffff"/>
+  <rect id="svg_8" height="67.619026" width="19.365073" y="34.599729" x="58.561177" fill-opacity="null" stroke-opacity="null" stroke-width="0.001" stroke="#FF0000" fill="#ffffff"/>
+  <rect id="svg_9" height="76.190452" width="31.428562" y="18.409258" x="51.577052" fill-opacity="null" stroke-opacity="null" stroke-width="0.001" stroke="#FF0000" fill="#ffffff"/>
+  <g id="svg_1">
+   <path id="svg_2" d="m62.74,110.31l21.48,-22.58l-21.48,0l0,22.58l0,0zm-43.81,-48.37l58.3,0l0,5.53l-58.3,0l0,-5.53l0,0zm0,13.59l27.29,0l0,5.53l-27.29,0l0,-5.53l0,0zm0,13.59l19.23,0l0,5.53l-19.23,0l0,-5.53l0,0zm19.93,-45.64l-8.04,0l-1.4,5.69l-10.49,0l9.67,-29.83l12.65,0l9.72,29.83l-10.75,0l-1.36,-5.69l0,0zm-1.53,-6.55l-2.39,-9.94l-0.14,0l-1.17,5.06l-1.22,4.88l4.92,0l0,0zm37.89,0.77l-7.64,0l0,8.99l-7.91,0l0,-8.99l-7.68,0l0,-6.91l7.68,0l0,-8.99l7.91,0l0,8.99l7.64,0l0,6.91l0,0zm20.95,47.15c0,1.63 -1.1,3.04 -2.6,3.45l-31.64,33.27c-0.66,0.82 -1.66,1.32 -2.76,1.32l-52.74,0c-1.79,0 -3.39,-0.72 -4.55,-1.88c-1.16,-1.17 -1.88,-2.77 -1.88,-4.56l0,-110.02c0,-1.79 0.72,-3.39 1.88,-4.55c1.16,-1.16 2.79,-1.88 4.55,-1.88l83.31,0c1.76,0 3.39,0.72 4.55,1.88c1.16,1.16 1.88,2.76 1.88,4.55l0,78.42l0,0zm-7.18,-4.3l0,-73.37l-81.81,0l0,108.55l48.38,0l0,-31.57c0,-1.98 1.6,-3.61 3.61,-3.61l29.82,0l0,0z"/>
+  </g>
+ </g>
+</svg>
