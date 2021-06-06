@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import HelpIcon from '@material-ui/icons/Help';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { BONDI_BLUE, COD_GRAY, WHITE } from '../../theme';
 import HelpModal from './HelpModal';
 import textConstants from '../translations/textConstants';
@@ -21,10 +22,17 @@ const useStyles = makeStyles({
   },
   helpIcon: {
     marginLeft: '8px',
-    marginRight: 'auto',
     color: WHITE,
     width: '28px',
     height: '28px',
+    cursor: 'pointer',
+  },
+  githubIcon: {
+    marginLeft: '8px',
+    marginRight: 'auto',
+    color: WHITE,
+    width: '26px',
+    height: '26px',
     cursor: 'pointer',
   },
 });
@@ -37,6 +45,10 @@ export default ({ children }) => {
     <Grid className={style.header}>
       <Typography variant="h1">{t(textConstants.appName)}</Typography>
       <HelpIcon className={style.helpIcon} onClick={() => setOpen(true)} />
+      <GitHubIcon
+        onClick={() => window.open('https://github.com/pauloafpjunior/easyquest')}
+        className={style.githubIcon}
+      />
       {children}
       <HelpModal open={open} setOpen={setOpen} />
     </Grid>
