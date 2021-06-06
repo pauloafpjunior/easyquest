@@ -31,8 +31,8 @@ const useStyles = makeStyles({
     marginLeft: '8px',
     marginRight: 'auto',
     color: WHITE,
-    width: '26px',
-    height: '26px',
+    width: '24px',
+    height: '24px',
     cursor: 'pointer',
   },
 });
