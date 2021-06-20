@@ -87,7 +87,6 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
   };
 
   const downloadWarning = () => {
-    localStorage.removeItem('rememberDownload', true);
     if (localStorage.getItem('rememberDownload')) {
       close();
     }
