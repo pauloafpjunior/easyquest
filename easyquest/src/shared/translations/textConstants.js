@@ -39,6 +39,13 @@ export default {
     downloadFormat: 'generalMessages.downloadFormat',
   },
 
+  rememberDownload: {
+    title: 'rememberDownload.title',
+    text: 'rememberDownload.text',
+    confirm: 'rememberDownload.confirm',
+    cancel: 'rememberDownload.cancel',
+  },
+
   labels: {
     downloadFormatCancel: 'labels.downloadFormatCancel',
 
@@ -82,6 +89,7 @@ export default {
   },
   helpMessage: {
     easyQuest: 'helpMessage.easyQuest',
+    questions: 'helpMessage.questions',
     creators: 'helpMessage.creators',
   },
 };

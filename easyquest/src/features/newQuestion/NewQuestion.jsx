@@ -12,6 +12,7 @@ import TrueFalseQuestion from './TrueFalseQuestion';
 import ConfirmationDialog from '../../shared/components/ConfirmationDialog';
 import AssociativeQuestion from './AssociativeQuestion';
 import textConstants from '../../shared/translations/textConstants';
+import { BONDI_BLUE } from '../../theme';
 
 const useStyles = makeStyles({
   container: {
@@ -79,6 +80,30 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       setOpenDialog(true);
     }
   };
+
+  const onCloseWarning = () => {
+    localStorage.setItem('rememberDownload', true);
+    close();
+  };
+
+  const downloadWarning = () => {
+    localStorage.removeItem('rememberDownload', true);
+    if (localStorage.getItem('rememberDownload')) {
+      close();
+    }
+    setDialogParams({
+      title: t(textConstants.rememberDownload.title),
+      text: t(textConstants.rememberDownload.text),
+      confirmText: t(textConstants.rememberDownload.confirm),
+      cancelText: t(textConstants.rememberDownload.cancel),
+      canCancel: true,
+      confirmStyle: { backgroundColor: BONDI_BLUE, color: 'white' },
+      onConfirm: close,
+      onCancel: onCloseWarning,
+    });
+    setOpenDialog(true);
+  };
+
   const save = () => {
     const error = validateQuestion(newQuestion, t);
     if (error) {
@@ -86,7 +111,7 @@ export default ({ setActive, addQuestion, removeQuestion, questionToEdit }) => {
       return;
     }
     addQuestion(newQuestion);
-    close();
+    downloadWarning();
   };
   const handleChangeType = (event) => {
     if (
