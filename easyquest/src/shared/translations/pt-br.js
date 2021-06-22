@@ -98,6 +98,6 @@ export default {
     questions:
       'As questões cadastradas no EasyQuest ficam armazenadas apenas no computador do usuário, não sendo enviadas para terceiros. Além disso, as questões ficam salvas temporariamente no seu navegador, portanto é importante realizar o download com frequência para não perdê-las.',
     creators:
-      'Esta aplicação foi desenvolvida no Departamento de Ciência da Computação do Instituto de Ciências Exatas e Tecnológica (DCC/ICET) da Universidade Federal de Lavras (UFLA).',
+      'Esta aplicação foi desenvolvida no Departamento de Ciência da Computação do Instituto de Ciências Exatas e Tecnológicas (DCC/ICET) da Universidade Federal de Lavras (UFLA), em parceria com sua Coordenadoria de Educação a Distância (CEAD).',
   },
 };

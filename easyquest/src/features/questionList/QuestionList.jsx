@@ -48,9 +48,7 @@ export default ({
   useEffect(() => {
     if (filter) {
       setFilteredQuestions(
-        questions.filter((question) =>
-          question.description.toLowerCase().includes(filter.toLowerCase())
-        )
+        questions.filter((question) => question.title.toLowerCase().includes(filter.toLowerCase()))
       );
     } else {
       setFilteredQuestions(questions);
