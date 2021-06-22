@@ -36,3 +36,7 @@ You can also install the dependencies in your own machine. In this case you just
 * Clone this repository.
 * Run `yarn` in your terminal at the repository folder to install the dependencies.
 * Run `yarn start` in your terminal at the repository folder to run the project.
+
+### License
+
+This program is released under license GPL-3.0-only
