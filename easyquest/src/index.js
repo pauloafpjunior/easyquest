@@ -9,17 +9,29 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorkerRegistration';
 import ptBr from './shared/translations/pt-br';
-import en from './shared/translations/en';
+import enUS from './shared/translations/en-US';
+
+const supportedLangs = ['pt-BR', 'en-US'];
+let lng = navigator?.language;
+if (!lng) {
+  lng = 'pt-BR';
+} else if (!supportedLangs.includes(lng)) {
+  if (lng.includes('en')) {
+    lng = 'en-US';
+  } else {
+    lng = 'pt-BR';
+  }
+}
 
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: 'pt',
+  lng,
   resources: {
-    pt: {
+    'pt-BR': {
       common: ptBr,
     },
-    en: {
-      common: en,
+    'en-US': {
+      common: enUS,
     },
   },
 });

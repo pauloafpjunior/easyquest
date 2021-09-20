@@ -39,8 +39,15 @@ export default {
     noQuestionsMatchFilter: 'There are no questions that match the filter.',
 
     downloadFormatTitle: 'Atention',
-
     downloadFormat: 'Use the MoodleXML template to import your questions on Moodle.',
+  },
+
+  rememberDownload: {
+    title: 'Download Alert',
+    text:
+      "The questions created on EasyQuest are only temporaly stored on your browser. Remember to download your questions frequently so you dont't lose them.",
+    confirm: 'Ok',
+    cancel: "Don't show again",
   },
 
   labels: {
@@ -90,5 +97,7 @@ export default {
       'EasyQuest is a webapp with the goal of helping Moodle users to create questions in this plataform. The questions created on EasyQuest can be easily downloaded and imported on Moodle, using the format "Moodle XML". The questions created on EasyQuest will be stored only in the user device and will not be sent to any third party applications.',
     creators:
       'This application was developed on the Computer Science Department of Institute of Exact and Technological Sciences (DCC/ICET) from the Federal Universiti of Lavras (UFLA).',
+    questions:
+      "The questions created on EasyQuest are only stored on your computer, they are not sent to any thirdp-party server. Also, the questions are only temporaly stored on your browser's LocalStorage, so remember to frequently download your questions.",
   },
 };

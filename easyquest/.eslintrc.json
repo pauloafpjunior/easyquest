@@ -25,7 +25,12 @@
   "rules": {
     "no-param-reassign": "off",
     "import/prefer-default-export": "off",
-    "prettier/prettier": "warn",
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
