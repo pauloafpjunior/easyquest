@@ -26,6 +26,7 @@ export default ({ open, setOpen }) => {
       <Grid className={styles.container}>
         <Typography className={styles.title}>EasyQuest</Typography>
         <p>{t(textConstants.helpMessage.easyQuest)}</p>
+        <p>{t(textConstants.helpMessage.import)}</p>
         <p>{t(textConstants.helpMessage.questions)}</p>
         <p>{t(textConstants.helpMessage.creators)}</p>
         <Button className={styles.confirm} onClick={() => setOpen(false)}>

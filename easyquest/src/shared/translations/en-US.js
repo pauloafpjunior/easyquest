@@ -95,6 +95,8 @@ export default {
   helpMessage: {
     easyQuest:
       'EasyQuest is a webapp with the goal of helping Moodle users to create questions in this plataform. The questions created on EasyQuest can be easily downloaded and imported on Moodle, using the format "Moodle XML". The questions created on EasyQuest will be stored only in the user device and will not be sent to any third party applications.',
+    import:
+      'To import the questions on Moodle, browse to your desired course. Then, click on the "Questions Bank" option and then click "Import". At the end, you will need to select the category to save the questions  and then click "Import"',
     creators:
       'This application was developed on the Computer Science Department of Institute of Exact and Technological Sciences (DCC/ICET) from the Federal Universiti of Lavras (UFLA).',
     questions:

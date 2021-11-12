@@ -89,6 +89,7 @@ export default {
   },
   helpMessage: {
     easyQuest: 'helpMessage.easyQuest',
+    import: 'helpMessage.import',
     questions: 'helpMessage.questions',
     creators: 'helpMessage.creators',
   },

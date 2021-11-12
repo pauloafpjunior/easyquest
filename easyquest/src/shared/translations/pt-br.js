@@ -95,6 +95,8 @@ export default {
   helpMessage: {
     easyQuest:
       'EasyQuest é uma aplicação web que tem por finalidade auxiliar usuários Moodle quanto ao cadastramento de questões nesta plataforma. As questões criadas no EasyQuest podem ser facilmente baixadas e importadas no Moodle, usando o formato "Moodle XML".',
+    import:
+      'Para importar as questões no Moodle, navegue até o curso desejado. Em seguida, clique na opção "Banco de Questões" e depois em "Importar". Por fim, será necesário selecionar em qual categoria as questões serão importadas e executar a importação.',
     questions:
       'As questões cadastradas no EasyQuest ficam armazenadas apenas no computador do usuário, não sendo enviadas para terceiros. Além disso, as questões ficam salvas temporariamente no seu navegador, portanto é importante realizar o download com frequência para não perdê-las.',
     creators:
