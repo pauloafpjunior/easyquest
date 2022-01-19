@@ -46,7 +46,6 @@ export default ({ children }) => {
       <Typography variant="h1">{t(textConstants.appName)}</Typography>
       <HelpIcon className={style.helpIcon} onClick={() => setOpen(true)} />
       <GitHubIcon
-        onClick={() => window.open('https://github.com/pauloafpjunior/easyquest')}
         className={style.githubIcon}
       />
       {children}

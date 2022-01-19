@@ -98,7 +98,7 @@ export default {
     import:
       'To import the questions on Moodle, browse to your desired course. Then, click on the "Questions Bank" option and then click "Import". At the end, you will need to select the category to save the questions  and then click "Import"',
     creators:
-      'This application was developed on the Computer Science Department of Institute of Exact and Technological Sciences (DCC/ICET) from the Federal Universiti of Lavras (UFLA).',
+      'This application was developed on the Computer Science Department of Institute of Exact and Technological Sciences (DCC/ICET) from the -.',
     questions:
       "The questions created on EasyQuest are only stored on your computer, they are not sent to any thirdp-party server. Also, the questions are only temporaly stored on your browser's LocalStorage, so remember to frequently download your questions.",
   },
