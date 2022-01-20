@@ -30,10 +30,9 @@ const useStyles = makeStyles({
   githubIcon: {
     marginLeft: '8px',
     marginRight: 'auto',
-    color: WHITE,
+    color: BONDI_BLUE,
     width: '24px',
     height: '24px',
-    cursor: 'pointer',
   },
 });
 

@@ -28,7 +28,6 @@ export default ({ open, setOpen }) => {
         <p>{t(textConstants.helpMessage.easyQuest)}</p>
         <p>{t(textConstants.helpMessage.import)}</p>
         <p>{t(textConstants.helpMessage.questions)}</p>
-        <p>{t(textConstants.helpMessage.creators)}</p>
         <Button className={styles.confirm} onClick={() => setOpen(false)}>
           Entendi
         </Button>
