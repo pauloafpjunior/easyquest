@@ -35,7 +35,7 @@ export default {
     changeType:
       'Ao alterar o tipo questão, algumas informações podem ser perdidas. Tem certeza que deseja prosseguir?',
 
-    noQuestions: 'Não há questões cadastradas até o momento.',
+    noQuestions: 'Esta versão não possui identificação de seus autores e foi criada especificamente a fase de revisão do SBSI.',
     noQuestionsMatchFilter: 'Não há questões que correspondam ao texto de busca informado.',
 
     downloadFormatTitle: 'Informação',

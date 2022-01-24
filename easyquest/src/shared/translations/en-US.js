@@ -35,7 +35,7 @@ export default {
     changeType:
       'Are you sure you want to change the question type? Some informamtions will be permanently lost?',
 
-    noQuestions: 'You do not have any questions.',
+    noQuestions: 'This version does not describe its creators; it was deployed specially for the SBSI reviewing phase.',
     noQuestionsMatchFilter: 'There are no questions that match the filter.',
 
     downloadFormatTitle: 'Atention',
