@@ -68,6 +68,7 @@ export default {
 
     confirmButton: 'labels.confirmButton',
     cancelButton: 'labels.cancelButton',
+    understoodButton: 'labels.understoodButton',
 
     newQuestionButton: 'labels.newQuestionButton',
     downloadAllButton: 'labels.downloadAllButton',

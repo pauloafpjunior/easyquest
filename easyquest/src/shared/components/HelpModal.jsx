@@ -30,7 +30,7 @@ export default ({ open, setOpen }) => {
         <p>{t(textConstants.helpMessage.questions)}</p>
         <p>{t(textConstants.helpMessage.creators)}</p>
         <Button className={styles.confirm} onClick={() => setOpen(false)}>
-          Entendi
+        <p>{t(textConstants.labels.understoodButton)}</p>
         </Button>
       </Grid>
     </Dialog>

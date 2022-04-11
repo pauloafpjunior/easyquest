@@ -72,6 +72,7 @@ export default {
 
     confirmButton: 'Confirm',
     cancelButton: 'Cancel',
+    understoodButton: 'Understood',
 
     newQuestionButton: 'NEW',
     downloadAllButton: 'DOWNLOAD',
